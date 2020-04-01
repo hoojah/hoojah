@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      get 'hujahs/index'
-      post 'hujahs/create'
-      get '/show/:id', to: 'hujahs#show'
+      get 'hoojah/index', to: 'hujahs#index'
+      post 'hoojah/create', to: 'hujahs#create'
+      get '/hoojah/:id', to: 'hujahs#show'
       delete '/destroy/:id', to: 'hujahs#destroy'
     end
   end

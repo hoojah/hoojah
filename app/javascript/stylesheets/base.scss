@@ -1,0 +1,39 @@
+
+html, body {
+  background-color: #E6ECF0;
+  color: #343A40;
+}
+
+.bg-agree {
+  background-color: $color-agree;
+  width: 35%;
+}
+.bg-neutral {
+  background-color: $color-neutral;
+}
+.bg-disagree {
+  background-color: $color-disagree;
+}
+
+.vote-bar {
+  & > div {
+    height: 12px;
+  }
+  .vote-bar-agree {
+    width: 35%;
+  }
+  .vote-bar-neutral {
+    width: 50%;
+  }
+  .vote-bar-disagree {
+    width: 15%;
+  }
+}
+
+@media (max-width: 767.98px) {
+
+  .sm-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
