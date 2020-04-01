@@ -1,0 +1,2 @@
+module HujahHelper
+end
