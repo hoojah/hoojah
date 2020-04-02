@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Logo from 'logo.svg'
+import Loading from 'loading.svg'
+import NewHoojahIcon from './Icons/new_hoojah'
 
 class Hujahs extends React.Component {
   constructor(props) {
@@ -31,7 +33,7 @@ class Hujahs extends React.Component {
         <div className="card border-0 rounded-0">
           <div className="card-header bg-transparent border-top">
             <div className="media">
-              <div className="rounded-circle mr-3 avatar">avatar</div>
+              <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
               <div className="media-body">
                 <div className="d-flex flex-column">
                   <a className="mr-1 mt-0 mb-0">User Name</a>
@@ -69,37 +71,28 @@ class Hujahs extends React.Component {
       </div>
     ));
     const noHujah = (
-      <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
-        <h4>
-          No hoojahs yet. Why not <Link to="/new_hujah">create one</Link>
-        </h4>
+      <div className="vw-100 vh-100 d-flex align-items-center justify-content-center">
+        <img src={Loading} className="loading"/>
       </div>
     );
 
     return (
       <div className="">
-        <nav className="navbar fixed-top navbar-light bg-light">
-          <div className="container d-flex justify-content-between flex-row-reverse">
+        <nav className="navbar fixed-top navbar-light">
+          <div className="container d-flex justify-content-between">
             <a className="navbar-brand">
               <img src={Logo} />
             </a>
-            <div className="d-flex">
-              <form className="form-inline my-2 my-lg-0 d-none d-lg-inline-block">
-                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-primary my-2 my-sm-0">
-                  search icon
-                </button>
-              </form>
-              <Link to="/new_hujah">Log in</Link>
+            <Link to="/new_hujah" className="btn btn-link">Log in</Link>
+            <div className="">
+              <Link to="/hujah" className="btn btn-icon">
+                <NewHoojahIcon />
+              </Link>
             </div>
           </div>
         </nav>
+        <div id="navbar-bg"></div>
         <main className="container">
-          <div className="text-right mb-3">
-            <Link to="/hujah" className="btn custom-button">
-              Create New Hoojah
-            </Link>
-          </div>
           <div className="row">
             {hujahs.length > 0 ? allHujahs : noHujah}
           </div>
