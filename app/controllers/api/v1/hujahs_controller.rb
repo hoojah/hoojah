@@ -15,7 +15,8 @@ class Api::V1::HujahsController < ApplicationController
 
   def show
     if hujah
-      render json: hujah
+      hujahs = Hujah.all.order(updated_at: :desc)
+      render json: { hujah: hujah, hujahs: hujahs }
     else
       render json: hujah.errors
     end

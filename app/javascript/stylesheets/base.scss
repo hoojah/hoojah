@@ -1,9 +1,14 @@
 
+.avatar-small {
+  height: 24px;
+  width: 24px;
+}
+
 body {
   background-color: #e6ecf0;
   color: $color-black;
   margin-top: 60px;
-  margin-bottom: 60px;
+  margin-bottom: 16px;
 }
 
 .bg-agree {
@@ -16,9 +21,19 @@ body {
   background-color: $color-neutral;
 }
 
-.btn-icon-16 > svg {
-  height: 16px;
-  margin-top: -4px;
+.btn-icon-14 > svg {
+  height: 14px;
+}
+
+.btn-icon-16 {
+  
+  svg {
+    height: 16px;
+    margin-top: -4px;
+  }
+  &.neutral > svg {
+    margin-left: -3px;
+  }
 }
 
 .btn-icon-24 > svg {
@@ -27,6 +42,8 @@ body {
 
 .btn-circle {
   border-radius: 24px;
+  width: 48px;
+  height: 48px;
 
   &:hover {
     &.btn-outline-warning {
@@ -42,6 +59,26 @@ body {
     svg {
       fill: white;
     }
+  }
+}
+
+.btn-lg.btn-rounded {
+  border-radius: 24px;
+  font-size: 16px;
+  padding: 11px 24px;
+}
+
+.btn-group-lg {
+  .btn {
+    font-size: 16px;
+    padding: 11px 24px;
+  }
+
+  .btn:first-child {
+    border-radius: 24px 0 0 24px;
+  }
+  .btn:last-child {
+    border-radius: 0 24px 24px 0;
   }
 }
 
@@ -77,6 +114,14 @@ body {
   margin-top: -8px;
 }
 
+.hoojah-numbers {
+  font-size: 14px;
+}
+
+.hujah-card-small {
+  border-left: solid 6px;
+}
+
 nav {
   top: 0;
   left: 0;
@@ -89,8 +134,8 @@ nav {
   &.navbar .navbar-brand {
     position: absolute;
     left: 50%;
-    margin-left: -44px;
-    width: 88px;
+    margin-left: -36px;
+    width: 72px;
   }
 }
 #navbar-bg {
@@ -122,21 +167,59 @@ nav {
   color: $color-black;
 }
 
+.text-agree {
+  color: $color-agree;
+}
+
+.text-neutral {
+  color: $color-neutral;
+}
+
+.text-disagree {
+  color: $color-disagree;
+}
+
+.text-light-grey {
+  color: $color-light-grey;
+}
+
 .text-regular {
   font-weight: 300;
 }
 
-.vote-bar {
-  & > div {
-    height: 12px;
+.vote-bar,
+.vote-show {
+  & > .vote {
+    -webkit-transition : width 1s ease;
+    -moz-transition : width 1s ease;
+    -o-transition : width 1s ease;
+    transition : width 1s ease;
   }
-  .vote-bar-agree {
-    width: 33%;
+}
+
+.vote-bar > .vote {
+  height: 12px;
+}
+
+.vote-show {
+  position: relative;
+  height: 48px;
+  transform: rotate(180deg);
+
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(180deg);
+    background-color: white;
   }
-  .vote-bar-neutral {
-    width: 34%;
+  .vote {
+    height: 24px;
+    margin-left: 40px;
+    border-radius: 0 12px 12px 0;
   }
-  .vote-bar-disagree {
-    width: 33%;
+  .vote-text {
+    transform: rotate(180deg);
+    font-size: 14px;
   }
 }
