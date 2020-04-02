@@ -8,7 +8,6 @@ body {
 
 .bg-agree {
   background-color: $color-agree;
-  width: 35%;
 }
 .bg-disagree {
   background-color: $color-disagree;
@@ -132,12 +131,12 @@ nav {
     height: 12px;
   }
   .vote-bar-agree {
-    width: 35%;
+    width: 33%;
   }
   .vote-bar-neutral {
-    width: 50%;
+    width: 34%;
   }
   .vote-bar-disagree {
-    width: 15%;
+    width: 33%;
   }
 }

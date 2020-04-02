@@ -29,8 +29,14 @@ class Hujahs extends React.Component {
         .catch(() => this.props.history.push("/"))
   }
 
+  calculatePercentage(voteCount, totalVoteCount) {
+    const percentage = voteCount * 100 / totalVoteCount
+    return `${percentage}%`
+  }
+
   render() {
     const { hujahs } = this.state;
+
     const allHujahs = hujahs.map((hujah, index) => (
 
       <div key={index} className="col-12 sm-fluid mb-2">
@@ -65,9 +71,9 @@ class Hujahs extends React.Component {
           </div>
           <div className="card-body p-0">
             <div className="d-flex justify-content-around vote-bar">
-              <div className="vote-bar-agree agree bg-agree"></div>
-              <div className="vote-bar-neutral bg-neutral"></div>
-              <div className="vote-bar-disagree bg-disagree"></div>
+              <div className="vote-bar-agree bg-agree" style={ hujahs.length == 0 ? { width: "33%" } : { width: this.calculatePercentage(hujah.agree_count, hujah.agree_count + hujah.neutral_count + hujah.disagree_count)}}></div>
+              <div className="vote-bar-neutral bg-neutral" style={ hujahs.length == 0 ? { width: "33%" } : { width: this.calculatePercentage(hujah.neutral_count, hujah.agree_count + hujah.neutral_count + hujah.disagree_count)}}></div>
+              <div className="vote-bar-disagree bg-disagree" style={ hujahs.length == 0 ? { width: "33%" } : { width: this.calculatePercentage(hujah.disagree_count, hujah.agree_count + hujah.neutral_count + hujah.disagree_count)}}></div>
             </div>
           </div>
           <div className="card-footer text-muted d-flex justify-content-between">
