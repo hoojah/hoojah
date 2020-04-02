@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import Logo from 'logo.svg'
 import Loading from 'loading.svg'
 import NewHoojahIcon from './Icons/new_hoojah'
+import AgreeIcon from './Icons/agree'
+import NeutralIcon from './Icons/neutral'
+import DisagreeIcon from './Icons/disagree'
+import ShareIcon from './Icons/share'
 
 class Hujahs extends React.Component {
   constructor(props) {
@@ -31,29 +35,32 @@ class Hujahs extends React.Component {
 
       <div key={index} className="col-12 sm-fluid mb-2">
         <div className="card border-0 rounded-0">
-          <div className="card-header bg-transparent border-top">
+          <div className="card-header bg-transparent border-bottom-0 pb-0 d-flex justify-content-between">
             <div className="media">
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
               <div className="media-body">
                 <div className="d-flex flex-column">
-                  <a className="mr-1 mt-0 mb-0">User Name</a>
-                  <a className="no-underscore">
-                    <small className="text-muted">@user_handle </small>
+                  <Link to={`/users/${hujah.id}`} className="mt-0 mb-0">User Name</Link>
+                  <a className="no-underscore handle">
+                    <small className="text-muted">@user_handle</small>
                   </a>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="card-body">
-            <Link to={`/hoojah/${hujah.id}`} className="btn custom-button">
-              <h5 className="card-title">{hujah.body}</h5>
+            <Link to="/hujah" className="btn-icon-16 fill-light-grey">
+              <ShareIcon />
             </Link>
           </div>
-          <div className="card-body">
+          <div className="card-body pb-0">
+            <Link to={`/hoojah/${hujah.id}`} className="">
+              <h5 className="card-title text-black text-regular">{hujah.body}</h5>
+            </Link>
+          </div>
+          <div className="card-body pt-0">
             <div className="d-flex justify-content-around">
-              <button type="button" className="btn btn-primary btn-lg">Agree</button>
-              <button type="button" className="btn btn-neutral btn-lg">Neutral</button>
-              <button type="button" className="btn btn-disagree btn-lg">Disagree</button>
+              <a role="button" className="btn btn-outline-warning btn-lg btn-circle btn-icon-16 fill-agree"><AgreeIcon /></a>
+              <a role="button" className="btn btn-outline-danger btn-lg btn-circle btn-icon-16 fill-neutral"><NeutralIcon /></a>
+              <a role="button" className="btn btn-outline-info btn-lg btn-circle btn-icon-16 fill-disagree"><DisagreeIcon /></a>
             </div>
           </div>
           <div className="card-body p-0">
@@ -79,13 +86,13 @@ class Hujahs extends React.Component {
     return (
       <div className="">
         <nav className="navbar fixed-top navbar-light">
-          <div className="container d-flex justify-content-between">
+          <div className="container px-0 d-flex justify-content-between">
             <a className="navbar-brand">
               <img src={Logo} />
             </a>
             <Link to="/new_hujah" className="btn btn-link">Log in</Link>
             <div className="">
-              <Link to="/hujah" className="btn btn-icon">
+              <Link to="/hujah" className="btn btn-icon-24 fill-primary">
                 <NewHoojahIcon />
               </Link>
             </div>

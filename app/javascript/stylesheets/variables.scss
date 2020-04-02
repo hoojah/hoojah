@@ -3,5 +3,18 @@
 $color-agree: #FCAF45;
 $color-neutral: #E1306C;
 $color-disagree: #833AB4;
-
 $color-primary: #415DE6;
+$color-black: #343A40;
+$color-light-grey: #BAC2CA;
+
+
+$color-agree-light: lighten($color-agree, 15%);
+$color-neutral-light: lighten($color-neutral, 15%);
+$color-disagree-light: lighten($color-disagree, 15%);
+
+// BOOTSTRAP OVERRIDE
+
+$primary: $color-primary;
+$warning: $color-agree;
+$danger: $color-neutral;
+$info: $color-disagree;

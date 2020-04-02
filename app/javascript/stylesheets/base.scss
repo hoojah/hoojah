@@ -1,7 +1,7 @@
 
 body {
   background-color: #e6ecf0;
-  color: #343A40;
+  color: $color-black;
   margin-top: 60px;
   margin-bottom: 60px;
 }
@@ -17,21 +17,65 @@ body {
   background-color: $color-neutral;
 }
 
-.btn-icon > svg {
+.btn-icon-16 > svg {
+  height: 16px;
+  margin-top: -4px;
+}
+
+.btn-icon-24 > svg {
+  height: 24px;
+}
+
+.btn-circle {
+  border-radius: 24px;
+
+  &:hover {
+    &.btn-outline-warning {
+      background-color: $color-agree-light;
+    }
+    &.btn-outline-danger {
+      background-color: $color-neutral-light;
+    }
+    &.btn-outline-info {
+      background-color: $color-disagree-light;
+    }
+
+    svg {
+      fill: white;
+    }
+  }
+}
+
+.fill-primary {
   fill: $color-primary;
-  width: 24px;
+}
+
+.fill-agree {
+  fill: $color-agree;
+}
+
+.fill-neutral {
+  fill: $color-neutral;
+}
+
+.fill-disagree {
+  fill: $color-disagree;
+}
+
+.fill-light-grey {
+  fill: $color-light-grey;
+}
+
+.fill-white {
+  fill: white;
 }
 
 .loading {
   max-width: 20vw;
 }
 
-@media (max-width: 767.98px) {
-
-  .sm-fluid {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
+.handle {
+  margin-top: -8px;
 }
 
 nav {
@@ -65,6 +109,22 @@ nav {
   -o-filter: blur(15px);
   -ms-filter: blur(15px);
   z-index: 999;
+}
+
+@media (max-width: 767.98px) {
+
+  .sm-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.text-black {
+  color: $color-black;
+}
+
+.text-regular {
+  font-weight: 300;
 }
 
 .vote-bar {
