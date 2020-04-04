@@ -42,7 +42,7 @@ class HujahCard extends React.Component {
     const { hujah, totalVoteCount } = this.state
     
     return(
-      <div className="col-12 sm-fluid mb-2">
+      <div className="col-12 sm-fluid mb-3">
         { this.props.parentHujah == null ? null : <HujahCardParent hujah={this.props.parentHujah} /> }
         <div className="shadow card border-0 rounded-0">
           <HujahCardHeader hujah={hujah} />

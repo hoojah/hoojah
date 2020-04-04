@@ -41,6 +41,9 @@ class Api::V1::HujahsController < ApplicationController
     render json: { message: 'Hoojah deleted!' }
   end
 
+  def new
+  end
+
   private
 
   def hujah_params

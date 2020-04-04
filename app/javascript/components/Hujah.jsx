@@ -143,7 +143,7 @@ class Hujah extends React.Component {
                 <span className="ml-1">55</span>
               </div>
               <div className="card-body pt-0 text-center">
-                <Link to="/" className="shadow btn btn-lg btn-outline-warning btn-rounded btn-icon-16 fill-agree">
+                <Link to="/hoojah/new" className="shadow btn btn-lg btn-outline-warning btn-rounded btn-icon-16 fill-agree">
                   <HujahIcon /> Add hoojah
                 </Link>
               </div>
