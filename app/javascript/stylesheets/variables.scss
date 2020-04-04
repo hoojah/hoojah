@@ -5,6 +5,7 @@ $color-neutral: #E1306C;
 $color-disagree: #833AB4;
 $color-primary: #415DE6;
 $color-black: #343A40;
+$color-grey: #8E8E8E;
 $color-light-grey: #BAC2CA;
 
 
@@ -15,6 +16,7 @@ $color-disagree-light: lighten($color-disagree, 15%);
 // BOOTSTRAP OVERRIDE
 
 $primary: $color-primary;
+$secondary: $color-grey;
 $warning: $color-agree;
 $danger: $color-neutral;
 $info: $color-disagree;

@@ -20,11 +20,16 @@ class Api::V1::HujahsController < ApplicationController
       else
         hujahs = []
       end
-
+      
+      if hujah.is_parent?
+        parent_hujah = {}
+      else
+        parent_hujah = hujah.parent
+      end
       render json: { 
         hujah: hujah, 
         hujahs: hujahs,
-        is_parent: hujah.is_parent? 
+        parentHujah: parent_hujah
       }
     else
       render json: hujah.errors

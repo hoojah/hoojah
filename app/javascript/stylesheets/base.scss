@@ -116,6 +116,10 @@ body {
   background-color: white;
 }
 
+.fill-black {
+  fill: $color-black;
+}
+
 .fill-primary {
   fill: $color-primary;
 }
@@ -136,6 +140,10 @@ body {
   fill: $color-light-grey;
 }
 
+.fill-grey {
+  fill: $color-grey;
+}
+
 .fill-white {
   fill: white;
 }
@@ -154,6 +162,10 @@ body {
   svg {
     position: absolute;
     top: 8px;
+
+    &.hujah-index {
+      top: -12px;
+    }
   }
 }
 
@@ -216,6 +228,10 @@ nav {
 
 .text-disagree {
   color: $color-disagree;
+}
+
+.text-grey {
+  color: $color-grey;
 }
 
 .text-light-grey {

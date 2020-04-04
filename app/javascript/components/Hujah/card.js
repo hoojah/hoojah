@@ -4,6 +4,9 @@ import AgreeIcon from '../Icons/agree'
 import NeutralIcon from '../Icons/neutral'
 import DisagreeIcon from '../Icons/disagree'
 import CrownIcon from '../Icons/crown'
+import ViewsIcon from '../Icons/views'
+import VotesIcon from '../Icons/votes'
+import HujahIcon from '../Icons/hujah'
 import HujahCardHeader from './card_header'
 
 class HujahCard extends React.Component {
@@ -36,15 +39,15 @@ class HujahCard extends React.Component {
   }
 
   render() {
-    const hujah = this.state.hujah
-
+    const { hujah, totalVoteCount } = this.state
+    
     return(
       <div className="col-12 sm-fluid mb-2">
         <div className="card border-0 rounded-0">
           <HujahCardHeader hujah={hujah} />
           <div className="card-body pb-0">
-            <Link to={`/hoojah/${hujah.id}`} className="hujah-body">
-              { hujah.parent_id == null ? null : <CrownIcon /> }
+            <Link to={`/hoojah/${hujah.id}`} className="hujah-body fill-agree btn-icon-14">
+              { hujah.parent_id == null ? <CrownIcon /> : null }
               <h5 className="card-title text-black text-regular">{hujah.body}</h5>
             </Link>
           </div>
@@ -62,9 +65,17 @@ class HujahCard extends React.Component {
               <div className="vote bg-disagree" style={{ width: this.calculatePercentage(hujah.disagree_count) }}></div>
             </div>
           </div>
-          <div className="card-footer text-muted d-flex justify-content-between">
-            <small>Tom posted a hoojah</small>
-            <small>2h</small>
+          <div className="card-footer d-flex justify-content-between text-grey">
+            <div className="d-flex align-items-center text-14 btn-icon-14 fill-grey">
+              <ViewsIcon />
+              <span className="ml-1">348</span>
+              <span className="mx-2">·</span>
+              <VotesIcon />
+              <span className="ml-1">{totalVoteCount}</span>
+              <span className="mx-2">·</span>
+              <HujahIcon />
+              <span className="ml-1">55</span>
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment } from "react"
+import { Link } from "react-router-dom"
+import $ from 'jquery'
 import NavbarHujah from './Layouts/navbar_hujah'
 import AgreeIcon from './Icons/agree'
 import NeutralIcon from './Icons/neutral'
@@ -7,9 +8,9 @@ import DisagreeIcon from './Icons/disagree'
 import ViewsIcon from './Icons/views'
 import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
-import CrownIcon from './Icons/crown'
 import HujahCardHeader from './Hujah/card_header'
 import HujahCardSmall from './Hujah/card_small'
+import HujahCardParent from './Hujah/card_parent'
 
 class Hujah extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class Hujah extends React.Component {
         disagree_count: 33,
       },
       hujahs: [],
-      isParent: false
+      parentHujah: {}
     }
   }
 
@@ -47,7 +48,7 @@ class Hujah extends React.Component {
         this.setState({ 
           hujah: response.hujah,
           hujahs: response.hujahs,
-          isParent: response.is_parent
+          parentHujah: response.parentHujah
         })
       })
       .catch(() => this.props.history.push("/"))
@@ -75,7 +76,7 @@ class Hujah extends React.Component {
           this.setState({ 
             hujah: response.hujah,
             hujahs: response.hujahs,
-            isParent: response.is_parent
+            parentHujah: response.parentHujah
           })
         })
         .catch(() => this.props.history.push("/"))
@@ -88,7 +89,7 @@ class Hujah extends React.Component {
   }
 
   render() {
-    const { hujah, hujahs, isParent } = this.state;
+    const { hujah, hujahs, parentHujah } = this.state;
 
     const allHujahs = hujahs.map((hujah, index) => (
       <Fragment>
@@ -109,18 +110,29 @@ class Hujah extends React.Component {
 
     const totalVoteCount = hujah.agree_count + hujah.neutral_count + hujah.disagree_count
 
-    console.log(isParent)
+console.log(":: ")
+console.log(":: ")
+console.log(":: ")
+console.log(":: ")
+console.log(":: ")
+console.log(":: $.isEmptyObject(parentHujah) ::")
+console.log($.isEmptyObject(parentHujah))
+
     return (
       <div className="container">
         <div className="row">
           <NavbarHujah />
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
-              <HujahCardHeader hujah={hujah} />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
-                { isParent ? <CrownIcon /> : "" }
+                { $.isEmptyObject(parentHujah) ? null : <HujahCardParent hujah={parentHujah} /> }
                 <h3 className="card-title text-black text-regular">{hujah.body}</h3>
               </div>
+            </div>
+          </div>
+          <div className="col-12 sm-fluid mb-2">
+            <div className="card border-0 rounded-0">
+              <HujahCardHeader hujah={hujah} />
               <div className="card-body py-0">
                 <div className="d-flex flex-column justify-content-around">
                   <div className="vote-show mb-3 d-flex align-items-center">
