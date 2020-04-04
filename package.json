@@ -25,7 +25,7 @@
     "react-router-dom": "^5.1.2",
     "turbolinks": "^5.2.0",
     "typescript": "^3.8.3",
-    "webpack": "4.0.0"
+    "webpack": "^4.0.0"
   },
   "devDependencies": {
     "webpack-cli": "^3.3.11",
