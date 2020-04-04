@@ -1,5 +1,12 @@
 {
   "name": "hoojah",
+  "description": "https://beta.hoojah.my",
+  "version": "0.5.2",
+  "repository": {
+    "url": "https://bitbucket.com/rudzainy/hoojah-beta",
+    "type": "git"
+  },
+  "author": "Rudzainy Rahman",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.0.0-0",
@@ -16,11 +23,23 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
     "turbolinks": "^5.2.0",
+    "typescript": "^3.8.3",
     "webpack": "^4.0.0"
   },
-  "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"
+  },
+  "engines": {
+    "yarn": "1.21.1",
+    "npm": "6.13.4",
+    "node": "13.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   }
 }
