@@ -13,7 +13,7 @@ class HujahCardSmall extends React.Component {
     const hujah = this.state.hujah
     
     return(
-      <div className="shadow card-body hujah-card-small border-danger border-bottom-0 p-0 d-flex align-items-center mb-2">
+      <div className="shadow card-body hujah-card-small border-danger border-bottom-0 py-0 pl-0 pr-2 d-flex align-items-center mb-1">
         <div className="media py-1">
           <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mx-2 avatar-small" />
           <div className="media-body">

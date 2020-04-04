@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import AgreeIcon from '../Icons/agree'
 import NeutralIcon from '../Icons/neutral'
 import DisagreeIcon from '../Icons/disagree'
-import CrownIcon from '../Icons/crown'
 import ViewsIcon from '../Icons/views'
 import VotesIcon from '../Icons/votes'
 import HujahIcon from '../Icons/hujah'
 import HujahCardHeader from './card_header'
+import HujahCardParent from './card_parent'
 
 class HujahCard extends React.Component {
   constructor(props) {
@@ -43,11 +43,11 @@ class HujahCard extends React.Component {
     
     return(
       <div className="col-12 sm-fluid mb-2">
-        <div className="card border-0 rounded-0">
+        { this.props.parentHujah == null ? null : <HujahCardParent hujah={this.props.parentHujah} /> }
+        <div className="shadow card border-0 rounded-0">
           <HujahCardHeader hujah={hujah} />
           <div className="card-body pb-0">
-            <Link to={`/hoojah/${hujah.id}`} className="hujah-body fill-agree btn-icon-14">
-              { hujah.parent_id == null ? <CrownIcon /> : null }
+            <Link to={`/hoojah/${hujah.id}`}>
               <h5 className="card-title text-black text-regular">{hujah.body}</h5>
             </Link>
           </div>

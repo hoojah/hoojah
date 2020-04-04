@@ -10,7 +10,6 @@ import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
 import HujahCardHeader from './Hujah/card_header'
 import HujahCardSmall from './Hujah/card_small'
-import HujahCardParent from './Hujah/card_parent'
 
 class Hujah extends React.Component {
   constructor(props) {
@@ -92,13 +91,7 @@ class Hujah extends React.Component {
     const { hujah, hujahs, parentHujah } = this.state;
 
     const allHujahs = hujahs.map((hujah, index) => (
-      <Fragment>
-        <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
-          <HujahIcon />
-          <span className="ml-1">55</span>
-        </div>
-        <HujahCardSmall key={index} hujah={hujah} />
-      </Fragment>
+      <HujahCardSmall key={index} hujah={hujah} />
     ));
 
     const noHujah = (
@@ -110,29 +103,16 @@ class Hujah extends React.Component {
 
     const totalVoteCount = hujah.agree_count + hujah.neutral_count + hujah.disagree_count
 
-console.log(":: ")
-console.log(":: ")
-console.log(":: ")
-console.log(":: ")
-console.log(":: ")
-console.log(":: $.isEmptyObject(parentHujah) ::")
-console.log($.isEmptyObject(parentHujah))
-
     return (
       <div className="container">
         <div className="row">
           <NavbarHujah />
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
+              <HujahCardHeader hujah={hujah} parentHujah={ $.isEmptyObject(parentHujah) ? null : parentHujah } />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
-                { $.isEmptyObject(parentHujah) ? null : <HujahCardParent hujah={parentHujah} /> }
                 <h3 className="card-title text-black text-regular">{hujah.body}</h3>
               </div>
-            </div>
-          </div>
-          <div className="col-12 sm-fluid mb-2">
-            <div className="card border-0 rounded-0">
-              <HujahCardHeader hujah={hujah} />
               <div className="card-body py-0">
                 <div className="d-flex flex-column justify-content-around">
                   <div className="vote-show mb-3 d-flex align-items-center">

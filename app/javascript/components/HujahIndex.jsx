@@ -28,7 +28,7 @@ class Hujahs extends React.Component {
     const { hujahs } = this.state;
 
     const allHujahs = hujahs.map((hujah, index) => (
-      <HujahCard key={index} hujah={hujah} totalVoteCount={ hujah.agree_count + hujah.neutral_count + hujah.disagree_count} />
+      <HujahCard key={index} hujah={hujah} totalVoteCount={ hujah.agree_count + hujah.neutral_count + hujah.disagree_count} parentHujah={hujah.parent_id == null ? null : hujah} />
     ));
 
     const noHujah = (

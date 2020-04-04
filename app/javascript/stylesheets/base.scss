@@ -7,7 +7,7 @@
 body {
   background-color: #e6ecf0;
   color: $color-black;
-  margin-top: 60px;
+  margin-top: 64px;
   margin-bottom: 16px;
 }
 
@@ -156,21 +156,8 @@ body {
   margin-top: -8px;
 }
 
-.hujah-body {
-  position: relative;
-
-  svg {
-    position: absolute;
-    top: 8px;
-
-    &.hujah-index {
-      top: -12px;
-    }
-  }
-}
-
 .hujah-card-small {
-  border-left: solid 6px;
+  border-left: solid 8px;
 }
 
 nav {
