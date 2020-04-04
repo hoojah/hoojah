@@ -45,15 +45,42 @@ body {
   width: 48px;
   height: 48px;
 
+
+  // &.btn-outline-warning {
+  //   -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  //   -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  //   box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  // }
+  // &.btn-outline-danger {
+  //   -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  //   -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  //   box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  // }
+  // &.btn-outline-info {
+  //   -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  //   -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  //   box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
+  // }
+
+
   &:hover {
     &.btn-outline-warning {
-      background-color: $color-agree-light;
+      background-color: $color-agree;
+      -webkit-box-shadow: 3px 3px 12px 0px $color-agree !important;
+      -moz-box-shadow: 3px 3px 12px 0px $color-agree !important;
+      box-shadow: 3px 3px 12px 0px $color-agree !important;
     }
     &.btn-outline-danger {
-      background-color: $color-neutral-light;
+      background-color: $color-neutral;
+      -webkit-box-shadow: 3px 3px 12px 0px $color-neutral !important;
+      -moz-box-shadow: 3px 3px 12px 0px $color-neutral !important;
+      box-shadow: 3px 3px 12px 0px $color-neutral !important;
     }
     &.btn-outline-info {
-      background-color: $color-disagree-light;
+      background-color: $color-disagree;
+      -webkit-box-shadow: 3px 3px 12px 0px $color-disagree !important;
+      -moz-box-shadow: 3px 3px 12px 0px $color-disagree !important;
+      box-shadow: 3px 3px 12px 0px $color-disagree !important;
     }
 
     svg {
@@ -69,6 +96,8 @@ body {
 }
 
 .btn-group-lg {
+  border-radius: 24px;
+
   .btn {
     font-size: 16px;
     padding: 11px 24px;
@@ -80,6 +109,11 @@ body {
   .btn:last-child {
     border-radius: 0 24px 24px 0;
   }
+}
+
+.card-body,
+.card-header {
+  background-color: white;
 }
 
 .fill-primary {
@@ -114,8 +148,13 @@ body {
   margin-top: -8px;
 }
 
-.hoojah-numbers {
-  font-size: 14px;
+.hujah-body {
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: 8px;
+  }
 }
 
 .hujah-card-small {
@@ -185,6 +224,10 @@ nav {
 
 .text-regular {
   font-weight: 300;
+}
+
+.text-14 {
+  font-size: 14px;
 }
 
 .vote-bar,

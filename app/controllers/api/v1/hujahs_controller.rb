@@ -15,8 +15,17 @@ class Api::V1::HujahsController < ApplicationController
 
   def show
     if hujah
-      hujahs = Hujah.all.order(updated_at: :desc)
-      render json: { hujah: hujah, hujahs: hujahs }
+      if hujah.has_children?
+        hujahs = hujah.children.order(updated_at: :desc)
+      else
+        hujahs = []
+      end
+
+      render json: { 
+        hujah: hujah, 
+        hujahs: hujahs,
+        is_parent: hujah.is_parent? 
+      }
     else
       render json: hujah.errors
     end

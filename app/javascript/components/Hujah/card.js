@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import AgreeIcon from '../Icons/agree'
 import NeutralIcon from '../Icons/neutral'
 import DisagreeIcon from '../Icons/disagree'
+import CrownIcon from '../Icons/crown'
 import HujahCardHeader from './card_header'
 
 class HujahCard extends React.Component {
@@ -14,7 +15,8 @@ class HujahCard extends React.Component {
         body: "",
         agree_count: 33,
         neutral_count: 34,
-        disagree_count: 33
+        disagree_count: 33,
+        parent_id: null
       },
       totalVoteCount: 100
     };
@@ -35,20 +37,22 @@ class HujahCard extends React.Component {
 
   render() {
     const hujah = this.state.hujah
+
     return(
       <div className="col-12 sm-fluid mb-2">
         <div className="card border-0 rounded-0">
           <HujahCardHeader hujah={hujah} />
           <div className="card-body pb-0">
-            <Link to={`/hoojah/${hujah.id}`} className="">
+            <Link to={`/hoojah/${hujah.id}`} className="hujah-body">
+              { hujah.parent_id == null ? null : <CrownIcon /> }
               <h5 className="card-title text-black text-regular">{hujah.body}</h5>
             </Link>
           </div>
           <div className="card-body pt-0">
             <div className="d-flex justify-content-around">
-              <a role="button" className="btn btn-outline-warning btn-lg btn-circle btn-icon-16 fill-agree"><AgreeIcon /></a>
-              <a role="button" className="btn btn-outline-danger btn-lg btn-circle btn-icon-16 fill-neutral neutral"><NeutralIcon /></a>
-              <a role="button" className="btn btn-outline-info btn-lg btn-circle btn-icon-16 fill-disagree"><DisagreeIcon /></a>
+              <a role="button" className="shadow btn btn-outline-warning btn-lg btn-circle btn-icon-16 fill-agree"><AgreeIcon /></a>
+              <a role="button" className="shadow btn btn-outline-danger btn-lg btn-circle btn-icon-16 fill-neutral neutral"><NeutralIcon /></a>
+              <a role="button" className="shadow btn btn-outline-info btn-lg btn-circle btn-icon-16 fill-disagree"><DisagreeIcon /></a>
             </div>
           </div>
           <div className="card-body p-0">

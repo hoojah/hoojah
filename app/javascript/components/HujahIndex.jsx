@@ -12,16 +12,16 @@ class Hujahs extends React.Component {
   }
 
   componentDidMount() {
-      const url = "/api/v1/hoojah/index"
-      fetch(url)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error("Network response was not ok.")
-        })
-        .then(response => this.setState({ hujahs: response }))
-        .catch(() => this.props.history.push("/"))
+    const url = "/api/v1/hoojah/index"
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.")
+      })
+      .then(response => this.setState({ hujahs: response }))
+      .catch(() => this.props.history.push("/"))
   }
 
   render() {

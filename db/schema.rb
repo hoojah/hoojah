@@ -10,18 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_02_103911) do
+ActiveRecord::Schema.define(version: 2020_04_01_165823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "hujahs", force: :cascade do |t|
     t.text "body", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "agree_count", default: 0
     t.integer "neutral_count", default: 0
     t.integer "disagree_count", default: 0
+    t.integer "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

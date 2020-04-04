@@ -13,7 +13,7 @@ class HujahCardHeader extends React.Component {
   render() {
     const hujah = this.state.hujah
     return(
-      <div className="card-header bg-transparent border-bottom-0 pb-0 d-flex justify-content-between align-items-center">
+      <div className="card-header border-bottom-0 pb-0 d-flex justify-content-between align-items-center">
         <div className="media">
           <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
           <div className="media-body">
