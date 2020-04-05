@@ -26,19 +26,28 @@ class Hujahs extends React.Component {
       .catch(() => this.props.history.push("/"))
   }
 
+  findParent(hujah) {
+    if(hujah.parent_id != null) {
+      const parentHujah = this.state.hujahs.find(x => x.id === hujah.parent_id)
+      return parentHujah
+    } else {
+      return null
+    }
+  }
+
   render() {
     const { hujahs } = this.state;
 
     const allHujahs = hujahs.map((hujah, index) => (
-      <HujahCard key={index} hujah={hujah} totalVoteCount={ hujah.agree_count + hujah.neutral_count + hujah.disagree_count} parentHujah={hujah.parent_id == null ? null : hujah} />
-    ));
+      <HujahCard key={index} hujah={hujah} totalVoteCount={ hujah.agree_count + hujah.neutral_count + hujah.disagree_count} parentHujah={hujah.parent_id == null ? null : this.findParent(hujah)} />
+    ))
 
     const noHujah = (
       <div className="vw-100 vh-100 d-flex align-items-center justify-content-center">
         <img src={Loading} className="loading"/>
       </div>
-    );
-
+    )
+      
     return (
       <div className="">
         <Navbar />
@@ -49,7 +58,7 @@ class Hujahs extends React.Component {
           </div>
         </main>
       </div>
-    );
+    )
   }
 
 }
