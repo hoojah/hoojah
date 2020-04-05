@@ -27,7 +27,7 @@ class Hujah extends React.Component {
       hujahs: [],
       parentHujah: {}
     }
-    this.deleteHujah = this.deleteHujah.bind(this);
+    this.deleteHujah = this.deleteHujah.bind(this)
   }
 
   componentDidMount() {
@@ -96,8 +96,8 @@ class Hujah extends React.Component {
         params: { id }
       }
     } = this.props;
-    const url = `/api/v1/destroy/${id}`;
-    const token = document.querySelector('meta[name="csrf-token"]').content;
+    const url = `/api/v1/destroy/${id}`
+    const token = document.querySelector('meta[name="csrf-token"]').content
 
     fetch(url, {
       method: "DELETE",
@@ -108,12 +108,12 @@ class Hujah extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-          return response.json();
+          return response.json()
         }
-        throw new Error("Network response was not ok.");
+        throw new Error("Network response was not ok.")
       })
       .then(() => this.props.history.push("/"))
-      .catch(error => console.log(error.message));
+      .catch(error => console.log(error.message))
   }
 
   render() {
@@ -121,14 +121,14 @@ class Hujah extends React.Component {
 
     const allHujahs = hujahs.map((hujah, index) => (
       <HujahCardSmall key={index} hujah={hujah} />
-    ));
+    ))
 
     const noHujah = (
       <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
         <HujahIcon />
         <span className="ml-1">No hoojah yet</span>
       </div>
-    );
+    )
 
     const totalVoteCount = hujah.agree_count + hujah.neutral_count + hujah.disagree_count
 
@@ -186,7 +186,12 @@ class Hujah extends React.Component {
                 <span className="ml-1">55</span>
               </div>
               <div className="card-body pt-0 text-center">
-                <Link to="/hoojah/new" className="shadow btn btn-lg btn-outline-warning btn-rounded btn-icon-16 fill-agree">
+                <Link to={{
+                    pathname: '/hoojah/new',
+                    state: {
+                      parent: hujah
+                    }
+                  }} className="shadow btn btn-lg btn-outline-warning btn-rounded btn-icon-16 fill-agree">
                   <HujahIcon /> Add hoojah
                 </Link>
               </div>

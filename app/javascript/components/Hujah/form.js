@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { Fragment } from 'react'
+import $ from 'jquery'
 import AgreeIcon from '../Icons/agree'
 import HujahIcon from '../Icons/hujah'
 import ButtonBack from '../Layouts/button_back'
@@ -8,21 +8,26 @@ class HujahForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      newHujahBody: ""
+      newHujahBody: "",
+      parent: {}
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.stripHtmlEntities = this.stripHtmlEntities.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.stripHtmlEntities = this.stripHtmlEntities.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({parent: this.props.location.state.parent})
   }
 
   stripHtmlEntities(str) {
     return String(str)
       .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
+      .replace(/>/g, "&gt;")
   }
 
   handleChange(event) {
-    this.setState({newHujahBody: event.target.value});
+    this.setState({newHujahBody: event.target.value})
   }
 
   handleSubmit(event) {
@@ -35,7 +40,8 @@ class HujahForm extends React.Component {
       return
 
     const body = {
-      body: newHujahBody.replace(/\n/g, "<br> <br>")
+      body: newHujahBody.replace(/\n/g, "<br> <br>"),
+      parent_id: this.state.parent.id
     }
 
     const token = document.querySelector('meta[name="csrf-token"]').content
@@ -58,10 +64,21 @@ class HujahForm extends React.Component {
   }
 
   render() {
-    const { newHujahBody } = this.state
+    const { newHujahBody, parent } = this.state
 
     const activePostButtonClass = "shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree"
     const inactivePostButtonClass = "shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree disabled"
+
+    const parentCard = (
+      <Fragment>
+        <div className="col-12 mb-2">
+          <small>You <span className="text-agree btn-icon-14 fill-agree"><AgreeIcon /> agreed</span> to User Name's claim:</small>  
+        </div>
+        <div className="col-12 mb-1 pl-2 border-left-8 border-warning">
+          <h6 className="text-regular pt-1">{parent.body}</h6>
+        </div>
+      </Fragment>
+    )
 
     return (
       <form>
@@ -75,13 +92,8 @@ class HujahForm extends React.Component {
                 </button>
               </div>
             </nav>
-            <div className="col-12 mb-2">
-              <small>You <span className="text-agree btn-icon-14 fill-agree"><AgreeIcon /> agreed</span> to User Name's claim:</small>  
-            </div>
-            <div className="col-12 mb-4 pl-2 border-left-8 border-warning">
-              <h6 className="text-regular pt-1">We should teach science & mathematics in English as early as in primary school.</h6>
-            </div>
-            <div className="col-12 d-flex">
+            {$.isEmptyObject(parent) ? null : parentCard}
+            <div className="col-12 d-flex mt-3">
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
               <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleChange}></textarea>
             </div>

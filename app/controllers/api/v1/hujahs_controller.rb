@@ -47,7 +47,7 @@ class Api::V1::HujahsController < ApplicationController
   private
 
   def hujah_params
-    params.permit(:body)
+    params.permit(:body, :parent_id)
   end
 
   def hujah

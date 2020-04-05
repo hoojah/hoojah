@@ -13,7 +13,12 @@ class Navbar extends React.Component {
           </Link>
           <Link to="/new_hujah" className="btn btn-link">Log in</Link>
           <div className="">
-            <Link to="/hoojah/new" className="btn btn-icon-24 fill-primary">
+            <Link to={{
+                pathname: '/hoojah/new',
+                state: {
+                  parent: {}
+                }
+              }} className="btn btn-icon-24 fill-primary">
               <HujahIcon />
             </Link>
           </div>
