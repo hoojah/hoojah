@@ -44,7 +44,7 @@ class Hujahs extends React.Component {
 
     const noHujah = (
       <div className="vw-100 vh-100 d-flex align-items-center justify-content-center">
-        <img src={Loading} className="loading"/>
+        <img src={Loading} className="loading" style={{ marginTop: "-100px" }} />
       </div>
     )
       
