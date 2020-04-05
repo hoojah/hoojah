@@ -9,9 +9,9 @@ export default (
   <Router>
     <ScrollToTop />
     <Switch>
-      <Route path='/' exact component={HujahIndex} />
-      <Route path='/hoojah/new' exact component={HujahForm} />
-      <Route path='/hoojah/:id' exact component={Hujah} />
+      <Route exact path='/' component={HujahIndex} />
+      <Route exact path='/hoojah/new' component={HujahForm} />
+      <Route exact path='/hoojah/:id' component={Hujah} />
     </Switch>
   </Router>
 )

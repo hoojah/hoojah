@@ -1,9 +1,8 @@
-import React, { Fragment } from "react"
+import React from 'react'
 import { Link } from 'react-router-dom'
 import AgreeIcon from '../Icons/agree'
-import MoreActionsIcon from '../Icons/more_actions'
-import BackIcon from '../Icons/back'
 import HujahIcon from '../Icons/hujah'
+import ButtonBack from '../Layouts/button_back'
 
 class HujahForm extends React.Component {
   constructor(props) {
@@ -17,9 +16,7 @@ class HujahForm extends React.Component {
         <div className="row">
           <nav className="navbar fixed-top navbar-light">
             <div className="container px-0 d-flex justify-content-between">
-              <Link to="/" className="btn btn-icon-24 fill-primary">
-                <BackIcon />
-              </Link>
+              <ButtonBack />
               <Link to="/hoojah/new" className="shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree">
                 <HujahIcon /> Post hoojah
               </Link>
