@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import $ from 'jquery'
 import Navbar from './Layouts/navbar'
-import NavbarHujah from './Layouts/navbar_hujah'
+import MoreActionsIcon from './Icons/more_actions'
+import ButtonBack from './Layouts/button_back'
 import AgreeIcon from './Icons/agree'
 import NeutralIcon from './Icons/neutral'
 import DisagreeIcon from './Icons/disagree'
@@ -26,6 +27,7 @@ class Hujah extends React.Component {
       hujahs: [],
       parentHujah: {}
     }
+    this.deleteHujah = this.deleteHujah.bind(this);
   }
 
   componentDidMount() {
@@ -88,6 +90,32 @@ class Hujah extends React.Component {
     return percentage
   }
 
+  deleteHujah() {
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
+    const url = `/api/v1/destroy/${id}`;
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    fetch(url, {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(() => this.props.history.push("/"))
+      .catch(error => console.log(error.message));
+  }
+
   render() {
     const { hujah, hujahs, parentHujah } = this.state;
 
@@ -108,7 +136,20 @@ class Hujah extends React.Component {
       <div className="container">
         <div className="row">
           <Navbar />
-          <NavbarHujah />
+          <nav className="navbar bg-transparent pt-0">
+            <div className="container px-0 d-flex justify-content-between">
+              <ButtonBack />
+              <div className="dropdown">
+                <button className="btn btn-icon-24 fill-primary" type="button" id="moreAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <MoreActionsIcon />
+                </button>
+                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
+                  <button className="dropdown-item" type="button" onClick={this.deleteHujah}>Delete hoojah</button>
+                  <button className="dropdown-item" type="button">Flag hoojah</button>
+                </div>
+              </div>
+            </div>
+          </nav>
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
               <HujahCardHeader hujah={hujah} parentHujah={ $.isEmptyObject(parentHujah) ? null : parentHujah } />

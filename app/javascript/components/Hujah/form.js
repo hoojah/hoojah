@@ -58,6 +58,11 @@ class HujahForm extends React.Component {
   }
 
   render() {
+    const { newHujahBody } = this.state
+
+    const activePostButtonClass = "shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree"
+    const inactivePostButtonClass = "shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree disabled"
+
     return (
       <form>
         <div className="container">
@@ -65,7 +70,7 @@ class HujahForm extends React.Component {
             <nav className="navbar fixed-top navbar-light">
               <div className="container px-0 d-flex justify-content-between">
                 <ButtonBack />
-                <button type="submit" className="shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree" onClick={this.handleSubmit}>
+                <button type="submit" className={newHujahBody == "" ? inactivePostButtonClass : activePostButtonClass} onClick={this.handleSubmit}>
                   <HujahIcon /> Post hoojah
                 </button>
               </div>
@@ -78,7 +83,7 @@ class HujahForm extends React.Component {
             </div>
             <div className="col-12 d-flex">
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
-              <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={this.state.newHujahBody} onChange={this.handleChange}></textarea>
+              <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleChange}></textarea>
             </div>
           </div>
         </div>
