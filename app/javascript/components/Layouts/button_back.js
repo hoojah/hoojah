@@ -7,7 +7,6 @@ function ButtonBack() {
   const history = useHistory()
 
   function handleNavigateBack() {
-    console.log(history)
     history.goBack()
   }
 

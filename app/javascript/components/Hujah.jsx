@@ -1,6 +1,7 @@
-import React, { Fragment } from "react"
-import { Link } from "react-router-dom"
+import React from 'react'
+import { Link } from 'react-router-dom'
 import $ from 'jquery'
+import Navbar from './Layouts/navbar'
 import NavbarHujah from './Layouts/navbar_hujah'
 import AgreeIcon from './Icons/agree'
 import NeutralIcon from './Icons/neutral'
@@ -106,6 +107,7 @@ class Hujah extends React.Component {
     return (
       <div className="container">
         <div className="row">
+          <Navbar />
           <NavbarHujah />
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
@@ -172,4 +174,4 @@ class Hujah extends React.Component {
   }
 }
 
-export default Hujah;
+export default Hujah

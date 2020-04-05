@@ -22,18 +22,12 @@ class Hujahs extends React.Component {
       })
       .then(response => {
         this.setState({ hujahs: response })
-        console.log("-")
-        console.log("response in componentDidMount")
-        console.log(response)
       })
       .catch(() => this.props.history.push("/"))
   }
 
   render() {
     const { hujahs } = this.state;
-    console.log("-")
-    console.log("hujahs in start of render")
-    console.log(hujahs)
 
     const allHujahs = hujahs.map((hujah, index) => (
       <HujahCard key={index} hujah={hujah} totalVoteCount={ hujah.agree_count + hujah.neutral_count + hujah.disagree_count} parentHujah={hujah.parent_id == null ? null : hujah} />
@@ -59,4 +53,4 @@ class Hujahs extends React.Component {
   }
 
 }
-export default Hujahs;
+export default Hujahs
