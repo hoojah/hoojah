@@ -8,6 +8,13 @@ Rails.application.routes.draw do
       get '/hoojah/new', to: 'hujahs#new'
     end
   end
+  
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+  get '/logged_in', to: 'sessions#is_logged_in?'
+  
+  resources :users, only: [:create, :show, :index]
+
   root 'hujah#index'
   get '/*path' => 'hujah#index'
 end
