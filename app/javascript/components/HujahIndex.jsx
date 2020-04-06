@@ -50,7 +50,7 @@ class Hujahs extends React.Component {
       
     return (
       <div className="">
-        <Navbar />
+        <Navbar {...this.props} handleLogout={this.props.handleLogout} />
         <div id="navbar-bg"></div>
         <main className="container">
           <div className="row">

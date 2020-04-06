@@ -17,7 +17,15 @@ class HujahForm extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
+    if(!this.props.loggedInStatus) {
+      return this.redirect()
+    }
     this.setState({parent: this.props.location.state.parent})
+  }
+  
+  redirect = () => {
+    this.props.history.push('/login')
   }
 
   stripHtmlEntities(str) {
