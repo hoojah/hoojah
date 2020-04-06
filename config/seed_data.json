@@ -1,0 +1,224 @@
+{
+  "users": [	
+		{
+		  "id": 1,
+		  "name": "Hoojah Admin",
+		  "email": "hello@hoojah.my",
+		  "username": "hoojah",
+		  "phone_number": "037552525",
+		  "city": "Kuala Lumpur",
+		  "state": "",
+		  "role": 4,
+		  "description": "Hoojah is a platform where Malaysia’s brilliant minds come to debate about current issues and vote for what they feel is important."
+		},
+		{
+		  "id": 2,
+		  "name": "Rudzainy Rahman",
+		  "email": "rudzainy@gmail.com",
+		  "username": "rudzainy",
+		  "phone_number": "0138010985",
+		  "city": "Sandakan",
+		  "state": "Sabah",
+		  "role": 0,
+		  "description": "I have a lovely bunch of coconuts 🥥"
+		},
+		{
+		  "id": 3,
+		  "name": "Lin Guam Eng",
+		  "email": "guamenglin@email.com",
+		  "username": "guamenglin",
+		  "phone_number": "0123456789",
+		  "city": "Johor Bahru",
+		  "state": "Johor",
+		  "role": 0,
+		  "description": "Secretary-General of Democratic Action Party Malaysia"
+		},
+		{
+		  "id": 4,
+		  "name": "Abdul Hati Awang",
+		  "email": "abdulhatiawang@email.com",
+		  "username": "abdulhatiawang",
+		  "phone_number": "0123456788",
+		  "city": "Marang",
+		  "state": "Terengganu",
+		  "role": 0,
+		  "description": "Presiden PAS • Ahli Parlimen Marang"
+		},
+		{
+		  "id": 5,
+		  "name": "Fony Ternandez",
+		  "email": "fonyternandez@email.com",
+		  "username": "fonyternandes",
+		  "phone_number": "0123456787",
+		  "city": "Sepang",
+		  "state": "Selangor",
+		  "role": 0,
+		  "description": "AsiaAir PQR Kereterham Dune ✈️"
+		},
+		{
+		  "id": 6,
+		  "name": "KFC",
+		  "email": "kfc@email.com",
+		  "username": "KFC",
+		  "phone_number": "0123456786",
+		  "city": "Petaling Jaya",
+		  "state": "Selangor",
+		  "role": 1,
+		  "description": "It's finger-lickin' good 🍗"
+		},
+		{
+		  "id": 7,
+		  "name": "Dr Maszlik Malee",
+		  "email": "maszlik@email.com",
+		  "username": "maszlik",
+		  "phone_number": "0123456785",
+		  "city": "Putrajaya",
+		  "state": "",
+		  "role": 0,
+		  "description": "Melentur buluh biarlah dari rebungnya 🎋"
+		},
+		{
+		  "id": 8,
+		  "name": "Richard Grandson",
+		  "email": "richardgrandson@email.com",
+		  "username": "richardgrandson",
+		  "phone_number": "0123456784",
+		  "city": "Langkawi",
+		  "state": "Kedah",
+		  "role": 0,
+		  "description": "Tie-loathing adventurer, philanthropist & troublemaker, who believes in turning ideas into reality. Otherwise known as Dr Yes at @virgin!"
+		},
+		{
+		  "id": 9,
+		  "name": "Yoonalis Zarai",
+		  "email": "yoonamusic@email.com",
+		  "username": "yoonamusic",
+		  "phone_number": "0123456783",
+		  "city": "Alor Setar",
+		  "state": "Kedah",
+		  "role": 0,
+		  "description": "| A different kind of modern woman / 🎸"
+		},
+		{
+		  "id": 10,
+		  "name": "Dr Mathadir Mohamad",
+		  "email": "chedotofficial@email.com",
+		  "username": "chedotofficial",
+		  "phone_number": "0123456782",
+		  "city": "Alor Setar",
+		  "state": "Kedah",
+		  "role": 0,
+		  "description": "Official account of Tun Dr Mathadir Mohamad • 7th Prime Minister of Malaysia • Chairman of Pakatan Harapan"
+		},
+		{
+		  "id": 11,
+		  "name": "Anuar Ibrohim",
+		  "email": "anuaribrohim@email.com",
+		  "username": "anuaribrohim",
+		  "phone_number": "0123456781",
+		  "city": "",
+		  "state": "Penang",
+		  "role": 0,
+		  "description": "Laman Rasmi Anwar Ibrohim, Presiden KEADILAN. Ahli Parlimen P132 Port Dickson."
+		},
+		{
+		  "id": 12,
+		  "name": "Siti Nora Liza",
+		  "email": "CTNoraLiza11@email.com",
+		  "username": "CTNoraLiza11",
+		  "phone_number": "0123456780",
+		  "city": "Temerloh",
+		  "state": "Pahang",
+		  "role": 0,
+		  "description": "Singer • Music Producer • Businesswoman • ❤️"
+		},
+		{
+		  "id": 13,
+		  "name": "Khoiry Jalaluddin",
+		  "email": "Khoirykj@email.com",
+		  "username": "Khoirykj",
+		  "phone_number": "0123456779",
+		  "city": "Kuwait City",
+		  "state": "Kuwait",
+		  "role": 0,
+		  "description": "Shadow Finance Minister; MP for Rembau; Papa to Cougar, Puma & Leo. Dark blue."
+		},
+		{
+		  "id": 14,
+		  "name": "Dr Sheikh Mufasa",
+		  "email": "drsheikhmufasa@email.com",
+		  "username": "drsheikhmufasa",
+		  "phone_number": "0123456778",
+		  "city": "Kuala Lumpur",
+		  "state": "",
+		  "role": 0,
+		  "description": "🇲🇾 MALAYSIA's FIRST ASTRONAUT #AngkasawanNegara"
+		},
+		{
+		  "id": 15,
+		  "name": "Malaysia Airlines",
+		  "email": "mas@email.com",
+		  "username": "MAS",
+		  "phone_number": "0123456777",
+		  "city": "Sepang",
+		  "state": "Selangor",
+		  "role": 1,
+		  "description": "Memorable journeys inspired by Malaysia's diverse richness. #MalaysiaAirlines Global Airline partner of LiverpoolFC #MHxLFC"
+		},
+		{
+		  "id": 16,
+		  "name": "McDonald's",
+		  "email": "mcd@email.com",
+		  "username": "mcd",
+		  "phone_number": "0123456776",
+		  "city": "Kuala Lumpur",
+		  "state": "",
+		  "role": 1,
+		  "description": "🍔 I'm lovin' it 🍟"
+		},
+		{
+		  "id": 17,
+		  "name": "Thatila Tan",
+		  "email": "thatilabe@email.com",
+		  "username": "thatilabe",
+		  "phone_number": "0123456775",
+		  "city": "Kuala Lumpur",
+		  "state": "",
+		  "role": 0,
+		  "description": "🖤 #TeamNike "
+		},
+		{
+		  "id": 18,
+		  "name": "Jaklyn Viktor",
+		  "email": "jaklyn_viktor@email.com",
+		  "username": "jaklyn_viktor",
+		  "phone_number": "0123456774",
+		  "city": "Kepong",
+		  "state": "Selangor",
+		  "role": 0,
+		  "description": "❤️ Daughter Of THE KING ❤️ 1st Malaysian Idol #ISATMOAOLJC😍 #ILYDB😍 #MSMCCMTS😍"
+		},
+		{
+		  "id": 19,
+		  "name": "Michelle Yeah",
+		  "email": "michelleyeah_official@email.com",
+		  "username": "michelleyeah_official",
+		  "phone_number": "0123456773",
+		  "city": "Ipoh",
+		  "state": "Perak",
+		  "role": 0,
+		  "description": "Actress 🖖🏼Star Trek Discovery 🎬Crazy Rich Asians 🐉Crouching Tiger Hidden Dragon 👘Memoirs of A Geisha 🍸James Bond Tomorrow Never Dies"
+		},
+		{
+		  "id": 20,
+		  "name": "Maxis",
+		  "email": "maxis@email.com",
+		  "username": "maxis",
+		  "phone_number": "0123456772",
+		  "city": "Kuala Lumpur",
+		  "state": "Kuala Lumpur",
+		  "role": 1,
+		  "description": "Capturing your favourite #MyMaxis deals and more. ❤"
+		}
+	],
+}

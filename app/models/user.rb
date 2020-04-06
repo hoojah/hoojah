@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :hujahs, dependent: :destroy
+  # has_many :votes, dependent: :destroy
+
   has_secure_password
   validates :username, presence: true
   validates :username, uniqueness: true
