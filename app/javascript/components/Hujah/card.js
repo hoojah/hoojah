@@ -42,14 +42,81 @@ class HujahCard extends React.Component {
      })
   }
 
+  updateVote(vote) {
+
+    const url = "/api/v1/votes/create"
+
+    const body = {
+      vote: vote,
+      hujah_id: this.state.hujah.id
+    }
+
+    const token = document.querySelector('meta[name="csrf-token"]').content
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error("Network response was not ok.")
+      })
+      .catch(error => console.log(error.message))
+  }
+
   calculatePercentage(voteCount) {
     const percentage = voteCount * 100 / this.state.totalVoteCount
     return `${percentage}%`
   }
+
+  handleVoteAgree() {
+    const newHujahState = Object.assign({}, this.state.hujah)
+    newHujahState.agree_count = newHujahState.agree_count + 1
+    this.setState({ 
+      hujah: newHujahState,
+      totalVoteCount: this.state.totalVoteCount + 1
+    })
+    this.updateVote(1)
+  }
+
+  handleVoteNeutral() {
+    const newHujahState = Object.assign({}, this.state.hujah)
+    newHujahState.neutral_count = newHujahState.neutral_count + 1
+    this.setState({ 
+      hujah: newHujahState,
+      totalVoteCount: this.state.totalVoteCount + 1
+    })
+    this.updateVote(2)
+  }
+
+  handleVoteDisagree() {
+    const newHujahState = Object.assign({}, this.state.hujah)
+    newHujahState.disagree_count = newHujahState.disagree_count + 1
+    this.setState({ 
+      hujah: newHujahState,
+      totalVoteCount: this.state.totalVoteCount + 1
+    })
+    this.updateVote(3)
+  }
+
   render() {
     const { hujah, totalVoteCount } = this.state
     const { hujahParent, user } = this.props
 
+    const showVoteBar = (
+      <div className="card-body p-0">
+        <div className="d-flex justify-content-around vote-bar">
+          <div className="vote bg-agree" style={{ width: this.calculatePercentage(hujah.agree_count) }}></div>
+          <div className="vote bg-neutral" style={{ width: this.calculatePercentage(hujah.neutral_count) }}></div>
+          <div className="vote bg-disagree" style={{ width: this.calculatePercentage(hujah.disagree_count) }}></div>
+        </div>
+      </div>
+    )
     return(
       <div className="col-12 sm-fluid mb-3">
         <div className="shadow card border-0 rounded-0">
@@ -61,18 +128,12 @@ class HujahCard extends React.Component {
           </div>
           <div className="card-body pt-0">
             <div className="d-flex justify-content-around">
-              <a role="button" className="shadow btn btn-outline-warning btn-lg btn-circle btn-icon-16 fill-agree"><AgreeIcon /></a>
-              <a role="button" className="shadow btn btn-outline-danger btn-lg btn-circle btn-icon-16 fill-neutral neutral"><NeutralIcon /></a>
-              <a role="button" className="shadow btn btn-outline-info btn-lg btn-circle btn-icon-16 fill-disagree"><DisagreeIcon /></a>
+              <button className="shadow btn btn-outline-warning btn-lg btn-circle btn-icon-16 fill-agree" onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
+              <button className="shadow btn btn-outline-danger btn-lg btn-circle btn-icon-16 fill-neutral neutral" onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
+              <button className="shadow btn btn-outline-info btn-lg btn-circle btn-icon-16 fill-disagree" onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
             </div>
           </div>
-          <div className="card-body p-0">
-            <div className="d-flex justify-content-around vote-bar">
-              <div className="vote bg-agree" style={{ width: this.calculatePercentage(hujah.attributes.agree_count) }}></div>
-              <div className="vote bg-neutral" style={{ width: this.calculatePercentage(hujah.attributes.neutral_count) }}></div>
-              <div className="vote bg-disagree" style={{ width: this.calculatePercentage(hujah.attributes.disagree_count) }}></div>
-            </div>
-          </div>
+          {totalVoteCount > 0 ? showVoteBar : null}
           <div className="card-footer d-flex justify-content-between text-grey">
             <div className="d-flex align-items-center text-14 btn-icon-14 fill-grey">
               <ViewsIcon />

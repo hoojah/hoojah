@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  resources :votes
   namespace :api do
     namespace :v1 do
       get 'hoojah/index', to: 'hujahs#index'
       post 'hoojah/create', to: 'hujahs#create'
       get '/hoojah/:id', to: 'hujahs#show'
-      delete '/destroy/:id', to: 'hujahs#destroy'
+      delete '/hoojah/destroy/:id', to: 'hujahs#destroy'
       get '/hoojah/new', to: 'hujahs#new'
+
+      post 'votes/create', to: 'votes#create'
     end
   end
   

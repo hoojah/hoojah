@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 2020_04_06_114529) do
     t.index ["user_id"], name: "index_hujahs_on_user_id"
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.integer "hujah_id", null: false
+    t.integer "vote", null: false, array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"

@@ -137,8 +137,8 @@ class Hujah extends React.Component {
       match: {
         params: { id }
       }
-    } = this.props
-    const url = `/api/v1/destroy/${id}`
+    } = this.props;
+    const url = `/api/v1/hoojah/destroy/${id}`
     const token = document.querySelector('meta[name="csrf-token"]').content
 
     fetch(url, {
