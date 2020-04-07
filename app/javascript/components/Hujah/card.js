@@ -27,11 +27,6 @@ class HujahCard extends React.Component {
             body: "",
             username: "",
             full_name: ""
-          },
-          user: {
-            id: null,
-            username: "",
-            full_name: ""
           }
         }
       },
@@ -53,11 +48,12 @@ class HujahCard extends React.Component {
   }
   render() {
     const { hujah, totalVoteCount } = this.state
+    const { hujahParent, user } = this.props
 
     return(
       <div className="col-12 sm-fluid mb-3">
         <div className="shadow card border-0 rounded-0">
-          <HujahCardHeader hujah={hujah} hujahParent={ this.props.hujahParent == null ? null : this.props.hujahParent } user={this.props.user} />
+          <HujahCardHeader hujah={hujah} hujahParent={ hujahParent == null ? null : hujahParent } user={user} />
           <div className="card-body pb-0">
             <Link to={`/hoojah/${hujah.id}`}>
               <h5 className="card-title text-black text-regular">{hujah.attributes.body}</h5>

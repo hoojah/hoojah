@@ -2,15 +2,9 @@ import React from "react"
 import { Link } from 'react-router-dom'
 
 class HujahParentCard extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      hujah: this.props.hujah,
-    };
-  }
 
   render() {
-    const hujah = this.state.hujah
+    const hujah = this.props.hujah
 
     return(
       <Link to={`/hoojah/${hujah.id}`} className="no-underscore">

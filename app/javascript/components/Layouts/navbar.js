@@ -36,7 +36,8 @@ class Navbar extends React.Component {
             <Link to={{
                 pathname: '/hoojah/new',
                 state: {
-                  parent: {}
+                  hujah: {},
+                  user: {}
                 }
               }} className="btn btn-icon-24 fill-primary">
               <HujahIcon />

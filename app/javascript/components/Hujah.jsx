@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import $ from 'jquery'
 import Navbar from './Layouts/navbar'
 import MoreActionsIcon from './Icons/more_actions'
 import ButtonBack from './Layouts/button_back'
@@ -23,11 +22,20 @@ class Hujah extends React.Component {
         body: "",
         agree_count: 33,
         neutral_count: 34,
-        disagree_count: 33,
+        disagree_count: 33
       },
       children: [],
-      hujahParent: {},
-      user: {}
+      hujahParent: {
+        id: null,
+        body: "",
+        username: "",
+        full_name: ""
+      },
+      user: {
+        id: null,
+        username: "",
+        full_name: ""
+      }
     }
     this.deleteHujah = this.deleteHujah.bind(this)
   }
@@ -169,7 +177,7 @@ class Hujah extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <Navbar />
+          <Navbar {...this.props} handleLogout={this.props.handleLogout} />
           <nav className="navbar bg-transparent pt-0">
             <div className="container px-0 d-flex justify-content-between">
               <ButtonBack />
@@ -186,7 +194,10 @@ class Hujah extends React.Component {
           </nav>
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
-              <HujahCardHeader hujah={hujah} user={user} hujahParent={ $.isEmptyObject(hujahParent) ? null : hujahParent } />
+              <HujahCardHeader 
+                hujah={hujah} 
+                user={user} 
+                hujahParent={hujahParent.id == null ? null : hujahParent} />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
                 <h3 className="card-title text-black text-regular">{hujah.body}</h3>
               </div>

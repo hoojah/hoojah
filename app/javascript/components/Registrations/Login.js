@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Logo from 'logo.svg'
+import HomeIcon from '../Icons/home'
 
 class Login extends Component {
   constructor(props) {
@@ -13,7 +15,9 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    return this.props.loggedInStatus ? this.redirect() : null
+    if(this.props.loggedInStatus) {
+      return this.redirect()
+    }
   }
   
   handleChange = (event) => {
@@ -51,12 +55,12 @@ class Login extends Component {
 
   handleErrors = () => {
     return (
-      <div>
+      <div class="alert alert-warning" role="alert">
         <ul>
-        {this.state.errors.map(error => {
-        return <li key={error}>{error}</li>
-          })
-        }
+          {this.state.errors.map(error => {
+          return <li key={error}>{error}</li>
+            })
+          }
         </ul>
       </div>
     )
@@ -65,35 +69,66 @@ class Login extends Component {
   render() {
     const {email, password} = this.state
     return (
-      <div>
-        <h1>Log In</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-          <button placeholder="submit" type="submit">
-            Log In
-          </button>
-          <div>
-            or <Link to='/signup'>sign up</Link>
+      <div className="container">
+        <div className="row">
+          <nav className="navbar fixed-top navbar-light">
+            <div className="container px-0 d-flex justify-content-between">
+              <Link to="/" className="navbar-brand">
+                <img src={Logo} />
+              </Link>
+              <div className="">
+                <Link to={"/"} className="btn btn-icon-24 fill-primary">
+                  <HomeIcon />
+                </Link>
+              </div>
+            </div>
+          </nav>
+          <div className="col-12 sm-fluid mb-2">
+            <div className="card border-0 rounded-0">
+              <div className="card-header text-center">
+                Hello from Hoojah! 🎉
+              </div>
+              <div className="card-body text-center bg-primary text-white">
+                <h5 className="card-title">Don't have an account yet?</h5>
+                <Link to={"/signup"} className="btn btn-warning">Get started here!</Link>
+              </div>
+              <div className="card-body">
+                <h5 className="card-title">Log in</h5>
+                {
+                  this.state.errors ? this.handleErrors() : null
+                }
+                <form onSubmit={this.handleSubmit}>
+                  <div className="form-group">
+                    <label>Email address</label>
+                    <input
+                      className="form-control"
+                      placeholder="Enter email"
+                      type="email"
+                      name="email"
+                      value={email}
+                      onChange={this.handleChange}
+                    />
+                    <small className="form-text text-muted">For testing purpose, you don't need to enter a valid email.</small>
+                  </div>
+                  <div className="form-group">
+                    <label>Password</label>
+                    <input
+                      className="form-control"
+                      placeholder="Enter password"
+                      type="password"
+                      name="password"
+                      value={password}
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">Log in</button>
+                </form>
+              </div>
+              <div className="card-footer text-muted">
+                <small>Disclaimer: Hoojah is still in development. All activities are for testing purpose. Hoojah will not be liable for any damage done during this testing period.</small>
+              </div>
+            </div>
           </div>
-          
-          </form>
-          <div>
-          {
-            this.state.errors ? this.handleErrors() : null
-          }
         </div>
       </div>
     )
