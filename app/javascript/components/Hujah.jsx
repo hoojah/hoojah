@@ -159,20 +159,6 @@ class Hujah extends React.Component {
   }
 
   render() {
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("###############")
-    console.log("############### this.state.hujahParent in Hujah.jsx")
-    console.log(this.state.hujahParent)
-    
     const { hujah, children, hujahParent, user } = this.state
 
     const displayChildren = children.map((hujah, index) => (
@@ -191,7 +177,7 @@ class Hujah extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <Navbar />
+          <Navbar {...this.props} handleLogout={this.props.handleLogout} />
           <nav className="navbar bg-transparent pt-0">
             <div className="container px-0 d-flex justify-content-between">
               <ButtonBack />

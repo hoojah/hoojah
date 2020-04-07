@@ -6,10 +6,6 @@ import HujahCardParent from './card_parent'
 class HujahCardHeader extends React.Component {
   render() {
     const { hujahParent, user } = this.props
-    console.log("############### this.props.hujahParent in card_header.js")
-    console.log(this.props.hujahParent)
-    console.log("############### this.props.hujahParent == null in card_header.js")
-    console.log(this.props.hujahParent == null)
 
     return(
       <Fragment>

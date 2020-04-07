@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom'
 class HujahParentCard extends React.Component {
 
   render() {
-    console.log("############### this.props.hujah in card_parent.js")
-    console.log(this.props.hujah)
     const hujah = this.props.hujah
 
     return(
