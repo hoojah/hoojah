@@ -9,7 +9,8 @@ class HujahForm extends React.Component {
     super(props)
     this.state = {
       newHujahBody: "",
-      parent: {}
+      user: {},
+      hujah: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,11 +18,13 @@ class HujahForm extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     if(!this.props.loggedInStatus) {
       return this.redirect()
     }
-    this.setState({parent: this.props.location.state.parent})
+    this.setState({
+      user: this.props.location.state.user,
+      hujah: this.props.location.state.hujah
+    })
   }
   
   redirect = () => {
@@ -72,7 +75,7 @@ class HujahForm extends React.Component {
   }
 
   render() {
-    const { newHujahBody, parent } = this.state
+    const { newHujahBody, user, hujah } = this.state
 
     const activePostButtonClass = "shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree"
     const inactivePostButtonClass = "shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree disabled"
@@ -80,10 +83,10 @@ class HujahForm extends React.Component {
     const parentCard = (
       <Fragment>
         <div className="col-12 mb-2">
-          <small>You <span className="text-agree btn-icon-14 fill-agree"><AgreeIcon /> agreed</span> to User Name's claim:</small>  
+          <small>You <span className="text-agree btn-icon-14 fill-agree"><AgreeIcon /> agreed</span> to {user.full_name}'s claim:</small>  
         </div>
         <div className="col-12 mb-1 pl-2 border-left-8 border-warning">
-          <h6 className="text-regular pt-1">{parent.body}</h6>
+          <h6 className="text-regular pt-1">{hujah.body}</h6>
         </div>
       </Fragment>
     )
@@ -100,7 +103,7 @@ class HujahForm extends React.Component {
                 </button>
               </div>
             </nav>
-            {$.isEmptyObject(parent) ? null : parentCard}
+            {$.isEmptyObject(user) ? null : parentCard}
             <div className="col-12 d-flex mt-3">
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
               <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleChange}></textarea>
