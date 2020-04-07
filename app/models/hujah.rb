@@ -1,8 +1,10 @@
 class Hujah < ApplicationRecord
-  validates :body, presence: true
 
+  belongs_to :user
   has_many :children, class_name: "Hujah", foreign_key: "parent_id"
   belongs_to :parent, class_name: "Hujah", optional: true
+  
+  validates :body, presence: true
 
   def is_parent?
     self.parent == nil

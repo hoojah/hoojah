@@ -8,7 +8,7 @@ class Hujahs extends React.Component {
     super(props)
     this.state = {
       hujahs: []
-    };
+    }
   }
 
   componentDidMount() {
@@ -16,19 +16,19 @@ class Hujahs extends React.Component {
     fetch(url)
       .then(response => {
         if (response.ok) {
-          return response.json();
+          return response.json()
         }
         throw new Error("Network response was not ok.")
       })
       .then(response => {
-        this.setState({ hujahs: response })
+        this.setState({ hujahs: response.data })
       })
       .catch(() => this.props.history.push("/"))
   }
 
   findParent(hujah) {
-    if(hujah.parent_id != null) {
-      const parentHujah = this.state.hujahs.find(x => x.id === hujah.parent_id)
+    if(hujah.attributes.parent != null) {
+      const parentHujah = this.state.hujahs.find(x => x.id === hujah.attributes.parent)
       return parentHujah
     } else {
       return null
@@ -36,10 +36,10 @@ class Hujahs extends React.Component {
   }
 
   render() {
-    const { hujahs } = this.state;
+    const { hujahs } = this.state
 
     const allHujahs = hujahs.map((hujah, index) => (
-      <HujahCard key={index} hujah={hujah} totalVoteCount={ hujah.agree_count + hujah.neutral_count + hujah.disagree_count} parentHujah={hujah.parent_id == null ? null : this.findParent(hujah)} />
+      <HujahCard key={index} hujah={hujah} totalVoteCount={ hujah.attributes.agree_count + hujah.attributes.neutral_count + hujah.attributes.disagree_count} hujahParent={hujah.attributes.parent == null ? null : hujah.attributes.parent} user={hujah.attributes.user} />
     ))
 
     const noHujah = (
@@ -50,7 +50,7 @@ class Hujahs extends React.Component {
       
     return (
       <div className="">
-        <Navbar />
+        <Navbar {...this.props} handleLogout={this.props.handleLogout} />
         <div id="navbar-bg"></div>
         <main className="container">
           <div className="row">

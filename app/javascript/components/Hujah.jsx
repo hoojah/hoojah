@@ -19,13 +19,15 @@ class Hujah extends React.Component {
 
     this.state = { 
       hujah: { 
+        id: null,
         body: "",
         agree_count: 33,
         neutral_count: 34,
         disagree_count: 33,
       },
-      hujahs: [],
-      parentHujah: {}
+      children: [],
+      hujahParent: {},
+      user: {}
     }
     this.deleteHujah = this.deleteHujah.bind(this)
   }
@@ -47,11 +49,27 @@ class Hujah extends React.Component {
         throw new Error("Network response was not ok.")
       })
       .then(response => {
+        const data = response.data
         this.setState({ 
-          hujah: response.hujah,
-          hujahs: response.hujahs,
-          parentHujah: response.parentHujah
+          hujah: {
+            id: data.id,
+            body: data.attributes.body,
+            agree_count: data.attributes.agree_count,
+            neutral_count: data.attributes.neutral_count,
+            disagree_count: data.attributes.disagree_count,
+          },
+          user: data.attributes.user
         })
+        if(data.attributes.hasOwnProperty("parent")) {
+          this.setState({ hujahParent: data.attributes.parent })
+        } else {
+          this.setState({ hujahParent: {} })
+        }
+        if(data.attributes.hasOwnProperty("children")) {
+          this.setState({ children: data.attributes.children })
+        } else {
+          this.setState({ children: [] })
+        }
       })
       .catch(() => this.props.history.push("/"))
   }
@@ -70,16 +88,32 @@ class Hujah extends React.Component {
       fetch(url)
         .then(response => {
           if (response.ok) {
-            return response.json();
+            return response.json()
           }
           throw new Error("Network response was not ok.")
         })
         .then(response => {
+          const data = response.data
           this.setState({ 
-            hujah: response.hujah,
-            hujahs: response.hujahs,
-            parentHujah: response.parentHujah
+            hujah: {
+              id: data.id,
+              body: data.attributes.body,
+              agree_count: data.attributes.agree_count,
+              neutral_count: data.attributes.neutral_count,
+              disagree_count: data.attributes.disagree_count,
+            },
+            user: data.attributes.user
           })
+          if(data.attributes.hasOwnProperty("parent")) {
+            this.setState({ hujahParent: data.attributes.parent })
+          } else {
+            this.setState({ hujahParent: {} })
+          }
+          if(data.attributes.hasOwnProperty("children")) {
+            this.setState({ children: data.attributes.children })
+          } else {
+            this.setState({ children: [] })
+          }
         })
         .catch(() => this.props.history.push("/"))
     }
@@ -95,7 +129,7 @@ class Hujah extends React.Component {
       match: {
         params: { id }
       }
-    } = this.props;
+    } = this.props
     const url = `/api/v1/destroy/${id}`
     const token = document.querySelector('meta[name="csrf-token"]').content
 
@@ -117,16 +151,16 @@ class Hujah extends React.Component {
   }
 
   render() {
-    const { hujah, hujahs, parentHujah } = this.state;
+    const { hujah, children, hujahParent, user } = this.state
 
-    const allHujahs = hujahs.map((hujah, index) => (
+    const displayChildren = children.map((hujah, index) => (
       <HujahCardSmall key={index} hujah={hujah} />
     ))
 
-    const noHujah = (
+    const noChildren = (
       <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
         <HujahIcon />
-        <span className="ml-1">No hoojah yet</span>
+        <span className="ml-1">No response yet</span>
       </div>
     )
 
@@ -152,7 +186,7 @@ class Hujah extends React.Component {
           </nav>
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
-              <HujahCardHeader hujah={hujah} parentHujah={ $.isEmptyObject(parentHujah) ? null : parentHujah } />
+              <HujahCardHeader hujah={hujah} user={user} hujahParent={ $.isEmptyObject(hujahParent) ? null : hujahParent } />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
                 <h3 className="card-title text-black text-regular">{hujah.body}</h3>
               </div>
@@ -211,12 +245,12 @@ class Hujah extends React.Component {
                   <button type="button" className="btn btn-outline-light btn-icon-16 fill-disagree"><DisagreeIcon /></button>
                 </div>
               </div>
-              {hujahs.length > 0 ? allHujahs : noHujah}
+              {children.length > 0 ? displayChildren : noChildren}
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
