@@ -1,7 +1,10 @@
 class Api::V1::HujahsController < ApplicationController
   def index
     hujahs = Hujah.all.order(updated_at: :desc)
-    render json: hujahs
+    
+    render json: HujahSerializer.new(hujahs).serialized_json
+
+    # render json: hujahs
   end
 
   def create

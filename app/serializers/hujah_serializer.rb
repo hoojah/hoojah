@@ -1,8 +1,6 @@
 class HujahSerializer
   include FastJsonapi::ObjectSerializer
 
-  set_key_transform :camel_lower
-  
   attributes :body, :agree_count, :neutral_count, :disagree_count
 
   # has_many :children, record_type: :hujah, serializer: HujahSerializer

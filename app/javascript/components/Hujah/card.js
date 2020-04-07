@@ -14,12 +14,26 @@ class HujahCard extends React.Component {
     super(props)
 
     this.state = {
-      hujah: { 
-        body: "",
-        agree_count: 33,
-        neutral_count: 34,
-        disagree_count: 33,
-        parent_id: null
+      hujah: {
+        id: null,
+        type: "",
+        attributes: {
+          body: "",
+          agree_count: null,
+          neutral_count: null,
+          disagree_count: null,
+          parent: {
+            id: null,
+            body: "",
+            username: "",
+            full_name: ""
+          },
+          user: {
+            id: null,
+            username: "",
+            full_name: ""
+          }
+        }
       },
       totalVoteCount: 100
     };
@@ -37,18 +51,16 @@ class HujahCard extends React.Component {
     const percentage = voteCount * 100 / this.state.totalVoteCount
     return `${percentage}%`
   }
-
   render() {
     const { hujah, totalVoteCount } = this.state
-    
+
     return(
       <div className="col-12 sm-fluid mb-3">
-        { this.props.parentHujah == null ? null : <HujahCardParent hujah={this.props.parentHujah} /> }
         <div className="shadow card border-0 rounded-0">
-          <HujahCardHeader hujah={hujah} />
+          <HujahCardHeader hujah={hujah} hujahParent={ this.props.hujahParent == null ? null : this.props.hujahParent } user={this.props.user} />
           <div className="card-body pb-0">
             <Link to={`/hoojah/${hujah.id}`}>
-              <h5 className="card-title text-black text-regular">{hujah.body}</h5>
+              <h5 className="card-title text-black text-regular">{hujah.attributes.body}</h5>
             </Link>
           </div>
           <div className="card-body pt-0">
@@ -60,9 +72,9 @@ class HujahCard extends React.Component {
           </div>
           <div className="card-body p-0">
             <div className="d-flex justify-content-around vote-bar">
-              <div className="vote bg-agree" style={{ width: this.calculatePercentage(hujah.agree_count) }}></div>
-              <div className="vote bg-neutral" style={{ width: this.calculatePercentage(hujah.neutral_count) }}></div>
-              <div className="vote bg-disagree" style={{ width: this.calculatePercentage(hujah.disagree_count) }}></div>
+              <div className="vote bg-agree" style={{ width: this.calculatePercentage(hujah.attributes.agree_count) }}></div>
+              <div className="vote bg-neutral" style={{ width: this.calculatePercentage(hujah.attributes.neutral_count) }}></div>
+              <div className="vote bg-disagree" style={{ width: this.calculatePercentage(hujah.attributes.disagree_count) }}></div>
             </div>
           </div>
           <div className="card-footer d-flex justify-content-between text-grey">

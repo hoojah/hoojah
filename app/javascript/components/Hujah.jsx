@@ -21,9 +21,9 @@ class Hujah extends React.Component {
       hujah: { 
         id: null,
         body: "",
-        agreeCount: 33,
-        neutralCount: 34,
-        disagreeCount: 33,
+        agree_count: 33,
+        neutral_count: 34,
+        disagree_count: 33,
       },
       children: [],
       hujahParent: {},
@@ -54,9 +54,9 @@ class Hujah extends React.Component {
           hujah: {
             id: data.id,
             body: data.attributes.body,
-            agreeCount: data.attributes.agreeCount,
-            neutralCount: data.attributes.neutralCount,
-            disagreeCount: data.attributes.disagreeCount,
+            agree_count: data.attributes.agree_count,
+            neutral_count: data.attributes.neutral_count,
+            disagree_count: data.attributes.disagree_count,
           },
           user: data.attributes.user
         })
@@ -98,9 +98,9 @@ class Hujah extends React.Component {
             hujah: {
               id: data.id,
               body: data.attributes.body,
-              agreeCount: data.attributes.agreeCount,
-              neutralCount: data.attributes.neutralCount,
-              disagreeCount: data.attributes.disagreeCount,
+              agree_count: data.attributes.agree_count,
+              neutral_count: data.attributes.neutral_count,
+              disagree_count: data.attributes.disagree_count,
             },
             user: data.attributes.user
           })
@@ -151,7 +151,7 @@ class Hujah extends React.Component {
   }
 
   render() {
-    const { hujah, children, hujahParent } = this.state
+    const { hujah, children, hujahParent, user } = this.state
 
     const displayChildren = children.map((hujah, index) => (
       <HujahCardSmall key={index} hujah={hujah} />
@@ -164,7 +164,7 @@ class Hujah extends React.Component {
       </div>
     )
 
-    const totalVoteCount = hujah.agreeCount + hujah.neutralCount + hujah.disagreeCount
+    const totalVoteCount = hujah.agree_count + hujah.neutral_count + hujah.disagree_count
 
     return (
       <div className="container">
@@ -186,7 +186,7 @@ class Hujah extends React.Component {
           </nav>
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
-              <HujahCardHeader hujah={hujah} hujahParent={ $.isEmptyObject(hujahParent) ? null : hujahParent } />
+              <HujahCardHeader hujah={hujah} user={user} hujahParent={ $.isEmptyObject(hujahParent) ? null : hujahParent } />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
                 <h3 className="card-title text-black text-regular">{hujah.body}</h3>
               </div>
@@ -194,18 +194,18 @@ class Hujah extends React.Component {
                 <div className="d-flex flex-column justify-content-around">
                   <div className="vote-show mb-3 d-flex align-items-center">
                     <a role="button" className="shadow btn btn-outline-warning btn-lg btn-circle btn-icon-16 fill-agree"><AgreeIcon /></a>
-                    <div className="vote bg-agree" style={{ width: `${this.calculatePercentage(hujah.agreeCount, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-agree ml-auto">{Math.round(this.calculatePercentage(hujah.agreeCount, totalVoteCount))}%</small>
+                    <div className="vote bg-agree" style={{ width: `${this.calculatePercentage(hujah.agree_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-agree ml-auto">{Math.round(this.calculatePercentage(hujah.agree_count, totalVoteCount))}%</small>
                   </div>
                   <div className="vote-show mb-3 d-flex align-items-center">
                     <a role="button" className="shadow btn btn-outline-danger btn-lg btn-circle btn-icon-16 fill-neutral neutral"><NeutralIcon /></a>
-                    <div className="vote bg-neutral" style={{ width: `${this.calculatePercentage(hujah.neutralCount, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-neutral ml-auto">{Math.round(this.calculatePercentage(hujah.neutralCount, totalVoteCount))}%</small>
+                    <div className="vote bg-neutral" style={{ width: `${this.calculatePercentage(hujah.neutral_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-neutral ml-auto">{Math.round(this.calculatePercentage(hujah.neutral_count, totalVoteCount))}%</small>
                   </div>
                   <div className="vote-show mb-3 d-flex align-items-center">
                     <a role="button" className="shadow btn btn-outline-info btn-lg btn-circle btn-icon-16 fill-disagree"><DisagreeIcon /></a>
-                    <div className="vote bg-disagree" style={{ width: `${this.calculatePercentage(hujah.disagreeCount, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-disagree ml-auto">{Math.round(this.calculatePercentage(hujah.disagreeCount, totalVoteCount))}%</small>
+                    <div className="vote bg-disagree" style={{ width: `${this.calculatePercentage(hujah.disagree_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-disagree ml-auto">{Math.round(this.calculatePercentage(hujah.disagree_count, totalVoteCount))}%</small>
                   </div>
                 </div>
               </div>

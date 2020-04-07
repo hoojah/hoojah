@@ -8,10 +8,12 @@ class HujahCardHeader extends React.Component {
     super(props)
     this.state = {
       hujah: this.props.hujah,
-    };
+    }
   }
 
   render() {
+    const { user } = this.props
+
     return(
       <Fragment>
         { this.props.hujahParent == null ? null : <HujahCardParent hujah={this.props.hujahParent} /> }
@@ -21,9 +23,9 @@ class HujahCardHeader extends React.Component {
             <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
             <div className="media-body">
               <div className="d-flex flex-column">
-                <Link to={"/"} className="mt-0 mb-0">User Name</Link>
+                <Link to={"/"} className="mt-0 mb-0">{user.full_name}</Link>
                 <a className="no-underscore handle">
-                  <small className="text-muted">@user_handle</small>
+                  <small className="text-muted">{`@${user.username}`}</small>
                 </a>
               </div>
             </div>
