@@ -4,19 +4,16 @@ import ShareIcon from '../Icons/share'
 import HujahCardParent from './card_parent'
 
 class HujahCardHeader extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      hujah: this.props.hujah,
-    }
-  }
-
   render() {
-    const { user } = this.props
+    const { hujahParent, user } = this.props
+    console.log("############### this.props.hujahParent in card_header.js")
+    console.log(this.props.hujahParent)
+    console.log("############### this.props.hujahParent == null in card_header.js")
+    console.log(this.props.hujahParent == null)
 
     return(
       <Fragment>
-        { this.props.hujahParent == null ? null : <HujahCardParent hujah={this.props.hujahParent} /> }
+        { hujahParent == null ? null : <HujahCardParent hujah={hujahParent} /> }
 
         <div className="card-header border-bottom-0 pb-0 d-flex justify-content-between align-items-center">
           <div className="media">

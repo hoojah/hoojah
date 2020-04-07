@@ -9,8 +9,18 @@ class HujahForm extends React.Component {
     super(props)
     this.state = {
       newHujahBody: "",
-      user: {},
-      hujah: {}
+      user: {
+        id: null,
+        username: "",
+        full_name: ""
+      },
+      hujah: { 
+        id: null,
+        body: "",
+        agree_count: 33,
+        neutral_count: 34,
+        disagree_count: 33,
+      }
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -52,7 +62,7 @@ class HujahForm extends React.Component {
 
     const body = {
       body: newHujahBody.replace(/\n/g, "<br> <br>"),
-      parent_id: this.state.parent.id
+      parent_id: this.state.hujah.id 
     }
 
     const token = document.querySelector('meta[name="csrf-token"]').content
@@ -103,7 +113,7 @@ class HujahForm extends React.Component {
                 </button>
               </div>
             </nav>
-            {$.isEmptyObject(user) ? null : parentCard}
+            {$.isEmptyObject(hujah) ? null : parentCard}
             <div className="col-12 d-flex mt-3">
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
               <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleChange}></textarea>
