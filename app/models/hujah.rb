@@ -1,4 +1,5 @@
 class Hujah < ApplicationRecord
+
   belongs_to :user
   has_many :children, class_name: "Hujah", foreign_key: "parent_id"
   belongs_to :parent, class_name: "Hujah", optional: true

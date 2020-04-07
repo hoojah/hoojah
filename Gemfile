@@ -11,6 +11,7 @@ gem 'webpacker', '~> 4.0'
 gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
+gem 'fast_jsonapi'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 

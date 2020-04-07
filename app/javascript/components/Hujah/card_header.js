@@ -14,7 +14,7 @@ class HujahCardHeader extends React.Component {
   render() {
     return(
       <Fragment>
-        { this.props.parentHujah == null ? null : <HujahCardParent hujah={this.props.parentHujah} /> }
+        { this.props.hujahParent == null ? null : <HujahCardParent hujah={this.props.hujahParent} /> }
 
         <div className="card-header border-bottom-0 pb-0 d-flex justify-content-between align-items-center">
           <div className="media">

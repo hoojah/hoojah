@@ -21,8 +21,6 @@ class Navbar extends React.Component {
   }
 
   render() {
-    console.log("navbar props")
-    console.log(this.props)
     return(
       <nav className="navbar fixed-top navbar-light">
         <div className="container px-0 d-flex justify-content-between">

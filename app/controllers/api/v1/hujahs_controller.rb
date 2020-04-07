@@ -5,7 +5,7 @@ class Api::V1::HujahsController < ApplicationController
   end
 
   def create
-    hujah = Hujah.create!(hujah_params)
+    hujah = current_user.hujahs.create!(hujah_params)
     if hujah
       render json: hujah
     else
@@ -15,24 +15,31 @@ class Api::V1::HujahsController < ApplicationController
 
   def show
     if hujah
-      if hujah.has_children?
-        hujahs = hujah.children.order(updated_at: :desc)
-      else
-        hujahs = []
-      end
+
+      # options = {}
+      # options[:include] = [:user, :children, :parent]
+      # render json: HujahSerializer.new(hujah, options).serialized_json
+
+      render json: HujahSerializer.new(hujah).serialized_json
+
+    #   if hujah.has_children?
+    #     hujahs = hujah.children.order(updated_at: :desc)
+    #   else
+    #     hujahs = []
+    #   end
       
-      if hujah.is_parent?
-        parent_hujah = {}
-      else
-        parent_hujah = hujah.parent
-      end
-      render json: { 
-        hujah: hujah, 
-        hujahs: hujahs,
-        parentHujah: parent_hujah
-      }
-    else
-      render json: hujah.errors
+    #   if hujah.is_parent?
+    #     parent_hujah = {}
+    #   else
+    #     parent_hujah = hujah.parent
+    #   end
+    #   render json: { 
+    #     hujah: hujah, 
+    #     hujahs: hujahs,
+    #     parentHujah: parent_hujah
+    #   }
+    # else
+    #   render json: hujah.errors
     end
   end
 
