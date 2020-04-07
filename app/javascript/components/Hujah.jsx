@@ -223,7 +223,8 @@ class Hujah extends React.Component {
                 <Link to={{
                     pathname: '/hoojah/new',
                     state: {
-                      parent: hujah
+                      hujah: hujah,
+                      user: user
                     }
                   }} className="shadow btn btn-lg btn-outline-warning btn-rounded btn-icon-16 fill-agree">
                   <HujahIcon /> Add hoojah
