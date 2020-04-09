@@ -7,7 +7,7 @@ import ViewsIcon from '../Icons/views'
 import VotesIcon from '../Icons/votes'
 import HujahIcon from '../Icons/hujah'
 import HujahCardHeader from './card_header'
-import HujahCardParent from './card_parent'
+import ButtonAddHujah from '../Layouts/button_add_hujah'
 
 class HujahCard extends React.Component {
   constructor(props) {
@@ -30,7 +30,9 @@ class HujahCard extends React.Component {
           }
         }
       },
-      totalVoteCount: 100
+      totalVoteCount: 100,
+      showAddHujahButton: false,
+      vote: ""
     };
   }
   
@@ -48,7 +50,8 @@ class HujahCard extends React.Component {
 
     const body = {
       vote: vote,
-      hujah_id: this.state.hujah.id
+      hujah_id: this.state.hujah.id,
+      user_id: this.props.user.id
     }
 
     const token = document.querySelector('meta[name="csrf-token"]').content
@@ -75,45 +78,67 @@ class HujahCard extends React.Component {
   }
 
   handleVoteAgree() {
+    if(!this.props.loggedInStatus) {
+      return this.redirect()
+    }
     const newHujahState = Object.assign({}, this.state.hujah)
     newHujahState.agree_count = newHujahState.agree_count + 1
     this.setState({ 
       hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + 1
+      totalVoteCount: this.state.totalVoteCount + 1,
+      showAddHujahButton: true,
+      vote: "agree"
     })
     this.updateVote(1)
   }
 
   handleVoteNeutral() {
+    if(!this.props.loggedInStatus) {
+      return this.redirect()
+    }
     const newHujahState = Object.assign({}, this.state.hujah)
     newHujahState.neutral_count = newHujahState.neutral_count + 1
     this.setState({ 
       hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + 1
+      totalVoteCount: this.state.totalVoteCount + 1,
+      showAddHujahButton: true,
+      vote: "neutral"
     })
     this.updateVote(2)
   }
 
   handleVoteDisagree() {
+    if(!this.props.loggedInStatus) {
+      return this.redirect()
+    }
     const newHujahState = Object.assign({}, this.state.hujah)
     newHujahState.disagree_count = newHujahState.disagree_count + 1
     this.setState({ 
       hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + 1
+      totalVoteCount: this.state.totalVoteCount + 1,
+      showAddHujahButton: true,
+      vote: "disagree"
     })
     this.updateVote(3)
   }
+  
+  redirect = () => {
+    this.props.history.push('/login')
+  }
 
   render() {
-    const { hujah, totalVoteCount } = this.state
+    const { hujah, totalVoteCount, showAddHujahButton, vote } = this.state
     const { hujahParent, user } = this.props
+
+// console.log("----------------- this.state.hujah from card.js")
+// console.log(hujah)
 
     const showVoteBar = (
       <div className="card-body p-0">
         <div className="d-flex justify-content-around vote-bar">
-          <div className="vote bg-agree" style={{ width: this.calculatePercentage(hujah.agree_count) }}></div>
-          <div className="vote bg-neutral" style={{ width: this.calculatePercentage(hujah.neutral_count) }}></div>
-          <div className="vote bg-disagree" style={{ width: this.calculatePercentage(hujah.disagree_count) }}></div>
+          <div className="vote bg-agree" style={{ width: this.calculatePercentage(hujah.attributes.agree_count) }}></div>
+          <div className="vote bg-neutral" style={{ width: this.calculatePercentage(hujah.attributes.neutral_count) }}></div>
+          <div className="vote bg-disagree" style={{ width: this.calculatePercentage(hujah.attributes.disagree_count) }}></div>
         </div>
       </div>
     )
@@ -126,12 +151,13 @@ class HujahCard extends React.Component {
               <h5 className="card-title text-black text-regular">{hujah.attributes.body}</h5>
             </Link>
           </div>
-          <div className="card-body pt-0">
-            <div className="d-flex justify-content-around">
-              <button className="shadow btn btn-outline-warning btn-lg btn-circle btn-icon-16 fill-agree" onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
-              <button className="shadow btn btn-outline-danger btn-lg btn-circle btn-icon-16 fill-neutral neutral" onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
-              <button className="shadow btn btn-outline-info btn-lg btn-circle btn-icon-16 fill-disagree" onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
+          <div className={`card-body pt-0 ${showAddHujahButton ? "d-flex justify-content-between" : null}`}>
+            <div className={`d-flex justify-content-${showAddHujahButton ? "between" : "around"}`}>
+              <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${showAddHujahButton ? "mr-3" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
+              <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${showAddHujahButton ? "mr-3" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
+              <button className="shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree" onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
             </div>
+            {showAddHujahButton ? <ButtonAddHujah hujahParent={hujah} user={user} vote={vote} /> : null}
           </div>
           {totalVoteCount > 0 ? showVoteBar : null}
           <div className="card-footer d-flex justify-content-between text-grey">

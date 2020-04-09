@@ -5,7 +5,7 @@ class Api::V1::VotesController < ApplicationController
   end
 
   def create
-    vote = Vote.create!(vote: [vote_params[:vote]], hujah_id: vote_params[:hujah_id])
+    vote = current_user.votes.create!(vote: [vote_params[:vote]], hujah_id: vote_params[:hujah_id])
     if vote
       render json: vote
     else
@@ -47,7 +47,7 @@ class Api::V1::VotesController < ApplicationController
   private
 
   def vote_params
-    params.permit(:vote, :hujah_id)
+    params.permit(:vote, :hujah_id, :user_id)
   end
 
   def vote
