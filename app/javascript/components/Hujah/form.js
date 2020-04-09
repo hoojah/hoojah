@@ -91,7 +91,6 @@ class HujahForm extends React.Component {
   render() {
     const { newHujahBody, user, hujahParent } = this.state
 
-    console.log(user)
     const parentCard = (
       <Fragment>
         <div className="col-12 mb-2">

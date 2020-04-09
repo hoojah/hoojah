@@ -1,10 +1,17 @@
 class Api::V1::HujahsController < ApplicationController
   def index
-    hujahs = Hujah.all.order(updated_at: :desc)
     
-    render json: HujahSerializer.new(hujahs).serialized_json
+    hujahs = Hujah.all.order(updated_at: :desc)
 
-    # render json: hujahs
+    serialized_hujahs = Hash["data", []]
+    hujahs.each do |hujah_to_process|
+      serialized_hujah = JSON.parse(HujahSerializer.new(hujah_to_process).serialized_json)
+      serialized_hujah["data"]["attributes"].merge!({"has_voted" => user_has_voted?(hujah_to_process)})
+      serialized_hujahs["data"] << serialized_hujah["data"]
+    end
+
+    render json: serialized_hujahs
+
   end
 
   def create
@@ -19,30 +26,10 @@ class Api::V1::HujahsController < ApplicationController
   def show
     if hujah
 
-      # options = {}
-      # options[:include] = [:user, :children, :parent]
-      # render json: HujahSerializer.new(hujah, options).serialized_json
+      serialized_hujah = JSON.parse(HujahSerializer.new(hujah).serialized_json)
+      serialized_hujah["data"]["attributes"].merge!({"has_voted" => user_has_voted?(hujah)})
 
-      render json: HujahSerializer.new(hujah).serialized_json
-
-    #   if hujah.has_children?
-    #     hujahs = hujah.children.order(updated_at: :desc)
-    #   else
-    #     hujahs = []
-    #   end
-      
-    #   if hujah.is_parent?
-    #     parent_hujah = {}
-    #   else
-    #     parent_hujah = hujah.parent
-    #   end
-    #   render json: { 
-    #     hujah: hujah, 
-    #     hujahs: hujahs,
-    #     parentHujah: parent_hujah
-    #   }
-    # else
-    #   render json: hujah.errors
+      render json: serialized_hujah
     end
   end
 
@@ -62,5 +49,13 @@ class Api::V1::HujahsController < ApplicationController
 
   def hujah
     @hujah ||= Hujah.find(params[:id])
+  end
+
+  def user_has_voted?(hujah)
+    if logged_in?
+      hujah.votes.joins(:user).where(user_id: current_user.id).any?
+    else
+      false
+    end
   end
 end

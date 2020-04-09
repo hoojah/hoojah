@@ -19,6 +19,7 @@ class HujahCard extends React.Component {
         type: "",
         attributes: {
           body: "",
+          has_voted: false,
           agree_count: null,
           neutral_count: null,
           disagree_count: null,
@@ -51,7 +52,7 @@ class HujahCard extends React.Component {
     const body = {
       vote: vote,
       hujah_id: this.state.hujah.id,
-      user_id: this.props.user.id
+      user_id: this.props.currentUser.id
     }
 
     const token = document.querySelector('meta[name="csrf-token"]').content
@@ -128,10 +129,7 @@ class HujahCard extends React.Component {
 
   render() {
     const { hujah, totalVoteCount, showAddHujahButton, vote } = this.state
-    const { hujahParent, user } = this.props
-
-// console.log("----------------- this.state.hujah from card.js")
-// console.log(hujah)
+    const { hujahParent, currentUser, user } = this.props
 
     const showVoteBar = (
       <div className="card-body p-0">
@@ -142,6 +140,9 @@ class HujahCard extends React.Component {
         </div>
       </div>
     )
+
+console.log(this.state.hujah.attributes.has_voted)
+
     return(
       <div className="col-12 sm-fluid mb-3">
         <div className="shadow card border-0 rounded-0">
@@ -153,8 +154,8 @@ class HujahCard extends React.Component {
           </div>
           <div className={`card-body pt-0 ${showAddHujahButton ? "d-flex justify-content-between" : null}`}>
             <div className={`d-flex justify-content-${showAddHujahButton ? "between" : "around"}`}>
-              <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${showAddHujahButton ? "mr-3" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
-              <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${showAddHujahButton ? "mr-3" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
+              <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${showAddHujahButton ? "mr-2" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
+              <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${showAddHujahButton ? "mr-2" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
               <button className="shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree" onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
             </div>
             {showAddHujahButton ? <ButtonAddHujah hujahParent={hujah} user={user} vote={vote} /> : null}
