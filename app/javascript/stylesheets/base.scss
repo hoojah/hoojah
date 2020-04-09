@@ -52,50 +52,79 @@ body {
   border-radius: 24px;
   width: 48px;
   height: 48px;
+}
 
+.btn-outline-agree {
+  color: $color-agree;
+  border-color: $color-agree;
+}
 
-  // &.btn-outline-warning {
-  //   -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  //   -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  //   box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  // }
-  // &.btn-outline-danger {
-  //   -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  //   -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  //   box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  // }
-  // &.btn-outline-info {
-  //   -webkit-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  //   -moz-box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  //   box-shadow: 3px 3px 5px 1px rgba(0,0,0,0.15);
-  // }
+.btn-outline-neutral {
+  color: $color-neutral;
+  border-color: $color-neutral;
+}
 
+.btn-outline-disagree {
+  color: $color-disagree;
+  border-color: $color-disagree;
+}
 
-  &:hover {
-    &.btn-outline-warning {
-      background-color: $color-agree;
-      -webkit-box-shadow: 3px 3px 12px 0px $color-agree !important;
-      -moz-box-shadow: 3px 3px 12px 0px $color-agree !important;
-      box-shadow: 3px 3px 12px 0px $color-agree !important;
-    }
-    &.btn-outline-danger {
-      background-color: $color-neutral;
-      -webkit-box-shadow: 3px 3px 12px 0px $color-neutral !important;
-      -moz-box-shadow: 3px 3px 12px 0px $color-neutral !important;
-      box-shadow: 3px 3px 12px 0px $color-neutral !important;
-    }
-    &.btn-outline-info {
-      background-color: $color-disagree;
-      -webkit-box-shadow: 3px 3px 12px 0px $color-disagree !important;
-      -moz-box-shadow: 3px 3px 12px 0px $color-disagree !important;
-      box-shadow: 3px 3px 12px 0px $color-disagree !important;
-    }
+.btn-outline-agree:not(:disabled):not(.disabled):active, 
+.btn-outline-agree:not(:disabled):not(.disabled).active, 
+.show > .btn-outline-agree.dropdown-toggle,
+.btn-outline-agree:hover {
+  color: white;
+  
+  &.btn-outline-agree {
+    background-color: $color-agree;
+    -webkit-box-shadow: 3px 3px 12px 0px $color-agree !important;
+    -moz-box-shadow: 3px 3px 12px 0px $color-agree !important;
+    box-shadow: 3px 3px 12px 0px $color-agree !important;
+  }
 
-    svg {
-      fill: white;
-    }
+  svg {
+    fill: white;
   }
 }
+
+.btn-outline-neutral:not(:disabled):not(.disabled):active, 
+.btn-outline-neutral:not(:disabled):not(.disabled).active, 
+.show > .btn-outline-neutral.dropdown-toggle,
+.btn-outline-neutral:hover {
+  color: white;
+  
+  &.btn-outline-neutral {
+    background-color: $color-neutral;
+    -webkit-box-shadow: 3px 3px 12px 0px $color-neutral !important;
+    -moz-box-shadow: 3px 3px 12px 0px $color-neutral !important;
+    box-shadow: 3px 3px 12px 0px $color-neutral !important;
+  }
+
+  svg {
+    fill: white;
+  }
+}
+
+.btn-outline-disagree:not(:disabled):not(.disabled):active, 
+.btn-outline-disagree:not(:disabled):not(.disabled).active, 
+.show > .btn-outline-disagree.dropdown-toggle,
+.btn-outline-disagree:hover {
+  color: white;
+  
+  &.btn-outline-disagree {
+    background-color: $color-disagree;
+    -webkit-box-shadow: 3px 3px 12px 0px $color-disagree !important;
+    -moz-box-shadow: 3px 3px 12px 0px $color-disagree !important;
+    box-shadow: 3px 3px 12px 0px $color-disagree !important;
+  }
+
+  svg {
+    fill: white;
+  }
+}
+
+
+
 
 .btn-rounded {
   &.btn {

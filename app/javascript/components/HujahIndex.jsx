@@ -39,12 +39,12 @@ class Hujahs extends React.Component {
     const { hujahs } = this.state
 
     const allHujahs = hujahs.map((hujah, index) => (
-      <HujahCard key={index} hujah={hujah} totalVoteCount={ hujah.attributes.agree_count + hujah.attributes.neutral_count + hujah.attributes.disagree_count} hujahParent={hujah.attributes.parent == null ? null : hujah.attributes.parent} user={hujah.attributes.user} />
+      <HujahCard {...this.props} key={index} hujah={hujah} totalVoteCount={ hujah.attributes.agree_count + hujah.attributes.neutral_count + hujah.attributes.disagree_count} hujahParent={hujah.attributes.parent == null ? null : hujah.attributes.parent} user={hujah.attributes.user} />
     ))
 
     const noHujah = (
       <div className="vw-100 vh-100 d-flex align-items-center justify-content-center">
-        <img src={Loading} className="loading"/>
+        <img src={Loading} className="loading" style={{ marginTop: "-100px" }} />
       </div>
     )
       

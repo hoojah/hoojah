@@ -14,12 +14,12 @@ class HujahCardSmall extends React.Component {
             <div className="media-body">
               <div className="d-flex flex-column">
                 <div>
-                  <span className="my-0 mr-1 text-primary">{hujah.full_name}</span>
+                  <span className="my-0 mr-1 text-primary">{hujah.attributes.full_name}</span>
                   <span className="handle">
-                    <small className="text-muted">{`@${hujah.username}`}</small>
+                    <small className="text-muted">{`@${hujah.attributes.username}`}</small>
                   </span>
                 </div>
-                <p className="mb-0 text-black">{hujah.body}</p>
+                <p className="mb-0 text-black">{hujah.attributes.body}</p>
               </div>
             </div>
           </div>

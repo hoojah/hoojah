@@ -14,9 +14,9 @@ class HujahParentCard extends React.Component {
             <div className="media-body">
               <div className="d-flex flex-column">
                 <small className="text-grey">
-                  Response to <span className="text-primary">{hujah.full_name}</span>'s hoojah
+                  Response to <span className="text-primary">{hujah.attributes.full_name}</span>'s hoojah
                 </small>
-                <div className="mb-0 text-grey text-14 text-truncate d-inline-block" style={{ width: "70vw" }}>{hujah.body}</div>
+                <div className="mb-0 text-grey text-14 text-truncate d-inline-block" style={{ width: "70vw" }}>{hujah.attributes.body}</div>
               </div>
             </div>
           </div>

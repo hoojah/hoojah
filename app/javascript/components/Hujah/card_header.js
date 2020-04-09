@@ -16,9 +16,9 @@ class HujahCardHeader extends React.Component {
             <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
             <div className="media-body">
               <div className="d-flex flex-column">
-                <Link to={"/"} className="mt-0 mb-0">{user.full_name}</Link>
+                <Link to={"/"} className="mt-0 mb-0">{user.attributes.full_name}</Link>
                 <a className="no-underscore handle">
-                  <small className="text-muted">{`@${user.username}`}</small>
+                  <small className="text-muted">{`@${user.attributes.username}`}</small>
                 </a>
               </div>
             </div>

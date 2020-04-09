@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Navbar from './Layouts/navbar'
 import MoreActionsIcon from './Icons/more_actions'
 import ButtonBack from './Layouts/button_back'
+import ButtonAddHujah from './Layouts/button_add_hujah'
 import AgreeIcon from './Icons/agree'
 import NeutralIcon from './Icons/neutral'
 import DisagreeIcon from './Icons/disagree'
@@ -19,22 +19,28 @@ class Hujah extends React.Component {
     this.state = { 
       hujah: { 
         id: null,
-        body: "",
-        agree_count: 33,
-        neutral_count: 34,
-        disagree_count: 33
+        attributes: {
+          body: "",
+          agree_count: 33,
+          neutral_count: 34,
+          disagree_count: 33
+        }
       },
       children: [],
       hujahParent: {
         id: null,
-        body: "",
-        username: "",
-        full_name: ""
+        attributes: {
+          body: "",
+          username: "",
+          full_name: ""
+        }
       },
       user: {
         id: null,
-        username: "",
-        full_name: ""
+        attributes: {
+          username: "",
+          full_name: ""
+        }
       }
     }
     this.deleteHujah = this.deleteHujah.bind(this)
@@ -61,10 +67,12 @@ class Hujah extends React.Component {
         this.setState({ 
           hujah: {
             id: data.id,
-            body: data.attributes.body,
-            agree_count: data.attributes.agree_count,
-            neutral_count: data.attributes.neutral_count,
-            disagree_count: data.attributes.disagree_count,
+            attributes: {
+              body: data.attributes.body,
+              agree_count: data.attributes.agree_count,
+              neutral_count: data.attributes.neutral_count,
+              disagree_count: data.attributes.disagree_count
+            }
           },
           user: data.attributes.user
         })
@@ -105,10 +113,12 @@ class Hujah extends React.Component {
           this.setState({ 
             hujah: {
               id: data.id,
-              body: data.attributes.body,
-              agree_count: data.attributes.agree_count,
-              neutral_count: data.attributes.neutral_count,
-              disagree_count: data.attributes.disagree_count,
+              attributes: {
+                body: data.attributes.body,
+                agree_count: data.attributes.agree_count,
+                neutral_count: data.attributes.neutral_count,
+                disagree_count: data.attributes.disagree_count
+              }
             },
             user: data.attributes.user
           })
@@ -137,8 +147,8 @@ class Hujah extends React.Component {
       match: {
         params: { id }
       }
-    } = this.props
-    const url = `/api/v1/destroy/${id}`
+    } = this.props;
+    const url = `/api/v1/hoojah/destroy/${id}`
     const token = document.querySelector('meta[name="csrf-token"]').content
 
     fetch(url, {
@@ -172,7 +182,7 @@ class Hujah extends React.Component {
       </div>
     )
 
-    const totalVoteCount = hujah.agree_count + hujah.neutral_count + hujah.disagree_count
+    const totalVoteCount = hujah.attributes.agree_count + hujah.attributes.neutral_count + hujah.attributes.disagree_count
 
     return (
       <div className="container">
@@ -199,24 +209,24 @@ class Hujah extends React.Component {
                 user={user} 
                 hujahParent={hujahParent.id == null ? null : hujahParent} />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
-                <h3 className="card-title text-black text-regular">{hujah.body}</h3>
+                <h3 className="card-title text-black text-regular">{hujah.attributes.body}</h3>
               </div>
               <div className="card-body py-0">
                 <div className="d-flex flex-column justify-content-around">
                   <div className="vote-show mb-3 d-flex align-items-center">
                     <a role="button" className="shadow btn btn-outline-warning btn-lg btn-circle btn-icon-16 fill-agree"><AgreeIcon /></a>
-                    <div className="vote bg-agree" style={{ width: `${this.calculatePercentage(hujah.agree_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-agree ml-auto">{Math.round(this.calculatePercentage(hujah.agree_count, totalVoteCount))}%</small>
+                    <div className="vote bg-agree" style={{ width: `${this.calculatePercentage(hujah.attributes.agree_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-agree ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.agree_count, totalVoteCount))}%</small>
                   </div>
                   <div className="vote-show mb-3 d-flex align-items-center">
                     <a role="button" className="shadow btn btn-outline-danger btn-lg btn-circle btn-icon-16 fill-neutral neutral"><NeutralIcon /></a>
-                    <div className="vote bg-neutral" style={{ width: `${this.calculatePercentage(hujah.neutral_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-neutral ml-auto">{Math.round(this.calculatePercentage(hujah.neutral_count, totalVoteCount))}%</small>
+                    <div className="vote bg-neutral" style={{ width: `${this.calculatePercentage(hujah.attributes.neutral_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-neutral ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.neutral_count, totalVoteCount))}%</small>
                   </div>
                   <div className="vote-show mb-3 d-flex align-items-center">
                     <a role="button" className="shadow btn btn-outline-info btn-lg btn-circle btn-icon-16 fill-disagree"><DisagreeIcon /></a>
-                    <div className="vote bg-disagree" style={{ width: `${this.calculatePercentage(hujah.disagree_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-disagree ml-auto">{Math.round(this.calculatePercentage(hujah.disagree_count, totalVoteCount))}%</small>
+                    <div className="vote bg-disagree" style={{ width: `${this.calculatePercentage(hujah.attributes.disagree_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-disagree ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.disagree_count, totalVoteCount))}%</small>
                   </div>
                 </div>
               </div>
@@ -231,15 +241,7 @@ class Hujah extends React.Component {
                 <span className="ml-1">55</span>
               </div>
               <div className="card-body pt-0 text-center">
-                <Link to={{
-                    pathname: '/hoojah/new',
-                    state: {
-                      hujah: hujah,
-                      user: user
-                    }
-                  }} className="shadow btn btn-lg btn-outline-warning btn-rounded btn-icon-16 fill-agree">
-                  <HujahIcon /> Add hoojah
-                </Link>
+                <ButtonAddHujah hujahParent={hujah} user={user} />
               </div>
             </div>
           </div>
