@@ -1,10 +1,17 @@
 class Api::V1::HujahsController < ApplicationController
   def index
-    hujahs = Hujah.all.order(updated_at: :desc)
     
-    render json: HujahSerializer.new(hujahs).serialized_json
+    hujahs = Hujah.all.order(updated_at: :desc)
 
-    # render json: hujahs
+    serialized_hujahs = Hash["data", []]
+    hujahs.each do |hujah_to_process|
+      serialized_hujah = JSON.parse(HujahSerializer.new(hujah_to_process).serialized_json)
+      serialized_hujah["data"]["attributes"].merge!({"current_user_vote" => current_user_vote(hujah_to_process)})
+      serialized_hujahs["data"] << serialized_hujah["data"]
+    end
+
+    render json: serialized_hujahs
+
   end
 
   def create
@@ -19,30 +26,10 @@ class Api::V1::HujahsController < ApplicationController
   def show
     if hujah
 
-      # options = {}
-      # options[:include] = [:user, :children, :parent]
-      # render json: HujahSerializer.new(hujah, options).serialized_json
+      serialized_hujah = JSON.parse(HujahSerializer.new(hujah).serialized_json)
+      serialized_hujah["data"]["attributes"].merge!({"current_user_vote" => current_user_vote(hujah)})
 
-      render json: HujahSerializer.new(hujah).serialized_json
-
-    #   if hujah.has_children?
-    #     hujahs = hujah.children.order(updated_at: :desc)
-    #   else
-    #     hujahs = []
-    #   end
-      
-    #   if hujah.is_parent?
-    #     parent_hujah = {}
-    #   else
-    #     parent_hujah = hujah.parent
-    #   end
-    #   render json: { 
-    #     hujah: hujah, 
-    #     hujahs: hujahs,
-    #     parentHujah: parent_hujah
-    #   }
-    # else
-    #   render json: hujah.errors
+      render json: serialized_hujah
     end
   end
 
@@ -62,5 +49,24 @@ class Api::V1::HujahsController < ApplicationController
 
   def hujah
     @hujah ||= Hujah.find(params[:id])
+  end
+
+  def current_user_vote(hujah)
+    if logged_in?
+      if hujah.votes.joins(:user).find_by(user_id: current_user.id).nil?
+        nil
+      else
+        vote = hujah.votes.joins(:user).find_by(user_id: current_user.id).vote.last
+        if vote == 1
+          "agree"
+        elsif vote == 2
+          "neutral"
+        elsif vote == 3
+          "disagree"
+        end
+      end
+    else
+      nil
+    end
   end
 end

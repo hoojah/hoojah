@@ -3,10 +3,7 @@ class HujahSerializer
 
   attributes :body, :agree_count, :neutral_count, :disagree_count
 
-  # has_many :children, record_type: :hujah, serializer: HujahSerializer
-  # belongs_to :parent, record_type: :hujah, serializer: HujahSerializer
-  # belongs_to :user
-
+  # this is the owner of the hujah, not the current user
   attribute :user do |hujah| 
     {
       "id": hujah.user.id,
@@ -18,9 +15,7 @@ class HujahSerializer
     }
   end
 
-  attribute :parent, if: Proc.new { |hujah|
-    hujah.parent_id != nil
-  } do |hujah| {
+  attribute :parent, if: Proc.new { |hujah| hujah.parent_id != nil } do |hujah| {
       "id": hujah.parent.id,
       "type": "hujah",
       "attributes": {
@@ -31,9 +26,7 @@ class HujahSerializer
     }
   end
 
-  attributes :children, if: Proc.new { |hujah|
-    hujah.children.length != 0
-  } do |hujah| 
+  attributes :children, if: Proc.new { |hujah| hujah.children.length != 0 } do |hujah| 
 
     newChildren = []
   

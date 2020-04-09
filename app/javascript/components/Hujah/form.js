@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 import $ from 'jquery'
 import AgreeIcon from '../Icons/agree'
+import NeutralIcon from '../Icons/neutral'
+import DisagreeIcon from '../Icons/disagree'
 import HujahIcon from '../Icons/hujah'
 import ButtonBack from '../Layouts/button_back'
 
@@ -88,14 +90,36 @@ class HujahForm extends React.Component {
       .catch(error => console.log(error.message))
   }
 
+  displayVote(current_user_vote) {
+    if(current_user_vote == "agree"){
+      return (
+        <span className={`text-${current_user_vote} btn-icon-14 fill-${current_user_vote}`}>
+          <AgreeIcon /> agreed
+        </span>
+      )
+    } else if(current_user_vote == "neutral"){
+      return (
+        <span className={`text-${current_user_vote} btn-icon-14 fill-${current_user_vote}`}>
+          <NeutralIcon /> were neutral
+        </span>
+      )
+    } else if(current_user_vote == "disagree"){
+      return (
+        <span className={`text-${current_user_vote} btn-icon-14 fill-${current_user_vote}`}>
+          <DisagreeIcon /> disagreed
+        </span>
+      )
+    }
+  }
+
   render() {
     const { newHujahBody, user, hujahParent } = this.state
+    const { current_user_vote } = this.state.hujahParent.attributes
 
-    console.log(user)
     const parentCard = (
       <Fragment>
         <div className="col-12 mb-2">
-          <small>You <span className="text-agree btn-icon-14 fill-agree"><AgreeIcon /> agreed</span> to {user.id == null? null : user.attributes.full_name}'s claim:</small>  
+          <small>You {this.displayVote(current_user_vote)} to {user.id == null? null : user.attributes.full_name}'s claim:</small>  
         </div>
         <div className="col-12 mb-1 pl-2 border-left-8 border-warning">
           <h6 className="text-regular pt-1">{hujahParent.id == null ? null : hujahParent.attributes.body}</h6>

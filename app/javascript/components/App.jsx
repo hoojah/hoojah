@@ -13,7 +13,7 @@ class App extends React.Component {
     super(props)
     this.state = { 
       isLoggedIn: false,
-      user: {}
+      currentUser: {}
      }
   }
 
@@ -36,14 +36,14 @@ class App extends React.Component {
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      user: data.user
+      currentUser: data.data.user
     })
   }
 
   handleLogout = () => {
     this.setState({
     isLoggedIn: false,
-    user: {}
+    currentUser: {}
     })
   }
   
@@ -67,7 +67,7 @@ class App extends React.Component {
           <Route 
             exact path='/' 
             render={props => (
-            <HujahIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+            <HujahIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
