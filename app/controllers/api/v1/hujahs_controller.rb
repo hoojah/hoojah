@@ -6,7 +6,7 @@ class Api::V1::HujahsController < ApplicationController
     serialized_hujahs = Hash["data", []]
     hujahs.each do |hujah_to_process|
       serialized_hujah = JSON.parse(HujahSerializer.new(hujah_to_process).serialized_json)
-      serialized_hujah["data"]["attributes"].merge!({"has_voted" => user_has_voted?(hujah_to_process)})
+      serialized_hujah["data"]["attributes"].merge!({"current_user_vote" => current_user_vote(hujah_to_process)})
       serialized_hujahs["data"] << serialized_hujah["data"]
     end
 
@@ -27,7 +27,7 @@ class Api::V1::HujahsController < ApplicationController
     if hujah
 
       serialized_hujah = JSON.parse(HujahSerializer.new(hujah).serialized_json)
-      serialized_hujah["data"]["attributes"].merge!({"has_voted" => user_has_voted?(hujah)})
+      serialized_hujah["data"]["attributes"].merge!({"current_user_vote" => current_user_vote(hujah)})
 
       render json: serialized_hujah
     end
@@ -51,11 +51,22 @@ class Api::V1::HujahsController < ApplicationController
     @hujah ||= Hujah.find(params[:id])
   end
 
-  def user_has_voted?(hujah)
+  def current_user_vote(hujah)
     if logged_in?
-      hujah.votes.joins(:user).where(user_id: current_user.id).any?
+      if hujah.votes.joins(:user).find_by(user_id: current_user.id).nil?
+        nil
+      else
+        vote = hujah.votes.joins(:user).find_by(user_id: current_user.id).vote.last
+        if vote == 1
+          "agree"
+        elsif vote == 2
+          "neutral"
+        elsif vote == 3
+          "disagree"
+        end
+      end
     else
-      false
+      nil
     end
   end
 end

@@ -72,7 +72,8 @@ body {
 .btn-outline-agree:not(:disabled):not(.disabled):active, 
 .btn-outline-agree:not(:disabled):not(.disabled).active, 
 .show > .btn-outline-agree.dropdown-toggle,
-.btn-outline-agree:hover {
+.btn-outline-agree:hover,
+.btn-outline-agree.voted {
   color: white;
   
   &.btn-outline-agree {
@@ -90,7 +91,8 @@ body {
 .btn-outline-neutral:not(:disabled):not(.disabled):active, 
 .btn-outline-neutral:not(:disabled):not(.disabled).active, 
 .show > .btn-outline-neutral.dropdown-toggle,
-.btn-outline-neutral:hover {
+.btn-outline-neutral:hover,
+.btn-outline-neutral.voted {
   color: white;
   
   &.btn-outline-neutral {
@@ -108,7 +110,8 @@ body {
 .btn-outline-disagree:not(:disabled):not(.disabled):active, 
 .btn-outline-disagree:not(:disabled):not(.disabled).active, 
 .show > .btn-outline-disagree.dropdown-toggle,
-.btn-outline-disagree:hover {
+.btn-outline-disagree:hover,
+.btn-outline-disagree.voted {
   color: white;
   
   &.btn-outline-disagree {
