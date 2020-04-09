@@ -32,16 +32,20 @@ class HujahCard extends React.Component {
         }
       },
       totalVoteCount: 100,
-      showAddHujahButton: false,
-      vote: ""
-    };
+      showAddHujahButton: false
+    }
   }
   
   // TODO: animate vote bar 
   componentDidMount() {
+    var setShowAddHujahButton = false
+    if(this.props.hujah.attributes.current_user_vote != null) {
+      setShowAddHujahButton = true
+    }
     this.setState({ 
       hujah: this.props.hujah,
-      totalVoteCount: this.props.totalVoteCount
+      totalVoteCount: this.props.totalVoteCount,
+      showAddHujahButton: setShowAddHujahButton
      })
   }
 
@@ -167,7 +171,7 @@ class HujahCard extends React.Component {
   }
 
   render() {
-    const { hujah, totalVoteCount, showAddHujahButton, vote } = this.state
+    const { hujah, totalVoteCount, showAddHujahButton } = this.state
     const { hujahParent, currentUser, user } = this.props
 
     const showVoteBar = (
@@ -179,7 +183,7 @@ class HujahCard extends React.Component {
         </div>
       </div>
     )
-console.log(this.state)
+
     return(
       <div className="col-12 sm-fluid mb-3">
         <div className="shadow card border-0 rounded-0">
