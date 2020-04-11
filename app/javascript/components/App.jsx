@@ -36,7 +36,7 @@ class App extends React.Component {
   handleLogin = (data) => {
     this.setState({
       isLoggedIn: true,
-      currentUser: data.data.user
+      currentUser: data.user
     })
   }
 
