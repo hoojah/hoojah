@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import MoreActionsIcon from '../Icons/more_actions'
 import ButtonBack from '../Layouts/button_back'
 

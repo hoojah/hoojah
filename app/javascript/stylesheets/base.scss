@@ -29,6 +29,18 @@ body {
   border-left: solid 8px;
 }
 
+.border-agree {
+  border-left: solid 8px $color-agree;
+}
+
+.border-neutral {
+  border-left: solid 8px $color-neutral;
+}
+
+.border-disagree {
+  border-left: solid 8px $color-disagree;
+}
+
 .btn-icon-14 > svg {
   height: 14px;
 }

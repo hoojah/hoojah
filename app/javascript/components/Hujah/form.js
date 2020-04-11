@@ -22,11 +22,10 @@ class HujahForm extends React.Component {
         id: null,
         attributes: {
           body: "",
-          agree_count: 33,
-          neutral_count: 34,
-          disagree_count: 33
+          current_user_vote: null
         }
-      }
+      },
+      newHujahParent: true
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -37,10 +36,27 @@ class HujahForm extends React.Component {
     if(!this.props.loggedInStatus) {
       return this.redirect()
     }
-    this.setState({
-      user: this.props.location.state.user,
-      hujahParent: this.props.location.state.hujahParent
-    })
+
+    const { user, hujahParent } = this.props.location.state
+    
+    if(hujahParent.id == null) {
+      this.setState({
+        user: user,
+        hujahParent: {
+          id: null,
+          attributes: {
+            body: "",
+            current_user_vote: "primary"
+          }
+        }
+      })
+    } else {
+      this.setState({
+        user: user,
+        hujahParent: hujahParent,
+        newHujahParent: false
+      })
+    }
   }
   
   redirect = () => {
@@ -113,16 +129,16 @@ class HujahForm extends React.Component {
   }
 
   render() {
-    const { newHujahBody, user, hujahParent } = this.state
-    const { current_user_vote } = this.state.hujahParent.attributes
+    const { newHujahBody, user, hujahParent, newHujahParent } = this.state
+    const { body, current_user_vote } = hujahParent.attributes
 
-    const parentCard = (
+    const displayParentCard = (
       <Fragment>
         <div className="col-12 mb-2">
           <small>You {this.displayVote(current_user_vote)} to {user.id == null? null : user.attributes.full_name}'s claim:</small>  
         </div>
-        <div className="col-12 mb-1 pl-2 border-left-8 border-warning">
-          <h6 className="text-regular pt-1">{hujahParent.id == null ? null : hujahParent.attributes.body}</h6>
+        <div className={`col-12 mb-1 pl-2 border-left-8 border-${current_user_vote}`}>
+          <h6 className="text-regular pt-1">{body}</h6>
         </div>
       </Fragment>
     )
@@ -134,12 +150,12 @@ class HujahForm extends React.Component {
             <nav className="navbar fixed-top navbar-light">
               <div className="container px-0 d-flex justify-content-between">
                 <ButtonBack />
-                <button type="submit" className={`shadow btn btn-outline-warning btn-rounded btn-icon-16 fill-agree ${newHujahBody == "" ? "disabled" : null}`} onClick={this.handleSubmit}>
+                <button type="submit" className={`shadow btn btn-outline-${current_user_vote} btn-rounded btn-icon-16 fill-${current_user_vote} ${newHujahBody == "" ? "disabled" : null}`} onClick={this.handleSubmit}>
                   <HujahIcon /> Post hoojah
                 </button>
               </div>
             </nav>
-            {hujahParent.id == null ? null : parentCard}
+            {!newHujahParent && displayParentCard}
             <div className="col-12 d-flex mt-3">
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/hoojah-user-avatar-2.jpg" className="rounded-circle mr-3 avatar" />
               <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleChange}></textarea>
