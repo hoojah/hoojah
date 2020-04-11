@@ -43,9 +43,11 @@ class Hujah extends React.Component {
           full_name: ""
         }
       },
-      totalVoteCount: 0
+      totalVoteCount: 0,
+      hujahResponseFilter: "all"
     }
     this.deleteHujah = this.deleteHujah.bind(this)
+    this.handleFilterClick = this.handleFilterClick.bind(this)
   }
 
   componentDidMount() {
@@ -225,6 +227,28 @@ class Hujah extends React.Component {
     })
     this.updateVote(3)
   }
+
+  handleFilterClick(filter) {
+    const { hujahResponseFilter } = this.state
+
+    if(filter == "all") {
+      if(hujahResponseFilter == "all")
+        return
+      this.setState({ hujahResponseFilter: "all" })
+    } else if(filter == "agree") {
+      if(hujahResponseFilter == "agree")
+        return
+      this.setState({ hujahResponseFilter: "agree" })
+    } else if(filter == "neutral") {
+      if(hujahResponseFilter == "neutral")
+        return
+      this.setState({ hujahResponseFilter: "neutral" })
+    } else if(filter == "disagree") {
+      if(hujahResponseFilter == "disagree")
+        return
+      this.setState({ hujahResponseFilter: "disagree" })
+    } 
+  }
   
   redirect = () => {
     this.props.history.push('/login')
@@ -293,11 +317,24 @@ class Hujah extends React.Component {
       .catch(error => console.log(error.message))
   }
 
+  filterChildren(hujah, index) {
+    const { hujahResponseFilter } = this.state
+    if(hujahResponseFilter == "all") {
+      return <HujahCardSmall key={index} hujah={hujah} />
+    } else if(hujahResponseFilter == "agree" && hujah.attributes.vote == 1) {
+      return <HujahCardSmall key={index} hujah={hujah} />
+    } else if(hujahResponseFilter == "neutral" && hujah.attributes.vote == 2) {
+      return <HujahCardSmall key={index} hujah={hujah} />
+    } else if(hujahResponseFilter == "disagree" && hujah.attributes.vote == 3) {
+      return <HujahCardSmall key={index} hujah={hujah} />
+    }
+  }
+
   render() {
-    const { hujah, children, hujahParent, user } = this.state
+    const { hujah, children, hujahParent, user, hujahResponseFilter } = this.state
 
     const displayChildren = children.map((hujah, index) => (
-      <HujahCardSmall key={index} hujah={hujah} />
+      this.filterChildren(hujah, index)
     ))
 
     const noChildren = (
@@ -381,15 +418,19 @@ class Hujah extends React.Component {
         </div>
         <div className="row">
           <div className="col-12 sm-fluid mb-2">
-            <div className="card border-0 rounded-0">
+            <div className="card border-0 rounded-0 pb-3">
               <div className="card-body">
                 <div className="shadow btn-group btn-group-lg d-flex" role="group">
-                  <button type="button" className="btn btn-primary btn-icon-16 fill-white">
-                    All <HujahIcon />
-                  </button>
-                  <button type="button" className="btn btn-outline-light btn-icon-16 fill-agree"><AgreeIcon /></button>
-                  <button type="button" className="btn btn-outline-light btn-icon-16 fill-neutral"><NeutralIcon /></button>
-                  <button type="button" className="btn btn-outline-light btn-icon-16 fill-disagree"><DisagreeIcon /></button>
+                  <button type="button" className={hujahResponseFilter == "all" ? this.selectedFilterClass("primary") : "btn btn-outline-light btn-icon-16 fill-primary text-primary"} onClick={() => this.handleFilterClick("all")}>All <HujahIcon /></button>
+
+
+                  <button type="button" className={hujahResponseFilter == "agree" ? this.selectedFilterClass("agree") : "btn btn-outline-light btn-icon-16 fill-agree"} onClick={() => this.handleFilterClick("agree")}><AgreeIcon /></button>
+                  
+                  
+                  
+                  
+                  <button type="button" className={hujahResponseFilter == "neutral" ? this.selectedFilterClass("neutral") : "btn btn-outline-light btn-icon-16 fill-neutral"} onClick={() => this.handleFilterClick("neutral")}><NeutralIcon /></button>
+                  <button type="button" className={hujahResponseFilter == "disagree" ? this.selectedFilterClass("disagree") : "btn btn-outline-light btn-icon-16 fill-disagree"} onClick={() => this.handleFilterClick("disagree")}><DisagreeIcon /></button>
                 </div>
               </div>
               {children.length > 0 ? displayChildren : noChildren}
@@ -398,6 +439,10 @@ class Hujah extends React.Component {
         </div>
       </div>
     )
+  }
+
+  selectedFilterClass(selectedResponse) {
+    return`btn btn-${selectedResponse} btn-icon-16 fill-white`
   }
 }
 

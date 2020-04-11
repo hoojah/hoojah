@@ -41,6 +41,51 @@ body {
   border-left: solid 8px $color-disagree;
 }
 
+.btn-agree {
+  color: white;
+  background-color: $color-agree;
+  
+  &:hover {
+    -webkit-box-shadow: 3px 3px 12px 0px $color-agree !important;
+    -moz-box-shadow: 3px 3px 12px 0px $color-agree !important;
+    box-shadow: 3px 3px 12px 0px $color-agree !important;
+  }
+
+  svg {
+    fill: white;
+  }
+}
+
+.btn-neutral {
+  color: white;
+  background-color: $color-neutral;
+  
+  &:hover {
+    -webkit-box-shadow: 3px 3px 12px 0px $color-neutral !important;
+    -moz-box-shadow: 3px 3px 12px 0px $color-neutral !important;
+    box-shadow: 3px 3px 12px 0px $color-neutral !important;
+  }
+
+  svg {
+    fill: white;
+  }
+}
+
+.btn-disagree {
+  color: white;
+  background-color: $color-disagree;
+  
+  &:hover {
+    -webkit-box-shadow: 3px 3px 12px 0px $color-disagree !important;
+    -moz-box-shadow: 3px 3px 12px 0px $color-disagree !important;
+    box-shadow: 3px 3px 12px 0px $color-disagree !important;
+  }
+
+  svg {
+    fill: white;
+  }
+}
+
 .btn-icon-14 > svg {
   height: 14px;
 }
@@ -85,7 +130,7 @@ body {
 .btn-outline-agree:not(:disabled):not(.disabled).active, 
 .show > .btn-outline-agree.dropdown-toggle,
 .btn-outline-agree:hover,
-.btn-outline-agree.voted {
+.btn-outline-agree.voted{
   color: white;
   
   &.btn-outline-agree {
@@ -157,6 +202,33 @@ body {
   .btn {
     font-size: 16px;
     padding: 11px 24px;
+
+    &.fill-agree:hover {
+      background-color: $color-agree;
+      border-color: $color-agree;
+
+      svg {
+        fill: white;
+      }
+    }
+
+    &.fill-neutral:hover {
+      background-color: $color-neutral;
+      border-color: $color-neutral;
+
+      svg {
+        fill: white;
+      }
+    }
+
+    &.fill-disagree:hover {
+      background-color: $color-disagree;
+      border-color: $color-disagree;
+
+      svg {
+        fill: white;
+      }
+    }
   }
 
   .btn:first-child {
