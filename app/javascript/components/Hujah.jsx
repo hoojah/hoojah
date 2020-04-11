@@ -22,9 +22,9 @@ class Hujah extends React.Component {
         attributes: {
           body: "",
           current_user_vote: null,
-          agree_count: 33,
-          neutral_count: 34,
-          disagree_count: 33
+          agree_count: 0,
+          neutral_count: 0,
+          disagree_count: 0
         }
       },
       children: [],
@@ -260,7 +260,11 @@ class Hujah extends React.Component {
 
   calculatePercentage(voteCount, totalVoteCount) {
     const percentage = voteCount * 100 / totalVoteCount
-    return percentage
+    if(percentage > 0) {
+      return percentage
+    } else {
+      return 0
+    }
   }
 
   deleteHujah() {

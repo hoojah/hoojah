@@ -77,14 +77,15 @@ class HujahForm extends React.Component {
 
     event.preventDefault()
     const url = "/api/v1/hoojah/create"
-    const { newHujahBody } = this.state
+    const { newHujahBody, hujahParent } = this.state
 
     if (newHujahBody.length == 0)
       return
 
     const body = {
       body: newHujahBody.replace(/\n/g, "<br> <br>"),
-      parent_id: this.state.hujahParent.id 
+      parent_id: this.state.hujahParent.id,
+      vote: this.parseVote(hujahParent.attributes.current_user_vote)
     }
 
     const token = document.querySelector('meta[name="csrf-token"]').content
@@ -104,6 +105,18 @@ class HujahForm extends React.Component {
       })
       .then(response => this.props.history.push(`/hoojah/${response.id}`))
       .catch(error => console.log(error.message))
+  }
+
+  parseVote(vote) {
+    if(vote == "agree") {
+      return 1
+    } else if(vote == "neutral") {
+      return 2
+    } else if(vote == "disagree") {
+      return 3
+    } else {
+      return null
+    }
   }
 
   displayVote(current_user_vote) {
