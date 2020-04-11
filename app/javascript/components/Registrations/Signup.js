@@ -17,6 +17,18 @@ class Signup extends Component {
      }
   }
 
+  componentDidMount() {
+    if(this.props.loggedInStatus) {
+      return this.redirect()
+    }
+  }
+
+  componentDidUpdate() {
+    if(this.props.loggedInStatus) {
+      return this.redirect()
+    }
+  }
+
   handleChange = (event) => {
     const {name, value} = event.target
     this.setState({
@@ -86,8 +98,8 @@ class Signup extends Component {
               <div className="card-header text-center">
                 You're new here! 🥳
               </div>
-              <div className="card-body">
-                <h5 className="card-title">Sign up</h5>
+              <div className="card-body mb-5">
+                <h5 className="card-title mt-4">Sign up</h5>
                 {
                   this.state.errors ? this.handleErrors() : null
                 }
@@ -131,6 +143,17 @@ class Signup extends Component {
                     />
                     <small className="form-text text-muted">For testing purpose, you won't need to validate your email.</small>
                   </div>
+                  <fieldset disabled>
+                    <div className="form-group">
+                      <label className="text-muted">Phone number</label>
+                      <input
+                        className="form-control"
+                        placeholder="Your phone number"
+                        type="text"
+                      />
+                      <small className="form-text text-muted">For testing purpose, you won't need to provide your phone number.</small>
+                    </div>
+                  </fieldset>
                   <div className="form-group">
                     <label>Password</label>
                     <input
