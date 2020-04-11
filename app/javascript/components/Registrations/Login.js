@@ -40,7 +40,7 @@ class Login extends Component {
       email: email,
       password: password
     }
-    debugger
+    
     axios.post('/login', {user}, {withCredentials: true})
     .then(response => {
       if (response.data.logged_in) {
