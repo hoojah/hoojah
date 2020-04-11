@@ -25,9 +25,10 @@ class HujahForm extends React.Component {
           current_user_vote: null
         }
       },
-      newHujahParent: true
+      newHujahParent: true,
+      voteForHujah: ""
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleBodyChange = this.handleBodyChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.stripHtmlEntities = this.stripHtmlEntities.bind(this)
   }
@@ -54,7 +55,8 @@ class HujahForm extends React.Component {
       this.setState({
         user: user,
         hujahParent: hujahParent,
-        newHujahParent: false
+        newHujahParent: false,
+        voteForHujah: hujahParent.attributes.current_user_vote
       })
     }
   }
@@ -69,7 +71,7 @@ class HujahForm extends React.Component {
       .replace(/>/g, "&gt;")
   }
 
-  handleChange(event) {
+  handleBodyChange(event) {
     this.setState({newHujahBody: event.target.value})
   }
 
@@ -77,7 +79,7 @@ class HujahForm extends React.Component {
 
     event.preventDefault()
     const url = "/api/v1/hoojah/create"
-    const { newHujahBody, hujahParent } = this.state
+    const { newHujahBody, hujahParent, voteForHujah } = this.state
 
     if (newHujahBody.length == 0)
       return
@@ -141,17 +143,44 @@ class HujahForm extends React.Component {
     }
   }
 
+  handleResponseVoteAgree() {
+    this.setState({ 
+      voteForHujah: "agree"
+    })
+  }
+
+  handleResponseVoteNeutral() {
+    this.setState({ 
+      voteForHujah: "neutral"
+    })
+  }
+
+  handleResponseVoteDisagree() {
+    this.setState({ 
+      voteForHujah: "disagree"
+    })
+  }
+
   render() {
-    const { newHujahBody, user, hujahParent, newHujahParent } = this.state
+    const { newHujahBody, user, hujahParent, newHujahParent, voteForHujah } = this.state
     const { body, current_user_vote } = hujahParent.attributes
 
     const displayParentCard = (
       <Fragment>
-        <div className="col-12 mb-2">
+        <div className="col-12 pb-2 bg-white">
           <small>You {this.displayVote(current_user_vote)} to {user.id == null? null : user.attributes.full_name}'s claim:</small>  
         </div>
-        <div className={`col-12 mb-1 pl-2 border-left-8 border-${current_user_vote}`}>
+        <div className={`col-12 bg-white pl-2 border-left-8 border-${current_user_vote}`}>
           <h6 className="text-regular pt-1">{body}</h6>
+        </div>
+
+        <div className="col-12 mb-1 pt-1 pb-3 bg-white">
+          <small>Post this response hoojah as:</small>
+          <div className="d-flex justify-content-around mt-2">
+            <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${voteForHujah == "agree" ? "voted" : null}`} onClick={() => this.handleResponseVoteAgree()}><AgreeIcon /></button>
+            <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${voteForHujah == "neutral" ? "voted" : null}`} onClick={() => this.handleResponseVoteNeutral()}><NeutralIcon /></button>
+            <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${voteForHujah == "disagree" ? "voted" : null}`} onClick={() => this.handleResponseVoteDisagree()}><DisagreeIcon /></button>
+          </div>
         </div>
       </Fragment>
     )
@@ -163,15 +192,16 @@ class HujahForm extends React.Component {
             <nav className="navbar fixed-top navbar-light">
               <div className="container px-0 d-flex justify-content-between">
                 <ButtonBack />
-                <button type="submit" className={`shadow btn btn-outline-${current_user_vote} btn-rounded btn-icon-16 fill-${current_user_vote} ${newHujahBody == "" ? "disabled" : null}`} onClick={this.handleSubmit}>
+                <button type="submit" className={`shadow btn btn-outline-${voteForHujah} btn-rounded btn-icon-16 fill-${voteForHujah} ${newHujahBody == "" ? "disabled" : null}`} onClick={this.handleSubmit}>
                   <HujahIcon /> Post hoojah
                 </button>
               </div>
             </nav>
             {!newHujahParent && displayParentCard}
+
             <div className="col-12 d-flex mt-3">
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mr-3 avatar" />
-              <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleChange}></textarea>
+              <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleBodyChange}></textarea>
             </div>
           </div>
         </div>
