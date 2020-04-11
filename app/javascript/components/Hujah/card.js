@@ -172,7 +172,7 @@ class HujahCard extends React.Component {
 
   render() {
     const { hujah, totalVoteCount, showAddHujahButton } = this.state
-    const { hujahParent, currentUser, user } = this.props
+    const { hujahParent, user } = this.props
 
     const showVoteBar = (
       <div className="card-body p-0">

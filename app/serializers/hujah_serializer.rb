@@ -1,7 +1,7 @@
 class HujahSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :body, :agree_count, :neutral_count, :disagree_count
+  attributes :body, :agree_count, :neutral_count, :disagree_count, :vote
 
   # this is the owner of the hujah, not the current user
   attribute :user do |hujah| 
@@ -37,7 +37,8 @@ class HujahSerializer
         "attributes": {
           "body": child.body,
           "username": child.user.username,
-          "full_name": child.user.full_name
+          "full_name": child.user.full_name,
+          "vote": child.vote
         }
       }
       newChildren << newChild
