@@ -23,6 +23,7 @@ class HujahCard extends React.Component {
           agree_count: null,
           neutral_count: null,
           disagree_count: null,
+          children_count: 0,
           parent: {
             id: null,
             body: "",
@@ -204,14 +205,11 @@ class HujahCard extends React.Component {
           {totalVoteCount > 0 ? showVoteBar : null}
           <div className="card-footer d-flex justify-content-between text-grey">
             <div className="d-flex align-items-center text-14 btn-icon-14 fill-grey">
-              <ViewsIcon />
-              <span className="ml-1">348</span>
-              <span className="mx-2">·</span>
               <VotesIcon />
               <span className="ml-1">{totalVoteCount}</span>
               <span className="mx-2">·</span>
               <HujahIcon />
-              <span className="ml-1">55</span>
+              <span className="ml-1">{hujah.attributes.children_count}</span>
             </div>
           </div>
         </div>

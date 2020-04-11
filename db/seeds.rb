@@ -50,11 +50,12 @@ print "\nSeeding hoojahs..."
 
 ### 1
 User.second.hujahs.create(
-  body: "Hoojah is beneficial to Malaysians.",
+  body: "Hoojah is a healthier alternative to other mainstream social media platforms for Malaysians to have thoughtful discussions online.",
   agree_count: 0,
   neutral_count: 0,
   disagree_count: 0
 )
+
 ### 2
 # User.third.hujahs.create(
 #   body: "We all should sleep during daytime and work at nighttime for productivity reasons.",

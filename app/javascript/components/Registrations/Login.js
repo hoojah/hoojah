@@ -19,6 +19,12 @@ class Login extends Component {
       return this.redirect()
     }
   }
+
+  componentDidUpdate() {
+    if(this.props.loggedInStatus) {
+      return this.redirect()
+    }
+  }
   
   handleChange = (event) => {
     const {name, value} = event.target
@@ -34,7 +40,7 @@ class Login extends Component {
       email: email,
       password: password
     }
-    
+    debugger
     axios.post('/login', {user}, {withCredentials: true})
     .then(response => {
       if (response.data.logged_in) {
@@ -67,7 +73,8 @@ class Login extends Component {
   }
   
   render() {
-    const {email, password} = this.state
+    const { email, password } = this.state
+
     return (
       <div className="container">
         <div className="row">
@@ -92,8 +99,8 @@ class Login extends Component {
                 <h5 className="card-title">Don't have an account yet?</h5>
                 <Link to={"/signup"} className="btn btn-warning">Get started here!</Link>
               </div>
-              <div className="card-body">
-                <h5 className="card-title">Log in</h5>
+              <div className="card-body mb-5">
+                <h5 className="card-title mt-4">Log in</h5>
                 {
                   this.state.errors ? this.handleErrors() : null
                 }

@@ -24,7 +24,8 @@ class Hujah extends React.Component {
           current_user_vote: null,
           agree_count: 0,
           neutral_count: 0,
-          disagree_count: 0
+          disagree_count: 0,
+          children_count: 0
         }
       },
       children: [],
@@ -76,7 +77,8 @@ class Hujah extends React.Component {
               current_user_vote: data.attributes.current_user_vote,
               agree_count: data.attributes.agree_count,
               neutral_count: data.attributes.neutral_count,
-              disagree_count: data.attributes.disagree_count
+              disagree_count: data.attributes.disagree_count,
+              children_count: data.attributes.children_count
             }
           },
           user: data.attributes.user
@@ -123,7 +125,8 @@ class Hujah extends React.Component {
                 current_user_vote: data.attributes.current_user_vote,
                 agree_count: data.attributes.agree_count,
                 neutral_count: data.attributes.neutral_count,
-                disagree_count: data.attributes.disagree_count
+                disagree_count: data.attributes.disagree_count,
+                children_count: data.attributes.children_count
               }
             },
             user: data.attributes.user
@@ -330,8 +333,13 @@ class Hujah extends React.Component {
     }
   }
 
+  selectedFilterClass(selectedResponse) {
+    return`btn btn-${selectedResponse} btn-icon-16 fill-white`
+  }
+
   render() {
     const { hujah, children, hujahParent, user, hujahResponseFilter } = this.state
+    const { current_user_vote, agree_count, neutral_count, disagree_count, body, children_count } = hujah.attributes
 
     const displayChildren = children.map((hujah, index) => (
       this.filterChildren(hujah, index)
@@ -346,7 +354,7 @@ class Hujah extends React.Component {
 
     const displayAddHujahButton = (
       <div className="card-body pt-0 text-center">
-        <ButtonAddHujah hujahParent={hujah} user={user} vote={hujah.attributes.current_user_vote} />
+        <ButtonAddHujah hujahParent={hujah} user={user} vote={current_user_vote} />
       </div>
     )
     
@@ -354,7 +362,7 @@ class Hujah extends React.Component {
       <button className="dropdown-item" type="button" onClick={this.deleteHujah}>Delete hoojah</button>
     )
 
-    const totalVoteCount = hujah.attributes.agree_count + hujah.attributes.neutral_count + hujah.attributes.disagree_count
+    const totalVoteCount = agree_count + neutral_count + disagree_count
 
     return (
       <div className="container">
@@ -365,7 +373,7 @@ class Hujah extends React.Component {
               <ButtonBack />
               <div className="dropdown">
                 <button className="btn btn-icon-24 fill-primary" type="button" id="moreAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <MoreActionsIcon />
+                  <MoreActionsIcon />
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
                   {user.id == this.props.currentUser.id ? displayDeleteHujahButton : null}
@@ -381,38 +389,35 @@ class Hujah extends React.Component {
                 user={user} 
                 hujahParent={hujahParent.id == null ? null : hujahParent} />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
-                <h3 className="card-title text-black text-regular">{hujah.attributes.body}</h3>
+                <h3 className="card-title text-black text-regular">{body}</h3>
               </div>
               <div className="card-body py-0">
                 <div className="d-flex flex-column justify-content-around">
                   <div className="vote-show mb-3 d-flex align-items-center">
-                    <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${hujah.attributes.current_user_vote == "agree" ? "voted" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
-                    <div className="vote bg-agree mr-2" style={{ width: `${this.calculatePercentage(hujah.attributes.agree_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-agree ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.agree_count, totalVoteCount))}%</small>
+                    <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${current_user_vote == "agree" ? "voted" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
+                    <div className="vote bg-agree mr-2" style={{ width: `${this.calculatePercentage(agree_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-agree ml-auto">{Math.round(this.calculatePercentage(agree_count, totalVoteCount))}%</small>
                   </div>
                   <div className="vote-show mb-3 d-flex align-items-center">
-                    <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${hujah.attributes.current_user_vote == "neutral" ? "voted" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
-                    <div className="vote bg-neutral mr-2" style={{ width: `${this.calculatePercentage(hujah.attributes.neutral_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-neutral ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.neutral_count, totalVoteCount))}%</small>
+                    <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${current_user_vote == "neutral" ? "voted" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
+                    <div className="vote bg-neutral mr-2" style={{ width: `${this.calculatePercentage(neutral_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-neutral ml-auto">{Math.round(this.calculatePercentage(neutral_count, totalVoteCount))}%</small>
                   </div>
                   <div className="vote-show mb-3 d-flex align-items-center">
-                    <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${hujah.attributes.current_user_vote == "disagree" ? "voted" : null}`} onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
-                    <div className="vote bg-disagree mr-2" style={{ width: `${this.calculatePercentage(hujah.attributes.disagree_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-disagree ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.disagree_count, totalVoteCount))}%</small>
+                    <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${current_user_vote == "disagree" ? "voted" : null}`} onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
+                    <div className="vote bg-disagree mr-2" style={{ width: `${this.calculatePercentage(disagree_count, totalVoteCount)}%` }}></div>
+                    <small className="vote-text text-disagree ml-auto">{Math.round(this.calculatePercentage(disagree_count, totalVoteCount))}%</small>
                   </div>
                 </div>
               </div>
               <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
-                <ViewsIcon />
-                <span className="ml-1">348</span>
-                <span className="mx-2">·</span>
                 <VotesIcon />
                 <span className="ml-1">{totalVoteCount}</span>
                 <span className="mx-2">·</span>
                 <HujahIcon />
-                <span className="ml-1">55</span>
+                <span className="ml-1">{children_count}</span>
               </div>
-              {hujah.attributes.current_user_vote == null ? null : displayAddHujahButton}
+              {current_user_vote == null ? null : displayAddHujahButton}
             </div>
           </div>
         </div>
@@ -422,13 +427,7 @@ class Hujah extends React.Component {
               <div className="card-body">
                 <div className="shadow btn-group btn-group-lg d-flex" role="group">
                   <button type="button" className={hujahResponseFilter == "all" ? this.selectedFilterClass("primary") : "btn btn-outline-light btn-icon-16 fill-primary text-primary"} onClick={() => this.handleFilterClick("all")}>All <HujahIcon /></button>
-
-
                   <button type="button" className={hujahResponseFilter == "agree" ? this.selectedFilterClass("agree") : "btn btn-outline-light btn-icon-16 fill-agree"} onClick={() => this.handleFilterClick("agree")}><AgreeIcon /></button>
-                  
-                  
-                  
-                  
                   <button type="button" className={hujahResponseFilter == "neutral" ? this.selectedFilterClass("neutral") : "btn btn-outline-light btn-icon-16 fill-neutral"} onClick={() => this.handleFilterClick("neutral")}><NeutralIcon /></button>
                   <button type="button" className={hujahResponseFilter == "disagree" ? this.selectedFilterClass("disagree") : "btn btn-outline-light btn-icon-16 fill-disagree"} onClick={() => this.handleFilterClick("disagree")}><DisagreeIcon /></button>
                 </div>
@@ -439,10 +438,6 @@ class Hujah extends React.Component {
         </div>
       </div>
     )
-  }
-
-  selectedFilterClass(selectedResponse) {
-    return`btn btn-${selectedResponse} btn-icon-16 fill-white`
   }
 }
 
