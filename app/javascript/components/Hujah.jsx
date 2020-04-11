@@ -308,6 +308,10 @@ class Hujah extends React.Component {
         <ButtonAddHujah hujahParent={hujah} user={user} vote={hujah.attributes.current_user_vote} />
       </div>
     )
+    
+    const displayDeleteHujahButton = (
+      <button className="dropdown-item" type="button" onClick={this.deleteHujah}>Delete hoojah</button>
+    )
 
     const totalVoteCount = hujah.attributes.agree_count + hujah.attributes.neutral_count + hujah.attributes.disagree_count
 
@@ -323,7 +327,7 @@ class Hujah extends React.Component {
                 <MoreActionsIcon />
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
-                  <button className="dropdown-item" type="button" onClick={this.deleteHujah}>Delete hoojah</button>
+                  {user.id == this.props.currentUser.id ? displayDeleteHujahButton : null}
                   <button className="dropdown-item disabled" type="button">Flag hoojah</button>
                 </div>
               </div>
