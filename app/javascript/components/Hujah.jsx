@@ -411,9 +411,6 @@ class Hujah extends React.Component {
                 </div>
               </div>
               <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
-                <ViewsIcon />
-                <span className="ml-1">348</span>
-                <span className="mx-2">·</span>
                 <VotesIcon />
                 <span className="ml-1">{totalVoteCount}</span>
                 <span className="mx-2">·</span>
