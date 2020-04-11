@@ -42,7 +42,8 @@ class Hujah extends React.Component {
           username: "",
           full_name: ""
         }
-      }
+      },
+      totalVoteCount: 0
     }
     this.deleteHujah = this.deleteHujah.bind(this)
   }
@@ -140,6 +141,123 @@ class Hujah extends React.Component {
     }
   }
 
+  handleVoteAgree() {
+    if(!this.props.loggedInStatus) {
+      return this.redirect()
+    }
+    const newHujahState = Object.assign({}, this.state.hujah)
+    var addToTotalVoteCount = 0
+    if(newHujahState.attributes.current_user_vote == "agree") {
+      return
+    } else {
+      newHujahState.attributes.agree_count = newHujahState.attributes.agree_count + 1
+      if(newHujahState.attributes.current_user_vote == "neutral") {
+        newHujahState.attributes.neutral_count = newHujahState.attributes.neutral_count - 1
+      } else if(newHujahState.attributes.current_user_vote == "disagree") {
+        newHujahState.attributes.disagree_count = newHujahState.attributes.disagree_count - 1
+      }
+      if(newHujahState.attributes.current_user_vote == null) {
+        // if user has not voted previously
+        addToTotalVoteCount = 1
+      }
+      newHujahState.attributes.current_user_vote = "agree"
+    }
+    this.setState({ 
+      hujah: newHujahState,
+      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
+      showAddHujahButton: true
+    })
+    this.updateVote(1)
+  }
+
+  handleVoteNeutral() {
+    if(!this.props.loggedInStatus) {
+      return this.redirect()
+    }
+    const newHujahState = Object.assign({}, this.state.hujah)
+    var addToTotalVoteCount = 0
+    if(newHujahState.attributes.current_user_vote == "neutral") {
+      return
+    } else {
+      newHujahState.attributes.neutral_count = newHujahState.attributes.neutral_count + 1
+      if(newHujahState.attributes.current_user_vote == "agree") {
+        newHujahState.attributes.agree_count = newHujahState.attributes.agree_count - 1
+      } else if(newHujahState.attributes.current_user_vote == "disagree") {
+        newHujahState.attributes.disagree_count = newHujahState.attributes.disagree_count - 1
+      }
+      if(newHujahState.attributes.current_user_vote == null) {
+        addToTotalVoteCount = 1
+      }
+      newHujahState.attributes.current_user_vote = "neutral"
+    }
+    this.setState({ 
+      hujah: newHujahState,
+      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
+      showAddHujahButton: true
+    })
+    this.updateVote(2)
+  }
+
+  handleVoteDisagree() {
+    if(!this.props.loggedInStatus) {
+      return this.redirect()
+    }
+    const newHujahState = Object.assign({}, this.state.hujah)
+    var addToTotalVoteCount = 0
+    if(newHujahState.attributes.current_user_vote == "disagree") {
+      return
+    } else {
+      newHujahState.attributes.disagree_count = newHujahState.attributes.disagree_count + 1
+      if(newHujahState.attributes.current_user_vote == "agree") {
+        newHujahState.attributes.agree_count = newHujahState.attributes.agree_count - 1
+      } else if(newHujahState.attributes.current_user_vote == "neutral") {
+        newHujahState.attributes.neutral_count = newHujahState.attributes.neutral_count - 1
+      }
+      if(newHujahState.attributes.current_user_vote == null) {
+        addToTotalVoteCount = 1
+      }
+      newHujahState.attributes.current_user_vote = "disagree"
+    }
+    this.setState({ 
+      hujah: newHujahState,
+      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
+      showAddHujahButton: true
+    })
+    this.updateVote(3)
+  }
+  
+  redirect = () => {
+    this.props.history.push('/login')
+  }
+
+  updateVote(vote) {
+
+    const url = "/api/v1/votes/create"
+
+    const body = {
+      vote: vote,
+      hujah_id: this.state.hujah.id,
+      user_id: this.props.currentUser.id
+    }
+
+    const token = document.querySelector('meta[name="csrf-token"]').content
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error("Network response was not ok.")
+      })
+      .catch(error => console.log(error.message))
+  }
+
   calculatePercentage(voteCount, totalVoteCount) {
     const percentage = voteCount * 100 / totalVoteCount
     return percentage
@@ -206,7 +324,7 @@ class Hujah extends React.Component {
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
                   <button className="dropdown-item" type="button" onClick={this.deleteHujah}>Delete hoojah</button>
-                  <button className="dropdown-item" type="button">Flag hoojah</button>
+                  <button className="dropdown-item disabled" type="button">Flag hoojah</button>
                 </div>
               </div>
             </div>
@@ -223,17 +341,17 @@ class Hujah extends React.Component {
               <div className="card-body py-0">
                 <div className="d-flex flex-column justify-content-around">
                   <div className="vote-show mb-3 d-flex align-items-center">
-                    <a role="button" className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${hujah.attributes.current_user_vote == "agree" ? "voted" : null}`}><AgreeIcon /></a>
+                    <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${hujah.attributes.current_user_vote == "agree" ? "voted" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
                     <div className="vote bg-agree mr-2" style={{ width: `${this.calculatePercentage(hujah.attributes.agree_count, totalVoteCount)}%` }}></div>
                     <small className="vote-text text-agree ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.agree_count, totalVoteCount))}%</small>
                   </div>
                   <div className="vote-show mb-3 d-flex align-items-center">
-                    <a role="button" className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${hujah.attributes.current_user_vote == "neutral" ? "voted" : null}`}><NeutralIcon /></a>
+                    <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${hujah.attributes.current_user_vote == "neutral" ? "voted" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
                     <div className="vote bg-neutral mr-2" style={{ width: `${this.calculatePercentage(hujah.attributes.neutral_count, totalVoteCount)}%` }}></div>
                     <small className="vote-text text-neutral ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.neutral_count, totalVoteCount))}%</small>
                   </div>
                   <div className="vote-show mb-3 d-flex align-items-center">
-                    <a role="button" className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${hujah.attributes.current_user_vote == "disagree" ? "voted" : null}`}><DisagreeIcon /></a>
+                    <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${hujah.attributes.current_user_vote == "disagree" ? "voted" : null}`} onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
                     <div className="vote bg-disagree mr-2" style={{ width: `${this.calculatePercentage(hujah.attributes.disagree_count, totalVoteCount)}%` }}></div>
                     <small className="vote-text text-disagree ml-auto">{Math.round(this.calculatePercentage(hujah.attributes.disagree_count, totalVoteCount))}%</small>
                   </div>

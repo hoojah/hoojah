@@ -126,9 +126,6 @@ body {
   }
 }
 
-
-
-
 .btn-rounded {
   &.btn {
     border-radius: 16px;
@@ -311,7 +308,7 @@ nav {
   height: 48px;
   transform: rotate(180deg);
 
-  a {
+  button {
     position: absolute;
     top: 0;
     left: 0;
