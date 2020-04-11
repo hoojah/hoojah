@@ -1,5 +1,8 @@
 import React from "react"
 import { Link } from 'react-router-dom'
+import AgreeIcon from '../Icons/agree'
+import NeutralIcon from '../Icons/neutral'
+import DisagreeIcon from '../Icons/disagree'
 
 class HujahCardSmall extends React.Component {
 
@@ -17,7 +20,7 @@ class HujahCardSmall extends React.Component {
 
   render() {
     const hujah = this.props.hujah
-    const { body, full_name, username, vote } = hujah.attributes
+    const { body, full_name, username, vote, agree_count, neutral_count, disagree_count } = hujah.attributes
 
     return(
       <Link to={`/hoojah/${hujah.id}`} className="no-underscore">
@@ -33,6 +36,16 @@ class HujahCardSmall extends React.Component {
                   </span>
                 </div>
                 <p className="mb-0 text-black">{body}</p>
+                <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey p-0">
+                  <AgreeIcon />
+                  <span className="ml-1">{agree_count}</span>
+                  <span className="mx-2">·</span>
+                  <NeutralIcon />
+                  <span className="ml-1">{neutral_count}</span>
+                  <span className="mx-2">·</span>
+                  <DisagreeIcon />
+                  <span className="ml-1">{disagree_count}</span>
+                </div>
               </div>
             </div>
           </div>

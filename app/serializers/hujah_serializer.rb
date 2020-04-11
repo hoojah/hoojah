@@ -42,7 +42,10 @@ class HujahSerializer
           "body": child.body,
           "username": child.user.username,
           "full_name": child.user.full_name,
-          "vote": child.vote
+          "vote": child.vote,
+          "agree_count": child.agree_count,
+          "neutral_count": child.neutral_count,
+          "disagree_count": child.disagree_count
         }
       }
       newChildren << newChild
