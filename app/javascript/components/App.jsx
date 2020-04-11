@@ -61,7 +61,7 @@ class App extends React.Component {
           <Route 
             exact path='/hoojah/:id' 
             render={props => (
-            <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+            <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
