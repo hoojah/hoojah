@@ -2,11 +2,25 @@ import React, { Fragment } from "react"
 import { Link } from 'react-router-dom'
 import ShareIcon from '../Icons/share'
 import HujahCardParent from './card_parent'
+import {
+  EmailShareButton,
+  EmailIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  RedditShareButton,
+  RedditIcon,
+  TelegramShareButton,
+  TelegramIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  WhatsappShareButton,
+  WhatsappIcon
+} from "react-share"
 
 class HujahCardHeader extends React.Component {
   render() {
-    const { hujahParent, user } = this.props
-
+    const { hujah, hujahParent, user } = this.props
+    
     return(
       <Fragment>
         { hujahParent == null ? null : <HujahCardParent hujah={hujahParent} /> }
@@ -23,9 +37,58 @@ class HujahCardHeader extends React.Component {
               </div>
             </div>
           </div>
-          <Link to="/hujah" className="btn-icon-16 fill-light-grey">
-            <ShareIcon />
-          </Link>
+
+          <div className="dropdown">
+            <button className="btn btn-icon-16 fill-light-grey" type="button" id="moreAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <ShareIcon />
+            </button>
+            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
+              <h6 className="dropdown-header">Share this hoojah via</h6>
+              <FacebookShareButton 
+                url={window.location.href}
+                quote={`AGREE? NEUTRAL? DISAGREE?: "${hujah.attributes.body} (by @${user.attributes.username})"`} 
+                hashtag="#hoojah" 
+                className="px-3 py-1">
+                  <FacebookIcon size={24} borderRadius={48} className="mr-1" /> Facebook
+              </FacebookShareButton>
+              <TwitterShareButton 
+                url={window.location.href}
+                title={`AGREE? NEUTRAL? DISAGREE?: "${hujah.attributes.body} (by @${user.attributes.username})"`}
+                via="hoojah_my" 
+                hashtags={["hoojah", "discussion", "malaysia"]} 
+                className="px-3 py-1">
+                <TwitterIcon size={24} borderRadius={48} className="mr-1" /> Twitter
+              </TwitterShareButton>
+              <WhatsappShareButton 
+                url={window.location.href}
+                title={`AGREE? NEUTRAL? DISAGREE?: "${hujah.attributes.body} (by @${user.attributes.username})"`}
+                className="px-3 py-1">
+                <WhatsappIcon size={24} borderRadius={48} className="mr-1" /> WhatsApp
+              </WhatsappShareButton>
+              <TelegramShareButton 
+                url={window.location.href}
+                title={`AGREE? NEUTRAL? DISAGREE?: "${hujah.attributes.body} (by @${user.attributes.username})"`}
+                className="px-3 py-1">
+                <TelegramIcon size={24} borderRadius={48} className="mr-1" /> Telegram
+              </TelegramShareButton>
+              <RedditShareButton 
+                url={window.location.href}
+                title={`AGREE? NEUTRAL? DISAGREE?: "${hujah.attributes.body} (by @${user.attributes.username})"`}
+                className="px-3 py-1">
+                <RedditIcon size={24} borderRadius={48} className="mr-1" /> Reddit
+              </RedditShareButton>
+              <EmailShareButton 
+                url={window.location.href}
+                subject={`AGREE? NEUTRAL? DISAGREE?: "${hujah.attributes.body} (by @${user.attributes.username})"`}
+                body="hello@hoojah.my" 
+                className="px-3 py-1">
+                <EmailIcon size={24} borderRadius={48} className="mr-1" /> Email
+              </EmailShareButton>
+            </div>
+          </div>
+
+
+
         </div>
       </Fragment>
     )

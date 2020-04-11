@@ -355,7 +355,7 @@ class Hujah extends React.Component {
     )
 
     const totalVoteCount = hujah.attributes.agree_count + hujah.attributes.neutral_count + hujah.attributes.disagree_count
-
+console.log(this.props)
     return (
       <div className="container">
         <div className="row">
@@ -365,7 +365,7 @@ class Hujah extends React.Component {
               <ButtonBack />
               <div className="dropdown">
                 <button className="btn btn-icon-24 fill-primary" type="button" id="moreAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <MoreActionsIcon />
+                  <MoreActionsIcon />
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
                   {user.id == this.props.currentUser.id ? displayDeleteHujahButton : null}
@@ -377,6 +377,7 @@ class Hujah extends React.Component {
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
               <HujahCardHeader 
+                
                 hujah={hujah} 
                 user={user} 
                 hujahParent={hujahParent.id == null ? null : hujahParent} />
