@@ -55,7 +55,7 @@ class HujahCardHeader extends React.Component {
                 url={window.location.href}
                 title={`AGREE? NEUTRAL? DISAGREE?: "${hujah.attributes.body} (by @${user.attributes.username})"`}
                 via="hoojah_my" 
-                hashtags={["hoojah", "discussion", "malaysia"]} 
+                hashtags={["hoojah", "discussions", "malaysia"]} 
                 className="px-3 py-1">
                 <TwitterIcon size={24} borderRadius={48} className="mr-1" /> Twitter
               </TwitterShareButton>

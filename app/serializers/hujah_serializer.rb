@@ -3,6 +3,10 @@ class HujahSerializer
 
   attributes :body, :agree_count, :neutral_count, :disagree_count, :vote
 
+  attribute :children_count do |hujah|
+    hujah.children.count
+  end
+
   # this is the owner of the hujah, not the current user
   attribute :user do |hujah| 
     {

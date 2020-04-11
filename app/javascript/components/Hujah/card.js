@@ -23,6 +23,7 @@ class HujahCard extends React.Component {
           agree_count: null,
           neutral_count: null,
           disagree_count: null,
+          children_count: 0,
           parent: {
             id: null,
             body: "",
@@ -211,7 +212,7 @@ class HujahCard extends React.Component {
               <span className="ml-1">{totalVoteCount}</span>
               <span className="mx-2">·</span>
               <HujahIcon />
-              <span className="ml-1">55</span>
+              <span className="ml-1">{hujah.attributes.children_count}</span>
             </div>
           </div>
         </div>
