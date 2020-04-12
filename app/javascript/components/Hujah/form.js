@@ -5,27 +5,15 @@ import NeutralIcon from '../Icons/neutral'
 import DisagreeIcon from '../Icons/disagree'
 import HujahIcon from '../Icons/hujah'
 import ButtonBack from '../Layouts/button_back'
+import LoadingAnimation from '../Layouts/loading_animation'
 
 class HujahForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       newHujahBody: "",
-      user: {
-        id: null,
-        attributes: {
-          username: "",
-          full_name: ""
-        }
-      },
-      hujahParent: { 
-        id: null,
-        attributes: {
-          body: "",
-          current_user_vote: null
-        }
-      },
-      newHujahParent: true,
+      hujahParent: {},
+      isNewHujahParent: true,
       voteForHujah: ""
     }
     this.handleBodyChange = this.handleBodyChange.bind(this)
@@ -35,33 +23,36 @@ class HujahForm extends React.Component {
 
   componentDidMount() {
     if(!this.props.loggedInStatus) {
-      return this.redirect()
+debugger
+      return this.redirectToLogin()
     }
 
-    const { user, hujahParent } = this.props.location.state
+    const { hujahParent } = this.props.location.state
     
     if(hujahParent.id == null) {
       this.setState({
-        user: user,
         hujahParent: {
           id: null,
           attributes: {
             body: "",
-            current_user_vote: "primary"
+            current_user_vote: "primary",
+            user: {
+              id: null
+            }
           }
-        }
+        },
+        voteForHujah: "primary"
       })
     } else {
       this.setState({
-        user: user,
         hujahParent: hujahParent,
-        newHujahParent: false,
+        isNewHujahParent: false,
         voteForHujah: hujahParent.attributes.current_user_vote
       })
     }
   }
   
-  redirect = () => {
+  redirectToLogin = () => {
     this.props.history.push('/login')
   }
 
@@ -162,9 +153,15 @@ class HujahForm extends React.Component {
   }
 
   render() {
-    const { newHujahBody, user, hujahParent, newHujahParent, voteForHujah } = this.state
-    const { body, current_user_vote } = hujahParent.attributes
+    if($.isEmptyObject(this.state.hujahParent)){
+      return (
+        <LoadingAnimation />
+      )
+    }
 
+
+    const { newHujahBody, hujahParent, isNewHujahParent, voteForHujah } = this.state
+    const { body, current_user_vote, user } = hujahParent.attributes
     const displayParentCard = (
       <Fragment>
         <div className="col-12 pb-2 bg-white">
@@ -174,14 +171,31 @@ class HujahForm extends React.Component {
           <h6 className="text-regular pt-1">{body}</h6>
         </div>
 
+
+
         <div className="col-12 mb-1 pt-1 pb-3 bg-white">
           <small>Post this response hoojah as:</small>
           <div className="d-flex justify-content-around mt-2">
-            <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${voteForHujah == "agree" ? "voted" : null}`} onClick={() => this.handleResponseVoteAgree()}><AgreeIcon /></button>
-            <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${voteForHujah == "neutral" ? "voted" : null}`} onClick={() => this.handleResponseVoteNeutral()}><NeutralIcon /></button>
-            <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${voteForHujah == "disagree" ? "voted" : null}`} onClick={() => this.handleResponseVoteDisagree()}><DisagreeIcon /></button>
+            <button 
+              className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${voteForHujah == "agree" ? "voted" : null}`} 
+              onClick={() => this.handleResponseVoteAgree()}>
+              <AgreeIcon />
+            </button>
+            <button 
+              className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${voteForHujah == "neutral" ? "voted" : null}`} 
+              onClick={() => this.handleResponseVoteNeutral()}>
+              <NeutralIcon />
+            </button>
+            <button 
+              className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${voteForHujah == "disagree" ? "voted" : null}`} 
+              onClick={() => this.handleResponseVoteDisagree()}>
+              <DisagreeIcon />
+            </button>
           </div>
         </div>
+
+
+
       </Fragment>
     )
 
@@ -197,8 +211,7 @@ class HujahForm extends React.Component {
                 </button>
               </div>
             </nav>
-            {!newHujahParent && displayParentCard}
-
+            {!isNewHujahParent && displayParentCard}
             <div className="col-12 d-flex mt-3">
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mr-3 avatar" />
               <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleBodyChange}></textarea>

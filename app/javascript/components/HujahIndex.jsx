@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './Layouts/navbar'
 import HujahCard from './Hujah/card'
-import Loading from 'loading.svg'
+import LoadingAnimation from './Layouts/loading_animation'
 
 class HujahIndex extends React.Component {
   constructor(props) {
@@ -33,12 +33,6 @@ class HujahIndex extends React.Component {
     const displayAllHujah = allHujah.map((hujah, index) => (
       <HujahCard {...this.props} key={index} hujah={hujah} />
     ))
-
-    const displayLoadingAnimation = (
-      <div className="vw-100 vh-100 d-flex align-items-center justify-content-center">
-        <img src={Loading} className="loading" style={{ marginTop: "-100px" }} />
-      </div>
-    )
       
     return (
       <div className="">
@@ -46,7 +40,7 @@ class HujahIndex extends React.Component {
         <div id="navbar-bg"></div>
         <main className="container">
           <div className="row">
-            {allHujah.length > 0 ? displayAllHujah : displayLoadingAnimation}
+            {allHujah.length > 0 ? displayAllHujah : <LoadingAnimation />}
           </div>
         </main>
       </div>

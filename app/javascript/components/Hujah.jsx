@@ -5,6 +5,7 @@ import Navbar from './Layouts/navbar'
 import MoreActionsIcon from './Icons/more_actions'
 import ButtonBack from './Layouts/button_back'
 import ButtonAddHujah from './Layouts/button_add_hujah'
+import LoadingAnimation from './Layouts/loading_animation'
 import AgreeIcon from './Icons/agree'
 import NeutralIcon from './Icons/neutral'
 import DisagreeIcon from './Icons/disagree'
@@ -13,7 +14,6 @@ import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
 import HujahCardHeader from './Hujah/card_header'
 import HujahCardSmall from './Hujah/card_small'
-import Loading from 'loading.svg'
 
 class Hujah extends React.Component {
   constructor(props) {
@@ -114,10 +114,12 @@ class Hujah extends React.Component {
       }
       newHujahState.attributes.current_user_vote = "agree"
     }
-    this.setState({ 
-      hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
-      showAddHujahButton: true
+    this.setState((prevState, props) => {
+      return {
+        hujah: newHujahState,
+        totalVoteCount: prevState.totalVoteCount + addToTotalVoteCount,
+        showAddHujahButton: true
+      }
     })
     this.updateVote(1)
   }
@@ -142,10 +144,12 @@ class Hujah extends React.Component {
       }
       newHujahState.attributes.current_user_vote = "neutral"
     }
-    this.setState({ 
-      hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
-      showAddHujahButton: true
+    this.setState((prevState, props) => {
+      return {
+        hujah: newHujahState,
+        totalVoteCount: prevState.totalVoteCount + addToTotalVoteCount,
+        showAddHujahButton: true
+      }
     })
     this.updateVote(2)
   }
@@ -170,10 +174,12 @@ class Hujah extends React.Component {
       }
       newHujahState.attributes.current_user_vote = "disagree"
     }
-    this.setState({ 
-      hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
-      showAddHujahButton: true
+    this.setState((prevState, props) => {
+      return {
+        hujah: newHujahState,
+        totalVoteCount: prevState.totalVoteCount + addToTotalVoteCount,
+        showAddHujahButton: true
+      }
     })
     this.updateVote(3)
   }
@@ -295,9 +301,7 @@ class Hujah extends React.Component {
   render() {
     if($.isEmptyObject(this.state.hujah)){
       return (
-        <div className="vw-100 vh-100 d-flex align-items-center justify-content-center">
-          <img src={Loading} className="loading" style={{ marginTop: "-100px" }} />
-        </div>
+        <LoadingAnimation />
       )
     }
    

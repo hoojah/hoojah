@@ -82,10 +82,12 @@ class HujahCard extends React.Component {
       newHujahState.attributes.current_user_vote = "agree"
     }
 
-    this.setState({ 
-      hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
-      showAddHujahButton: true
+    this.setState((prevState, props) => {
+      return {
+        hujah: newHujahState,
+        totalVoteCount: prevState.totalVoteCount + addToTotalVoteCount,
+        showAddHujahButton: true
+      }
     })
 
     this.updateVote(1)
@@ -115,12 +117,14 @@ class HujahCard extends React.Component {
       newHujahState.attributes.current_user_vote = "neutral"
     }
 
-    this.setState({ 
-      hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
-      showAddHujahButton: true
+    this.setState((prevState, props) => {
+      return {
+        hujah: newHujahState,
+        totalVoteCount: prevState.totalVoteCount + addToTotalVoteCount,
+        showAddHujahButton: true
+      }
     })
-
+    
     this.updateVote(2)
   }
 
@@ -148,12 +152,14 @@ class HujahCard extends React.Component {
       newHujahState.attributes.current_user_vote = "disagree"
     }
 
-    this.setState({ 
-      hujah: newHujahState,
-      totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
-      showAddHujahButton: true
+    this.setState((prevState, props) => {
+      return {
+        hujah: newHujahState,
+        totalVoteCount: prevState.totalVoteCount + addToTotalVoteCount,
+        showAddHujahButton: true
+      }
     })
-
+    
     this.updateVote(3)
   }
 
