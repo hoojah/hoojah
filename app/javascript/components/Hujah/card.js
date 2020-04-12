@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Linkify from 'react-linkify'
 import AgreeIcon from '../Icons/agree'
 import NeutralIcon from '../Icons/neutral'
 import DisagreeIcon from '../Icons/disagree'
@@ -191,7 +192,7 @@ class HujahCard extends React.Component {
           <HujahCardHeader hujah={hujah} hujahParent={ hujahParent == null ? null : hujahParent } user={user} />
           <div className="card-body pb-0">
             <Link to={`/hoojah/${hujah.id}`}>
-              <h5 className="card-title text-black text-regular">{hujah.attributes.body}</h5>
+              <h5 className="card-title text-black text-regular"><Linkify>{body}</Linkify></h5>
             </Link>
           </div>
           <div className={`card-body pt-0 ${showAddHujahButton ? "d-flex justify-content-between" : null}`}>

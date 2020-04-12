@@ -1,4 +1,5 @@
 import React from 'react'
+import Linkify from 'react-linkify'
 import Navbar from './Layouts/navbar'
 import MoreActionsIcon from './Icons/more_actions'
 import ButtonBack from './Layouts/button_back'
@@ -389,7 +390,7 @@ class Hujah extends React.Component {
                 user={user} 
                 hujahParent={hujahParent.id == null ? null : hujahParent} />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
-                <h3 className="card-title text-black text-regular">{body}</h3>
+                <h3 className="card-title text-black text-regular"><Linkify>{body}</Linkify></h3>
               </div>
               <div className="card-body py-0">
                 <div className="d-flex flex-column justify-content-around">
