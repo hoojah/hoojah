@@ -6,6 +6,10 @@ class UserSerializer
     user.hujahs.length
   end
 
+  attribute :vote_count do |user|
+    user.votes.length
+  end
+
   attributes :hujahs, if: Proc.new { |user| user.hujahs.length != 0 } do |user| 
 
     all_hujah = []
