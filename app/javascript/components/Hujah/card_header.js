@@ -1,4 +1,5 @@
-import React, { Fragment } from "react"
+import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import ShareIcon from '../Icons/share'
 import HujahCardParent from './card_parent'
 import {
@@ -32,10 +33,10 @@ class HujahCardHeader extends React.Component {
 
         <div className="card-header border-bottom-0 pb-0 d-flex justify-content-between align-items-center">
           <div className="media">
-            <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mr-3 avatar" />
+            <Link to={`/users/${user.id}`}><img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mr-3 avatar" /></Link>
             <div className="media-body">
               <div className="d-flex flex-column">
-                <p className="mt-0 mb-0 text-primary">{full_name}</p>
+                <Link to={`/users/${user.id}`} className="mt-0 mb-0 text-primary">{full_name}</Link>
                 <a className="no-underscore handle">
                   <small className="text-muted">{`@${username}`}</small>
                 </a>
