@@ -176,17 +176,17 @@ debugger
         <div className="col-12 mb-1 pt-1 pb-3 bg-white">
           <small>Post this response hoojah as:</small>
           <div className="d-flex justify-content-around mt-2">
-            <button 
+            <button type="button"
               className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${voteForHujah == "agree" ? "voted" : null}`} 
               onClick={() => this.handleResponseVoteAgree()}>
               <AgreeIcon />
             </button>
-            <button 
+            <button type="button"
               className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${voteForHujah == "neutral" ? "voted" : null}`} 
               onClick={() => this.handleResponseVoteNeutral()}>
               <NeutralIcon />
             </button>
-            <button 
+            <button type="button"
               className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${voteForHujah == "disagree" ? "voted" : null}`} 
               onClick={() => this.handleResponseVoteDisagree()}>
               <DisagreeIcon />
