@@ -39,7 +39,7 @@ class Navbar extends React.Component {
                   hujahParent: { id: null },
                   user: { id: null }
                 }
-              }} className="btn btn-icon-24 fill-primary">
+              }} className="btn btn-icon-24 fill-primary p-0">
               <HujahIcon />
             </Link>
           </div>

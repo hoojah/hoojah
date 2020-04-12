@@ -55,31 +55,31 @@ class App extends React.Component {
           <Route 
             exact path='/hoojah/new' 
             render={props => (
-            <HujahForm {...props} loggedInStatus={this.state.isLoggedIn} />
+              <HujahForm {...props} loggedInStatus={this.state.isLoggedIn} />
             )}
           />
           <Route 
             exact path='/hoojah/:id' 
             render={props => (
-            <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+              <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
             exact path='/' 
             render={props => (
-            <HujahIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+              <HujahIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
             exact path='/login' 
             render={props => (
-            <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+              <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
             )}
           />
           <Route 
             exact path='/signup' 
             render={props => (
-            <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+              <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
             )}
           />
         </Switch>

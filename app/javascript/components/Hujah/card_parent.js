@@ -1,10 +1,10 @@
-import React from "react"
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 class HujahParentCard extends React.Component {
-
   render() {
     const hujah = this.props.hujah
+    const { user, body } = hujah.attributes
 
     return(
       <Link to={`/hoojah/${hujah.id}`} className="no-underscore">
@@ -14,9 +14,9 @@ class HujahParentCard extends React.Component {
             <div className="media-body">
               <div className="d-flex flex-column">
                 <small className="text-grey">
-                  Response to <span className="text-primary">{hujah.attributes.full_name}</span>'s hoojah
+                  Response to <span className="text-primary">{user.attributes.full_name}</span>'s hoojah
                 </small>
-                <div className="mb-0 text-grey text-14 text-truncate d-inline-block" style={{ width: "70vw" }}>{hujah.attributes.body}</div>
+                <div className="mb-0 text-grey text-14 text-truncate d-inline-block" style={{ width: "70vw" }}>{body}</div>
               </div>
             </div>
           </div>

@@ -1,18 +1,19 @@
 import React from 'react'
-import Loading from 'loading.svg'
 import Navbar from './Layouts/navbar'
 import HujahCard from './Hujah/card'
+import Loading from 'loading.svg'
 
-class Hujahs extends React.Component {
+class HujahIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      hujahs: []
+      allHujah: []
     }
   }
 
   componentDidMount() {
     const url = "/api/v1/hoojah/index"
+    
     fetch(url)
       .then(response => {
         if (response.ok) {
@@ -21,28 +22,19 @@ class Hujahs extends React.Component {
         throw new Error("Network response was not ok.")
       })
       .then(response => {
-        this.setState({ hujahs: response.data })
+        this.setState({ allHujah: response.data })
       })
       .catch(() => this.props.history.push("/"))
   }
 
-  findParent(hujah) {
-    if(hujah.attributes.parent != null) {
-      const parentHujah = this.state.hujahs.find(x => x.id === hujah.attributes.parent)
-      return parentHujah
-    } else {
-      return null
-    }
-  }
-
   render() {
-    const { hujahs } = this.state
+    const { allHujah } = this.state
 
-    const allHujahs = hujahs.map((hujah, index) => (
-      <HujahCard {...this.props} key={index} hujah={hujah} totalVoteCount={ hujah.attributes.agree_count + hujah.attributes.neutral_count + hujah.attributes.disagree_count} hujahParent={hujah.attributes.parent == null ? null : hujah.attributes.parent} user={hujah.attributes.user} />
+    const displayAllHujah = allHujah.map((hujah, index) => (
+      <HujahCard {...this.props} key={index} hujah={hujah} />
     ))
 
-    const noHujah = (
+    const displayLoadingAnimation = (
       <div className="vw-100 vh-100 d-flex align-items-center justify-content-center">
         <img src={Loading} className="loading" style={{ marginTop: "-100px" }} />
       </div>
@@ -54,7 +46,7 @@ class Hujahs extends React.Component {
         <div id="navbar-bg"></div>
         <main className="container">
           <div className="row">
-            {hujahs.length > 0 ? allHujahs : noHujah}
+            {allHujah.length > 0 ? displayAllHujah : displayLoadingAnimation}
           </div>
         </main>
       </div>
@@ -62,4 +54,4 @@ class Hujahs extends React.Component {
   }
 
 }
-export default Hujahs
+export default HujahIndex

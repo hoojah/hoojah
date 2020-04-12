@@ -61,7 +61,7 @@ class Login extends Component {
 
   handleErrors = () => {
     return (
-      <div class="alert alert-warning" role="alert">
+      <div className="alert alert-warning" role="alert">
         <ul>
           {this.state.errors.map(error => {
           return <li key={error}>{error}</li>
@@ -128,7 +128,7 @@ class Login extends Component {
                       onChange={this.handleChange}
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary">Log in</button>
+                  <button type="submit" className="btn btn-block btn-primary">Log in</button>
                 </form>
               </div>
               <div className="card-footer text-muted">
