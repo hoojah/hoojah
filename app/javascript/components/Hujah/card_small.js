@@ -19,8 +19,10 @@ class HujahCardSmall extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const hujah = this.props.hujah
-    const { body, full_name, username, vote, agree_count, neutral_count, disagree_count } = hujah.attributes
+    const { body, vote, agree_count, neutral_count, disagree_count, user } = hujah.attributes
+    const { full_name, username } = user.attributes
 
     return(
       <Link to={`/hoojah/${hujah.id}`} className="no-underscore">
