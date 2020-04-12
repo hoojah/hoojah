@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get '/hoojah/new', to: 'hujahs#new'
 
       post 'votes/create', to: 'votes#create'
+      
+      get '/users/:id', to: 'users#show'
     end
   end
   
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/logged_in', to: 'sessions#is_logged_in?'
   
-  resources :users, only: [:create, :show, :index]
+  resources :users, only: :create
 
   root 'hujah#index'
   get '/*path' => 'hujah#index'

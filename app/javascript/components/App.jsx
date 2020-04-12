@@ -1,12 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import HujahIndex from '../components/HujahIndex'
-import Hujah from '../components/Hujah'
-import HujahForm from '../components/Hujah/form'
-import ScrollToTop from '../components/Utilities/scroll_to_top'
-import Login from '../components/Registrations/Login'
-import Signup from '../components/Registrations/Signup'
+import HujahIndex from './HujahIndex'
+import Hujah from './Hujah'
+import UserProfile from './UserProfile'
+import HujahForm from './Hujah/form'
+import ScrollToTop from './Utilities/scroll_to_top'
+import Login from './Registrations/Login'
+import Signup from './Registrations/Signup'
 
 class App extends React.Component {
   constructor(props) {
@@ -69,6 +70,12 @@ class App extends React.Component {
             exact path='/hoojah/:id' 
             render={props => (
               <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+            )}
+          />
+          <Route 
+            exact path='/users/:id' 
+            render={props => (
+              <UserProfile {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
