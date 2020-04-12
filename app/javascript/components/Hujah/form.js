@@ -18,12 +18,10 @@ class HujahForm extends React.Component {
     }
     this.handleBodyChange = this.handleBodyChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.stripHtmlEntities = this.stripHtmlEntities.bind(this)
   }
 
   componentDidMount() {
     if(!this.props.loggedInStatus) {
-debugger
       return this.redirectToLogin()
     }
 
@@ -56,12 +54,6 @@ debugger
     this.props.history.push('/login')
   }
 
-  stripHtmlEntities(str) {
-    return String(str)
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-  }
-
   handleBodyChange(event) {
     this.setState({newHujahBody: event.target.value})
   }
@@ -77,8 +69,8 @@ debugger
 
     const body = {
       body: newHujahBody.replace(/\n/g, "<br /> <br />"),
-      parent_id: this.state.hujahParent.id,
-      vote: this.parseVote(hujahParent.attributes.current_user_vote)
+      parent_id: hujahParent.id,
+      vote: this.parseVote(voteForHujah)
     }
 
     const token = document.querySelector('meta[name="csrf-token"]').content
@@ -159,7 +151,6 @@ debugger
       )
     }
 
-
     const { newHujahBody, hujahParent, isNewHujahParent, voteForHujah } = this.state
     const { body, current_user_vote, user } = hujahParent.attributes
     const displayParentCard = (
@@ -170,9 +161,6 @@ debugger
         <div className={`col-12 bg-white pl-2 border-left-8 border-${current_user_vote}`}>
           <h6 className="text-regular pt-1">{body}</h6>
         </div>
-
-
-
         <div className="col-12 mb-1 pt-1 pb-3 bg-white">
           <small>Post this response hoojah as:</small>
           <div className="d-flex justify-content-around mt-2">
@@ -193,9 +181,6 @@ debugger
             </button>
           </div>
         </div>
-
-
-
       </Fragment>
     )
 
