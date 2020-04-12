@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Linkify from 'react-linkify'
 import AgreeIcon from '../Icons/agree'
 import NeutralIcon from '../Icons/neutral'
 import DisagreeIcon from '../Icons/disagree'
@@ -13,45 +14,18 @@ class HujahCard extends React.Component {
   constructor(props) {
     super(props)
 
+    const { hujah } = this.props
+    const { agree_count, neutral_count, disagree_count } = hujah.attributes
+
     this.state = {
-      hujah: {
-        id: null,
-        type: "",
-        attributes: {
-          body: "",
-          current_user_vote: null,
-          agree_count: null,
-          neutral_count: null,
-          disagree_count: null,
-          children_count: 0,
-          parent: {
-            id: null,
-            body: "",
-            username: "",
-            full_name: ""
-          }
-        }
-      },
-      totalVoteCount: 100,
-      showAddHujahButton: false
+      hujah: hujah,
+      hujahParentAvailable: hujah.attributes.hasOwnProperty("parent"),
+      showAddHujahButton: hujah.attributes.current_user_vote !== null,
+      totalVoteCount: agree_count + neutral_count + disagree_count
     }
-  }
-  
-  // TODO: animate vote bar 
-  componentDidMount() {
-    var setShowAddHujahButton = false
-    if(this.props.hujah.attributes.current_user_vote != null) {
-      setShowAddHujahButton = true
-    }
-    this.setState({ 
-      hujah: this.props.hujah,
-      totalVoteCount: this.props.totalVoteCount,
-      showAddHujahButton: setShowAddHujahButton
-     })
   }
 
   updateVote(vote) {
-
     const url = "/api/v1/votes/create"
 
     const body = {
@@ -61,6 +35,7 @@ class HujahCard extends React.Component {
     }
 
     const token = document.querySelector('meta[name="csrf-token"]').content
+
     fetch(url, {
       method: "POST",
       headers: {
@@ -84,11 +59,14 @@ class HujahCard extends React.Component {
   }
 
   handleVoteAgree() {
-    if(!this.props.loggedInStatus) {
-      return this.redirect()
+    if(this.userNotLoggedIn()) {
+      return this.redirectToLogin()
     }
+
     const newHujahState = Object.assign({}, this.state.hujah)
+    
     var addToTotalVoteCount = 0
+
     if(newHujahState.attributes.current_user_vote == "agree") {
       return
     } else {
@@ -103,20 +81,25 @@ class HujahCard extends React.Component {
       }
       newHujahState.attributes.current_user_vote = "agree"
     }
+
     this.setState({ 
       hujah: newHujahState,
       totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
       showAddHujahButton: true
     })
+
     this.updateVote(1)
   }
 
   handleVoteNeutral() {
-    if(!this.props.loggedInStatus) {
-      return this.redirect()
+    if(this.userNotLoggedIn()) {
+      return this.redirectToLogin()
     }
+
     const newHujahState = Object.assign({}, this.state.hujah)
+
     var addToTotalVoteCount = 0
+
     if(newHujahState.attributes.current_user_vote == "neutral") {
       return
     } else {
@@ -131,20 +114,25 @@ class HujahCard extends React.Component {
       }
       newHujahState.attributes.current_user_vote = "neutral"
     }
+
     this.setState({ 
       hujah: newHujahState,
       totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
       showAddHujahButton: true
     })
+
     this.updateVote(2)
   }
 
   handleVoteDisagree() {
-    if(!this.props.loggedInStatus) {
-      return this.redirect()
+    if(this.userNotLoggedIn()) {
+      return this.redirectToLogin()
     }
+
     const newHujahState = Object.assign({}, this.state.hujah)
+
     var addToTotalVoteCount = 0
+
     if(newHujahState.attributes.current_user_vote == "disagree") {
       return
     } else {
@@ -159,28 +147,34 @@ class HujahCard extends React.Component {
       }
       newHujahState.attributes.current_user_vote = "disagree"
     }
+
     this.setState({ 
       hujah: newHujahState,
       totalVoteCount: this.state.totalVoteCount + addToTotalVoteCount,
       showAddHujahButton: true
     })
+
     this.updateVote(3)
   }
+
+  userNotLoggedIn() {
+    return !this.props.loggedInStatus
+  }
   
-  redirect = () => {
+  redirectToLogin() {
     this.props.history.push('/login')
   }
 
   render() {
-    const { hujah, totalVoteCount, showAddHujahButton } = this.state
-    const { hujahParent, user } = this.props
+    const { hujah, hujahParentAvailable, showAddHujahButton, totalVoteCount } = this.state
+    const { agree_count, neutral_count, disagree_count, body, current_user_vote, children_count, user } = hujah.attributes
 
     const showVoteBar = (
       <div className="card-body p-0">
         <div className="d-flex justify-content-around vote-bar">
-          <div className="vote bg-agree" style={{ width: this.calculatePercentage(hujah.attributes.agree_count) }}></div>
-          <div className="vote bg-neutral" style={{ width: this.calculatePercentage(hujah.attributes.neutral_count) }}></div>
-          <div className="vote bg-disagree" style={{ width: this.calculatePercentage(hujah.attributes.disagree_count) }}></div>
+          <div className="vote bg-agree" style={{ width: this.calculatePercentage(agree_count) }}></div>
+          <div className="vote bg-neutral" style={{ width: this.calculatePercentage(neutral_count) }}></div>
+          <div className="vote bg-disagree" style={{ width: this.calculatePercentage(disagree_count) }}></div>
         </div>
       </div>
     )
@@ -188,19 +182,19 @@ class HujahCard extends React.Component {
     return(
       <div className="col-12 sm-fluid mb-3">
         <div className="shadow card border-0 rounded-0">
-          <HujahCardHeader hujah={hujah} hujahParent={ hujahParent == null ? null : hujahParent } user={user} />
+          <HujahCardHeader hujah={hujah} hujahParentAvailable={hujahParentAvailable} />
           <div className="card-body pb-0">
             <Link to={`/hoojah/${hujah.id}`}>
-              <h5 className="card-title text-black text-regular">{hujah.attributes.body}</h5>
+              <h5 className="card-title text-black text-regular">{body}</h5>
             </Link>
           </div>
           <div className={`card-body pt-0 ${showAddHujahButton ? "d-flex justify-content-between" : null}`}>
             <div className={`d-flex justify-content-${showAddHujahButton ? "between" : "around"}`}>
-              <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${hujah.attributes.current_user_vote == "agree" ? "voted" : null} ${showAddHujahButton ? "mr-2" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
-              <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${hujah.attributes.current_user_vote == "neutral" ? "voted" : null} ${showAddHujahButton ? "mr-2" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
-              <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${hujah.attributes.current_user_vote == "disagree" ? "voted" : null}`} onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
+              <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${current_user_vote == "agree" ? "voted" : null} ${showAddHujahButton ? "mr-2" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
+              <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${current_user_vote == "neutral" ? "voted" : null} ${showAddHujahButton ? "mr-2" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
+              <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${current_user_vote == "disagree" ? "voted" : null}`} onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
             </div>
-            {showAddHujahButton ? <ButtonAddHujah hujahParent={hujah} user={user} vote={hujah.attributes.current_user_vote} /> : null}
+            {showAddHujahButton ? <ButtonAddHujah hujahParent={hujah} user={user} vote={current_user_vote} /> : null}
           </div>
           {totalVoteCount > 0 ? showVoteBar : null}
           <div className="card-footer d-flex justify-content-between text-grey">
@@ -209,7 +203,7 @@ class HujahCard extends React.Component {
               <span className="ml-1">{totalVoteCount}</span>
               <span className="mx-2">·</span>
               <HujahIcon />
-              <span className="ml-1">{hujah.attributes.children_count}</span>
+              <span className="ml-1">{children_count}</span>
             </div>
           </div>
         </div>

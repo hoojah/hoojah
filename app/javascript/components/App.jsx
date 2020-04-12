@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   loginStatus = () => {
-    axios.get('/logged_in', {withCredentials: true})
+    axios.get('/logged_in', { withCredentials: true })
     .then(response => {
       if (response.data.logged_in) {
         this.handleLogin(response)
@@ -34,16 +34,23 @@ class App extends React.Component {
   }
 
   handleLogin = (data) => {
-    this.setState({
-      isLoggedIn: true,
-      currentUser: data.user
-    })
+    if(data.hasOwnProperty("user")){
+      this.setState({
+        isLoggedIn: true,
+        currentUser: data.user
+      })
+    } else if(data.data.hasOwnProperty("user")) {
+      this.setState({
+        isLoggedIn: true,
+        currentUser: data.data.user
+      })
+    }
   }
 
   handleLogout = () => {
     this.setState({
-    isLoggedIn: false,
-    currentUser: {}
+      isLoggedIn: false,
+      currentUser: {}
     })
   }
   
@@ -55,31 +62,31 @@ class App extends React.Component {
           <Route 
             exact path='/hoojah/new' 
             render={props => (
-            <HujahForm {...props} loggedInStatus={this.state.isLoggedIn} />
+              <HujahForm {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
             exact path='/hoojah/:id' 
             render={props => (
-            <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+              <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
             exact path='/' 
             render={props => (
-            <HujahIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+              <HujahIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
             exact path='/login' 
             render={props => (
-            <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+              <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
             )}
           />
           <Route 
             exact path='/signup' 
             render={props => (
-            <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+              <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
             )}
           />
         </Switch>

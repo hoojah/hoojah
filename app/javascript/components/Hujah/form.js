@@ -83,7 +83,7 @@ class HujahForm extends React.Component {
       return
 
     const body = {
-      body: newHujahBody.replace(/\n/g, "<br> <br>"),
+      body: newHujahBody.replace(/\n/g, "<br /> <br />"),
       parent_id: this.state.hujahParent.id,
       vote: this.parseVote(hujahParent.attributes.current_user_vote)
     }

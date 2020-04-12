@@ -24,8 +24,12 @@ class HujahSerializer
       "type": "hujah",
       "attributes": {
         "body": hujah.parent.body,
-        "username": hujah.parent.user.username,
-        "full_name": hujah.parent.user.full_name
+        "user": {
+          "attributes": {
+            "username": hujah.parent.user.username,
+            "full_name": hujah.parent.user.full_name
+          }
+        }
       }
     }
   end
@@ -40,12 +44,16 @@ class HujahSerializer
         "type": "hujah",
         "attributes": {
           "body": child.body,
-          "username": child.user.username,
-          "full_name": child.user.full_name,
           "vote": child.vote,
           "agree_count": child.agree_count,
           "neutral_count": child.neutral_count,
-          "disagree_count": child.disagree_count
+          "disagree_count": child.disagree_count,
+          "user": {
+            "attributes": {
+              "username": child.user.username,
+              "full_name": child.user.full_name
+            }
+          }
         }
       }
       newChildren << newChild
