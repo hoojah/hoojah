@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     else
       render json: { 
         status: 401,
-        errors: ['no such user', 'verify credentials and try again or signup']
+        errors: ["The email or password is incorrect. Please verify your credentials and try again", "If you don't have an account yet, click the button above to sign up!"]
       }
     end
   end
@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
     else
       render json: {
         logged_in: false,
-        message: 'no such user'
+        message: "User is not logged in"
       }
     end
   end

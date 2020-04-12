@@ -17,7 +17,7 @@ import {
 } from "react-share"
 
 class HujahCardHeader extends React.Component {
-  render() {  
+  render() {
     const { hujah, hujahParentAvailable } = this.props
     const { parent, user, body } = hujah.attributes
     const { full_name, username } = user.attributes

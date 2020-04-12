@@ -1,4 +1,5 @@
 import React from 'react'
+import $ from 'jquery'
 import Linkify from 'react-linkify'
 import Navbar from './Layouts/navbar'
 import MoreActionsIcon from './Icons/more_actions'
@@ -12,41 +13,18 @@ import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
 import HujahCardHeader from './Hujah/card_header'
 import HujahCardSmall from './Hujah/card_small'
+import Loading from 'loading.svg'
 
 class Hujah extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = { 
-      hujah: { 
-        id: null,
-        attributes: {
-          body: "",
-          current_user_vote: null,
-          agree_count: 0,
-          neutral_count: 0,
-          disagree_count: 0,
-          children_count: 0
-        }
-      },
-      children: [],
-      hujahParent: {
-        id: null,
-        attributes: {
-          body: "",
-          username: "",
-          full_name: ""
-        }
-      },
-      user: {
-        id: null,
-        attributes: {
-          username: "",
-          full_name: ""
-        }
-      },
+      hujah: {},
       totalVoteCount: 0,
-      hujahResponseFilter: "all"
+      hujahResponseFilter: "all",
+      hujahParentAvailable: false,
+      hujahChildrenAvailable: false
     }
     this.deleteHujah = this.deleteHujah.bind(this)
     this.handleFilterClick = this.handleFilterClick.bind(this)
@@ -69,32 +47,15 @@ class Hujah extends React.Component {
         throw new Error("Network response was not ok.")
       })
       .then(response => {
-        const data = response.data
+        const hujah = response.data
+        const { agree_count, neutral_count, disagree_count } = hujah.attributes
 
         this.setState({ 
-          hujah: {
-            id: data.id,
-            attributes: {
-              body: data.attributes.body,
-              current_user_vote: data.attributes.current_user_vote,
-              agree_count: data.attributes.agree_count,
-              neutral_count: data.attributes.neutral_count,
-              disagree_count: data.attributes.disagree_count,
-              children_count: data.attributes.children_count
-            }
-          },
-          user: data.attributes.user
+          hujah: hujah,
+          hujahParentAvailable: hujah.attributes.hasOwnProperty("parent"),
+          hujahChildrenAvailable: hujah.attributes.hasOwnProperty("children"),
+          totalVoteCount: agree_count + neutral_count + disagree_count
         })
-        if(data.attributes.hasOwnProperty("parent")) {
-          this.setState({ hujahParent: data.attributes.parent })
-        } else {
-          this.setState({ hujahParent: {} })
-        }
-        if(data.attributes.hasOwnProperty("children")) {
-          this.setState({ children: data.attributes.children })
-        } else {
-          this.setState({ children: [] })
-        }
       })
       .catch(() => this.props.history.push("/"))
   }
@@ -107,9 +68,9 @@ class Hujah extends React.Component {
           params: { id }
         }
       } = this.props
-      
+  
       const url = `/api/v1/hoojah/${id}`
-
+  
       fetch(url)
         .then(response => {
           if (response.ok) {
@@ -118,39 +79,23 @@ class Hujah extends React.Component {
           throw new Error("Network response was not ok.")
         })
         .then(response => {
-          const data = response
+          const hujah = response.data
+          const { agree_count, neutral_count, disagree_count } = hujah.attributes
+  
           this.setState({ 
-            hujah: {
-              id: data.id,
-              attributes: {
-                body: data.attributes.body,
-                current_user_vote: data.attributes.current_user_vote,
-                agree_count: data.attributes.agree_count,
-                neutral_count: data.attributes.neutral_count,
-                disagree_count: data.attributes.disagree_count,
-                children_count: data.attributes.children_count
-              }
-            },
-            user: data.attributes.user
+            hujah: hujah,
+            hujahParentAvailable: hujah.attributes.hasOwnProperty("parent"),
+            hujahChildrenAvailable: hujah.attributes.hasOwnProperty("children"),
+            totalVoteCount: agree_count + neutral_count + disagree_count
           })
-          if(data.attributes.hasOwnProperty("parent")) {
-            this.setState({ hujahParent: data.attributes.parent })
-          } else {
-            this.setState({ hujahParent: {} })
-          }
-          if(data.attributes.hasOwnProperty("children")) {
-            this.setState({ children: data.attributes.children })
-          } else {
-            this.setState({ children: [] })
-          }
         })
         .catch(() => this.props.history.push("/"))
     }
   }
 
   handleVoteAgree() {
-    if(!this.props.loggedInStatus) {
-      return this.redirect()
+    if(this.userNotLoggedIn()) {
+      return this.redirectToLogin()
     }
     const newHujahState = Object.assign({}, this.state.hujah)
     var addToTotalVoteCount = 0
@@ -178,8 +123,8 @@ class Hujah extends React.Component {
   }
 
   handleVoteNeutral() {
-    if(!this.props.loggedInStatus) {
-      return this.redirect()
+    if(this.userNotLoggedIn()) {
+      return this.redirectToLogin()
     }
     const newHujahState = Object.assign({}, this.state.hujah)
     var addToTotalVoteCount = 0
@@ -206,8 +151,8 @@ class Hujah extends React.Component {
   }
 
   handleVoteDisagree() {
-    if(!this.props.loggedInStatus) {
-      return this.redirect()
+    if(this.userNotLoggedIn()) {
+      return this.redirectToLogin()
     }
     const newHujahState = Object.assign({}, this.state.hujah)
     var addToTotalVoteCount = 0
@@ -255,8 +200,16 @@ class Hujah extends React.Component {
     } 
   }
   
-  redirect = () => {
+  redirectToLogin() {
     this.props.history.push('/login')
+  }
+
+  userIsLoggedIn() {
+    return this.props.loggedInStatus
+  }
+
+  userNotLoggedIn() {
+    return !this.props.loggedInStatus
   }
 
   updateVote(vote) {
@@ -340,19 +293,30 @@ class Hujah extends React.Component {
   }
 
   render() {
-    const { hujah, children, hujahParent, user, hujahResponseFilter } = this.state
-    const { current_user_vote, agree_count, neutral_count, disagree_count, body, children_count } = hujah.attributes
+    if($.isEmptyObject(this.state.hujah)){
+      return (
+        <div className="vw-100 vh-100 d-flex align-items-center justify-content-center">
+          <img src={Loading} className="loading" style={{ marginTop: "-100px" }} />
+        </div>
+      )
+    }
+   
+    const { hujah, hujahChildrenAvailable, hujahParentAvailable, hujahResponseFilter } = this.state
+    const { children, current_user_vote, agree_count, neutral_count, disagree_count, body, children_count, user } = hujah.attributes
 
-    const displayChildren = children.map((hujah, index) => (
-      this.filterChildren(hujah, index)
-    ))
-
-    const noChildren = (
-      <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
-        <HujahIcon />
-        <span className="ml-1">No response yet</span>
-      </div>
-    )
+    var displayChildren = null
+    if(hujahChildrenAvailable) {
+      displayChildren = children.map((hujah, index) => (
+        this.filterChildren(hujah, index)
+      ))
+    } else {
+      displayChildren = (
+        <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
+          <HujahIcon />
+          <span className="ml-1">No response yet</span>
+        </div>
+      )
+    }
 
     const displayAddHujahButton = (
       <div className="card-body pt-0 text-center">
@@ -365,7 +329,7 @@ class Hujah extends React.Component {
     )
 
     const totalVoteCount = agree_count + neutral_count + disagree_count
-console.log(this.state)
+
     return (
       <div className="container">
         <div className="row">
@@ -378,7 +342,7 @@ console.log(this.state)
                   <MoreActionsIcon />
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
-                  {user.id === this.props.currentUser.id ? displayDeleteHujahButton : null}
+                  {this.userIsLoggedIn() && user.id === this.props.currentUser.id ? displayDeleteHujahButton : null}
                   <button className="dropdown-item disabled" type="button">Flag hoojah</button>
                 </div>
               </div>
@@ -386,12 +350,9 @@ console.log(this.state)
           </nav>
           <div className="col-12 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
-              <HujahCardHeader 
-                hujah={hujah} 
-                user={user} 
-                hujahParent={hujahParent.id === null ? null : hujahParent} />
+              <HujahCardHeader hujah={hujah} hujahParentAvailable={hujahParentAvailable} />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
-                <h3 className="card-title text-black text-regular"><Linkify>{body}</Linkify></h3>
+                <h3 className="card-title text-black text-regular">{body}</h3>
               </div>
               <div className="card-body py-0">
                 <div className="d-flex flex-column justify-content-around">
@@ -434,7 +395,7 @@ console.log(this.state)
                   <button type="button" className={hujahResponseFilter === "disagree" ? this.selectedFilterClass("disagree") : "btn btn-outline-light btn-icon-16 fill-disagree"} onClick={() => this.handleFilterClick("disagree")}><DisagreeIcon /></button>
                 </div>
               </div>
-              {children.length > 0 ? displayChildren : noChildren}
+              {displayChildren}
             </div>
           </div>
         </div>

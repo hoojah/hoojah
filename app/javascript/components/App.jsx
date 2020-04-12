@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   loginStatus = () => {
-    axios.get('/logged_in', {withCredentials: true})
+    axios.get('/logged_in', { withCredentials: true })
     .then(response => {
       if (response.data.logged_in) {
         this.handleLogin(response)
@@ -34,16 +34,23 @@ class App extends React.Component {
   }
 
   handleLogin = (data) => {
-    this.setState({
-      isLoggedIn: true,
-      currentUser: data.user
-    })
+    if(data.hasOwnProperty("user")){
+      this.setState({
+        isLoggedIn: true,
+        currentUser: data.user
+      })
+    } else if(data.data.hasOwnProperty("user")) {
+      this.setState({
+        isLoggedIn: true,
+        currentUser: data.data.user
+      })
+    }
   }
 
   handleLogout = () => {
     this.setState({
-    isLoggedIn: false,
-    currentUser: {}
+      isLoggedIn: false,
+      currentUser: {}
     })
   }
   
@@ -55,7 +62,7 @@ class App extends React.Component {
           <Route 
             exact path='/hoojah/new' 
             render={props => (
-              <HujahForm {...props} loggedInStatus={this.state.isLoggedIn} />
+              <HujahForm {...props} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 

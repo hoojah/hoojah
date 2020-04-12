@@ -54,4 +54,5 @@ class HujahIndex extends React.Component {
   }
 
 }
+
 export default HujahIndex
