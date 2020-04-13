@@ -6,7 +6,9 @@ import GlobeIcon from './Icons/globe'
 import MapPinIcon from './Icons/map_pin'
 import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
+import EditIcon from './Icons/edit'
 import HujahCardSmall from './Hujah/card_small'
+import UserForm from './User/form'
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -79,21 +81,28 @@ class UserProfile extends React.Component {
       </div>
     )
 
+    const displayEditButton = (
+      <button type="button" className="position-absolute btn-icon-14 fill-white p-0"
+        style={{ top: 0, right: 20 }} data-toggle="modal" data-target="#exampleModal">
+        <EditIcon className="" />
+      </button>
+    )
+    
     return (
       <div className="">
         <Navbar {...this.props} handleLogout={this.props.handleLogout} />
         <div id="navbar-bg"></div>
         <main className="container">
-          <div 
-            className="row bg-primary text-white py-4" 
-            style={{ 
+          <div className="row bg-primary text-white py-4"> 
+            {/* style={{ 
               backgroundImage: "url('https://source.unsplash.com/random/800x600')",
               backgroundPosition: 'center',
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
               backgroundBlendMode: 'multiply'
-            }}>
-            <div className="col-12 d-flex flex-column align-items-center">
+            }}> */}
+            <div className="col-12 d-flex flex-column align-items-center position-relative">
+              {this.props.loggedInStatus && this.props.currentUser.id == user.id ? displayEditButton : null}
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_100,w_100/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mb-3" />
               <h5 className="mb-0">{full_name}</h5>
               <div className="mb-3">@{username}</div>
@@ -114,10 +123,10 @@ class UserProfile extends React.Component {
             </div>
           </div>
         </main>
+        <UserForm user={user} />
       </div>
     )
   }
-
 }
 
 export default UserProfile
