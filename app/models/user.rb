@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
 
   has_secure_password
-  validates :first_name, presence: true
+  validates :full_name, presence: true
   validates :username, presence: true
   validates :username, uniqueness: true
   validates :username, length: { minimum: 1 }

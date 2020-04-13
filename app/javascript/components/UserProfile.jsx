@@ -45,6 +45,12 @@ class UserProfile extends React.Component {
       .catch(() => this.props.history.push("/"))
   }
 
+  updateUserState = (user) => {
+    this.setState({ 
+      user: user
+    })
+  }
+
   render() {
     if($.isEmptyObject(this.state.user)){
       return (
@@ -82,8 +88,8 @@ class UserProfile extends React.Component {
     )
 
     const displayEditButton = (
-      <button type="button" className="position-absolute btn-icon-14 fill-white p-0"
-        style={{ top: 0, right: 20 }} data-toggle="modal" data-target="#exampleModal">
+      <button type="button" className="position-absolute btn btn-link btn-icon-14 fill-white p-0"
+        style={{ top: 0, right: 20 }} data-toggle="modal" data-target="#userEditModal">
         <EditIcon className="" />
       </button>
     )
@@ -94,21 +100,14 @@ class UserProfile extends React.Component {
         <div id="navbar-bg"></div>
         <main className="container">
           <div className="row bg-primary text-white py-4"> 
-            {/* style={{ 
-              backgroundImage: "url('https://source.unsplash.com/random/800x600')",
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundBlendMode: 'multiply'
-            }}> */}
             <div className="col-12 d-flex flex-column align-items-center position-relative">
               {this.props.loggedInStatus && this.props.currentUser.id == user.id ? displayEditButton : null}
               <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_100,w_100/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mb-3" />
               <h5 className="mb-0">{full_name}</h5>
               <div className="mb-3">@{username}</div>
               <div className="mb-3">{headline}</div>
-              {location === null ? null : displayLocation}
-              {link === null ? null : displayLink}
+              {location === "" ? null : displayLocation}
+              {link === "" ? null : displayLink}
               <div className="text-14 mb-1 btn-icon-14 fill-white">
                 <VotesIcon />
                 <span className="ml-1">{vote_count}</span>
@@ -123,7 +122,7 @@ class UserProfile extends React.Component {
             </div>
           </div>
         </main>
-        <UserForm user={user} />
+        <UserForm {...this.props} user={user} updateUserState={this.updateUserState} />
       </div>
     )
   }

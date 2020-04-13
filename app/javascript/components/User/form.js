@@ -6,19 +6,16 @@ class UserForm extends React.Component {
     super(props)
 
     const { photo, full_name, username, location, link, headline } = this.props.user.attributes
-
-    const parsedLocation = this.parseEmptyAttribute(location)
-    const parsedLink = this.parseEmptyAttribute(link)
-    const parsedHeadline = this.parseEmptyAttribute(headline)
     
     this.state = {
       photo: photo,
       full_name: full_name,
       username: username,
-      location: parsedLocation,
-      link: parsedLink,
-      headline: parsedHeadline,
-      errors: ""
+      location: location,
+      link: link,
+      headline: headline,
+      errors: "",
+      message: ""
     }
 
     this.handleFullNameChange = this.handleFullNameChange.bind(this)
@@ -27,14 +24,6 @@ class UserForm extends React.Component {
     this.handleLinkChange = this.handleLinkChange.bind(this)
     this.handleHeadlineChange = this.handleHeadlineChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  parseEmptyAttribute(attribute) {
-    if(attribute === null) {
-      return ""
-    } else {
-      return attribute
-    }
   }
 
   handleFullNameChange(event) {
@@ -60,7 +49,7 @@ class UserForm extends React.Component {
   handleSubmit(event) {
 
     event.preventDefault()
-    const url = "/api/v1/users/create"
+    const url = `/api/v1/users/${this.props.user.id}/update`
     const { photo, full_name, username, location, link, headline } = this.state
 
     const body = {
@@ -87,7 +76,10 @@ class UserForm extends React.Component {
         }
         throw new Error("Network response was not ok.")
       })
-      .then(response => this.props.history.push(`/users/${response.id}`))
+      .then(response => {
+        this.props.updateUserState(response.data)
+        $('#userEditModal').modal('hide')
+      })
       .catch(error => console.log(error.message))
   }
 
@@ -95,11 +87,11 @@ class UserForm extends React.Component {
     const { photo, full_name, username, location, link, headline } = this.state
 
     return (
-      <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal fade" id="userEditModal" tabIndex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Edit your profile</h5>
+              <h5 className="modal-title" id="userEditModalLabel">Edit your profile</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -109,6 +101,9 @@ class UserForm extends React.Component {
                 this.state.errors ? this.handleErrors() : null
               }
               <form>
+                <div className="form-group text-right">
+                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Save changes</button>
+                </div>
                 <div className="form-group">
                   <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_100,w_100/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mb-3" />
                 </div>
@@ -138,10 +133,6 @@ class UserForm extends React.Component {
                   <textarea placeholder="Add some jazz to your profile!" value={headline} className="form-control" rows="3" id="headline" onChange={this.handleHeadlineChange}></textarea>
                 </div>
               </form>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-text" data-dismiss="modal">Close</button>
-              <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Save changes</button>
             </div>
           </div>
         </div>
