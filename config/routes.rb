@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post 'votes/create', to: 'votes#create'
       
       get '/users/:id', to: 'users#show'
+      post 'users/:id/update', to: 'users#update'
     end
   end
   
