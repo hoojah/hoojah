@@ -24,6 +24,7 @@ class UserForm extends React.Component {
     this.handleLinkChange = this.handleLinkChange.bind(this)
     this.handleHeadlineChange = this.handleHeadlineChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.uploadWidget = this.uploadWidget.bind(this)
   }
 
   handleFullNameChange(event) {
@@ -83,8 +84,18 @@ class UserForm extends React.Component {
       .catch(error => console.log(error.message))
   }
 
+  uploadWidget() {
+    let currentComponent = this;
+    cloudinary.openUploadWidget({ cloud_name: 'hoojah', upload_preset: 'user_photo', tags:['user_photo']},
+      function(error, result) {
+        currentComponent.setState({ photo: result[0].secure_url })
+      });
+  }
+
   render() {
     const { photo, full_name, username, location, link, headline } = this.state
+
+    
 
     return (
       <div className="modal fade" id="userEditModal" tabIndex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
@@ -105,7 +116,12 @@ class UserForm extends React.Component {
                   <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Save changes</button>
                 </div>
                 <div className="form-group">
-                  <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_100,w_100/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mb-3" />
+                  <img src={photo} className="rounded-circle mb-3 avatar" />
+                </div>
+                <div className="upload">
+                  <button type="button" onClick={this.uploadWidget} className="upload-button">
+                    Add Image
+                  </button>
                 </div>
                 <div className="form-group">
                   <label htmlFor="full-name" className="col-form-label">Full name</label>

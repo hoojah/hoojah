@@ -21,13 +21,13 @@ class HujahCardSmall extends React.Component {
   render() {
     const hujah = this.props.hujah
     const { body, vote, agree_count, neutral_count, disagree_count, user } = hujah.attributes
-    const { full_name, username } = user.attributes
+    const { full_name, username, photo } = user.attributes
 
     return(
       <Link to={`/hoojah/${hujah.id}`} className="no-underscore">
         <div className={`shadow card-body border-left-8 border-${this.parseVote(vote)} border-bottom-0 py-0 pl-0 pr-2 d-flex align-items-center mb-1`}>
           <div className="media py-1">
-            <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mx-2 avatar-small" />
+            <img src={photo} className="rounded-circle mx-2 avatar-small" />
             <div className="media-body">
               <div className="d-flex flex-column">
                 <div>

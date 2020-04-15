@@ -21,7 +21,7 @@ class HujahCardHeader extends React.Component {
   render() {
     const { hujah, hujahParentAvailable } = this.props
     const { parent, user, body } = hujah.attributes
-    const { full_name, username } = user.attributes
+    const { full_name, username, photo } = user.attributes
 
     const messageForSocialMedia = `AGREE? NEUTRAL? DISAGREE?: "${body} (by @${username})"`
     const socialMediaButtonUrl = window.location.href
@@ -33,7 +33,7 @@ class HujahCardHeader extends React.Component {
 
         <div className="card-header border-bottom-0 pb-0 d-flex justify-content-between align-items-center">
           <div className="media">
-            <Link to={`/users/${user.id}`}><img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mr-3 avatar" /></Link>
+            <Link to={`/users/${user.id}`}><img src={photo} className="rounded-circle mr-3 avatar" /></Link>
             <div className="media-body">
               <div className="d-flex flex-column">
                 <Link to={`/users/${user.id}`} className="mt-0 mb-0 text-primary">{full_name}</Link>

@@ -14,7 +14,8 @@ class HujahSerializer
       "type": "user",
       "attributes": {
         "username": hujah.user.username,
-        "full_name": hujah.user.full_name
+        "full_name": hujah.user.full_name,
+        "photo": hujah.user.photo
       }
     }
   end
@@ -27,7 +28,8 @@ class HujahSerializer
         "user": {
           "attributes": {
             "username": hujah.parent.user.username,
-            "full_name": hujah.parent.user.full_name
+            "full_name": hujah.parent.user.full_name,
+            "photo": hujah.parent.user.photo
           }
         }
       }
@@ -51,7 +53,8 @@ class HujahSerializer
           "user": {
             "attributes": {
               "username": child.user.username,
-              "full_name": child.user.full_name
+              "full_name": child.user.full_name,
+              "photo": child.user.photo
             }
           }
         }
