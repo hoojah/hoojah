@@ -27,7 +27,8 @@ class UserSerializer
           "user": {
             "attributes": {
               "username": child_hujah.user.username,
-              "full_name": child_hujah.user.full_name
+              "full_name": child_hujah.user.full_name,
+              "photo": child_hujah.user.photo
             }
           }
         }

@@ -29,6 +29,8 @@ class UsersController < ApplicationController
     def create
       @user = User.new(user_params)
       if @user.save
+        @user.update(photo: User.random_photo)
+        
         login!
         render json: {
           status: :created,

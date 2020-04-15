@@ -172,6 +172,11 @@ class HujahCard extends React.Component {
   }
 
   render() {
+    // || this.state.hujah.attributes.children_count == 1
+    if(this.state.hujahParentAvailable) {
+      return null
+    }
+
     const { hujah, hujahParentAvailable, showAddHujahButton, totalVoteCount } = this.state
     const { agree_count, neutral_count, disagree_count, body, current_user_vote, children_count, user } = hujah.attributes
 

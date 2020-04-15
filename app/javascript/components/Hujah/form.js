@@ -153,6 +153,7 @@ class HujahForm extends React.Component {
 
     const { newHujahBody, hujahParent, isNewHujahParent, voteForHujah } = this.state
     const { body, current_user_vote, user } = hujahParent.attributes
+    
     const displayParentCard = (
       <Fragment>
         <div className="col-12 pb-2 bg-white">
@@ -198,7 +199,7 @@ class HujahForm extends React.Component {
             </nav>
             {!isNewHujahParent && displayParentCard}
             <div className="col-12 d-flex mt-3">
-              <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_42,w_42/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mr-3 avatar" />
+              <img src={this.props.currentUser.photo} className="rounded-circle mr-3 avatar" />
               <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleBodyChange}></textarea>
             </div>
           </div>

@@ -59,7 +59,7 @@ class UserProfile extends React.Component {
     }
 
     const { user, userHasHujahs } = this.state
-    const { username, full_name, location, headline, link, hujah_count, vote_count, hujahs } = user.attributes
+    const { username, full_name, location, headline, link, hujah_count, vote_count, hujahs, photo } = user.attributes
 
     var displayChildren = null
     if(userHasHujahs) {
@@ -102,7 +102,7 @@ class UserProfile extends React.Component {
           <div className="row bg-primary text-white py-4"> 
             <div className="col-12 d-flex flex-column align-items-center position-relative">
               {this.props.loggedInStatus && this.props.currentUser.id == user.id ? displayEditButton : null}
-              <img src="https://res.cloudinary.com/rudzainy/image/upload/c_fill,h_100,w_100/kjpulst4m0yei0cnsbbo.png" className="rounded-circle mb-3" />
+              <img src={photo} className="rounded-circle mb-3 avatar-large" />
               <h5 className="mb-0">{full_name}</h5>
               <div className="mb-3">@{username}</div>
               <div className="mb-3">{headline}</div>
