@@ -7,7 +7,6 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      current_user.update(photo: User.random_photo)
       render json: UserSerializer.new(user).serialized_json
     else
       render json: user.errors

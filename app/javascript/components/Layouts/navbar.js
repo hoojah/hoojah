@@ -7,10 +7,10 @@ import HujahIcon from '../Icons/hujah'
 class Navbar extends React.Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
   }
   
-  handleClick() {
+  handleLogout() {
     
     axios.delete('/logout', {withCredentials: true})
     .then(response => {
@@ -21,6 +21,20 @@ class Navbar extends React.Component {
   }
 
   render() {
+    const {username, photo, id } = this.props.currentUser
+
+    const userMenu = (
+      <div className="dropdown">
+        <img src={photo} className="dropdown-toggle rounded-circle mx-2 avatar-small" id="userMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+        <div className="dropdown-menu" aria-labelledby="userMenuButton">
+          <h6 className="dropdown-header">@{username}</h6>
+          <Link to={`/users/${id}`} className="dropdown-item" >Your profile</Link>
+          <div className="dropdown-divider"></div>
+          <Link to='/logout' className="dropdown-item" onClick={this.handleLogout}>Log Out</Link>
+        </div>
+      </div>
+    )
+
     return(
       <nav className="navbar fixed-top navbar-light">
         <div className="container px-0 d-flex justify-content-between">
@@ -29,7 +43,7 @@ class Navbar extends React.Component {
           </Link>
           { 
             this.props.loggedInStatus ? 
-            <Link to='/logout' onClick={this.handleClick}>Log Out</Link> : 
+            userMenu : 
             <Link to="/login" className="btn btn-link">Log in</Link>
           }
           <div className="">

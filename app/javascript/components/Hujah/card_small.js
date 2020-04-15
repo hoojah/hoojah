@@ -36,7 +36,7 @@ class HujahCardSmall extends React.Component {
                     <small className="text-muted">{`@${username}`}</small>
                   </span>
                 </div>
-                <p className="mb-0 text-black" style={{ wordBreak: "break-all", whiteSpace: "normal" }}>{body}</p>
+                <p className="mb-0 text-black" style={{ wordBreak: "break-word", whiteSpace: "normal" }}>{body}</p>
                 <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey p-0">
                   <AgreeIcon />
                   <span className="ml-1">{agree_count}</span>

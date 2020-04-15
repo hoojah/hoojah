@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2020_04_12_153534) do
     t.string "full_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "photo"
-    t.string "location"
-    t.string "headline"
-    t.string "link"
+    t.string "photo", default: ""
+    t.string "location", default: ""
+    t.string "headline", default: ""
+    t.string "link", default: ""
   end
 
   create_table "votes", force: :cascade do |t|
