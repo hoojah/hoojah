@@ -39,7 +39,7 @@ class HujahIndex extends React.Component {
         <Navbar {...this.props} handleLogout={this.props.handleLogout} />
         <div id="navbar-bg"></div>
         <main className="container">
-          <div className="row">
+          <div className="row justify-content-sm-center">
             {allHujah.length > 0 ? displayAllHujah : <LoadingAnimation />}
           </div>
         </main>

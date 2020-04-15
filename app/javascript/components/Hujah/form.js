@@ -156,13 +156,18 @@ class HujahForm extends React.Component {
     
     const displayParentCard = (
       <Fragment>
-        <div className="col-12 pb-2 bg-white">
+      <div className="row justify-content-center">
+        <div className="col-12 col-lg-6 col-md-8 pb-2 bg-white">
           <small>You {this.displayVote(current_user_vote)} to {user.id == null? null : user.attributes.full_name}'s claim:</small>  
         </div>
-        <div className={`col-12 bg-white pl-2 border-left-8 border-${current_user_vote}`}>
+      </div>
+      <div className="row justify-content-center">
+        <div className={`col-12 col-lg-6 col-md-8 bg-white pl-2 border-left-8 border-${current_user_vote}`}>
           <h6 className="text-regular pt-1">{body}</h6>
         </div>
-        <div className="col-12 mb-1 pt-1 pb-3 bg-white">
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-12 col-lg-6 col-md-8 mb-1 pt-1 pb-3 bg-white">
           <small>Post this response hoojah as:</small>
           <div className="d-flex justify-content-around mt-2">
             <button type="button"
@@ -182,13 +187,13 @@ class HujahForm extends React.Component {
             </button>
           </div>
         </div>
-      </Fragment>
+      </div></Fragment>
     )
 
     return (
       <form>
         <div className="container">
-          <div className="row">
+          <div className="row justify-content-center">
             <nav className="navbar fixed-top navbar-light">
               <div className="container px-0 d-flex justify-content-between">
                 <ButtonBack />
@@ -197,8 +202,10 @@ class HujahForm extends React.Component {
                 </button>
               </div>
             </nav>
-            {!isNewHujahParent && displayParentCard}
-            <div className="col-12 d-flex mt-3">
+          </div>
+          {!isNewHujahParent && displayParentCard}
+          <div className="row justify-content-center">
+            <div className="col-12 col-lg-6 col-md-8 d-flex mt-3">
               <img src={this.props.currentUser.photo} className="rounded-circle mr-3 avatar" />
               <textarea className="form-control new-hujah-form border-0 pl-0 bg-transparent" placeholder={"What's your hoojah?"} rows="10" value={newHujahBody} onChange={this.handleBodyChange}></textarea>
             </div>

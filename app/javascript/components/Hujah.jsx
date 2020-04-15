@@ -336,7 +336,7 @@ class Hujah extends React.Component {
 
     return (
       <div className="container">
-        <div className="row">
+        <div className="row justify-content-center">
           <Navbar {...this.props} handleLogout={this.props.handleLogout} />
           <nav className="navbar bg-transparent pt-0">
             <div className="container px-0 d-flex justify-content-between">
@@ -352,7 +352,7 @@ class Hujah extends React.Component {
               </div>
             </div>
           </nav>
-          <div className="col-12 sm-fluid mb-2">
+          <div className="col-12 col-lg-6 col-md-8 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
               <HujahCardHeader hujah={hujah} hujahParentAvailable={hujahParentAvailable} />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
@@ -388,8 +388,8 @@ class Hujah extends React.Component {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12 sm-fluid mb-2">
+        <div className="row justify-content-center">
+          <div className="col-12 col-lg-6 col-md-8 sm-fluid mb-2">
             <div className="card border-0 rounded-0 pb-3">
               <div className="card-body">
                 <div className="shadow btn-group btn-group-lg d-flex" role="group">

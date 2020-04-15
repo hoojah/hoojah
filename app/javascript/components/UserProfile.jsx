@@ -89,7 +89,7 @@ class UserProfile extends React.Component {
 
     const displayEditButton = (
       <button type="button" className="position-absolute btn btn-link btn-icon-14 fill-white p-0"
-        style={{ top: 0, right: 20 }} data-toggle="modal" data-target="#userEditModal">
+        style={{ top: 20, right: 20 }} data-toggle="modal" data-target="#userEditModal">
         <EditIcon className="" />
       </button>
     )
@@ -99,8 +99,8 @@ class UserProfile extends React.Component {
         <Navbar {...this.props} handleLogout={this.props.handleLogout} />
         <div id="navbar-bg"></div>
         <main className="container">
-          <div className="row bg-primary text-white py-4"> 
-            <div className="col-12 d-flex flex-column align-items-center position-relative">
+          <div className="row text-white justify-content-center"> 
+            <div className="col-12 col-lg-6 col-md-8 d-flex bg-primary flex-column align-items-center position-relative py-4">
               {this.props.loggedInStatus && this.props.currentUser.id == user.id ? displayEditButton : null}
               <img src={photo} className="rounded-circle mb-3 avatar-large" />
               <h5 className="mb-0">{full_name}</h5>
@@ -116,8 +116,8 @@ class UserProfile extends React.Component {
                 <span className="ml-1">{hujah_count}</span></div>
             </div>
           </div>
-          <div className="row mt-2">
-            <div className="col-12 d-flex flex-column px-0">
+          <div className="row mt-2 justify-content-center">
+            <div className="col-12 col-lg-6 col-md-8 d-flex flex-column px-0">
               {displayChildren}
             </div>
           </div>

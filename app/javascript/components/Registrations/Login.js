@@ -77,7 +77,7 @@ class Login extends Component {
 
     return (
       <div className="container">
-        <div className="row">
+        <div className="row justify-content-center">
           <nav className="navbar fixed-top navbar-light">
             <div className="container px-0 d-flex justify-content-between">
               <Link to="/" className="navbar-brand">
@@ -90,7 +90,7 @@ class Login extends Component {
               </div>
             </div>
           </nav>
-          <div className="col-12 sm-fluid mb-2">
+          <div className="col-12 col-lg-6 col-md-8 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
               <div className="card-header text-center">
                 Hello from Hoojah! 🎉
