@@ -14,6 +14,8 @@ import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
 import HujahCardHeader from './Hujah/card_header'
 import HujahCardSmall from './Hujah/card_small'
+import { ThemeContext } from './theme';
+
 
 class Hujah extends React.Component {
   constructor(props) {
@@ -187,23 +189,13 @@ class Hujah extends React.Component {
   handleFilterClick(filter) {
     const { hujahResponseFilter } = this.state
 
-    if(filter === "all") {
-      if(hujahResponseFilter === "all")
-        return
-      this.setState({ hujahResponseFilter: "all" })
-    } else if(filter === "agree") {
-      if(hujahResponseFilter === "agree")
-        return
-      this.setState({ hujahResponseFilter: "agree" })
-    } else if(filter === "neutral") {
-      if(hujahResponseFilter === "neutral")
-        return
-      this.setState({ hujahResponseFilter: "neutral" })
-    } else if(filter === "disagree") {
-      if(hujahResponseFilter === "disagree")
-        return
-      this.setState({ hujahResponseFilter: "disagree" })
-    } 
+    if (filter === hujahResponseFilter) {
+      return;
+    }
+
+    this.setState({
+      hujahResponseFilter: filter
+    })
   }
   
   redirectToLogin() {
@@ -244,15 +236,6 @@ class Hujah extends React.Component {
         throw new Error("Network response was not ok.")
       })
       .catch(error => console.log(error.message))
-  }
-
-  calculatePercentage(voteCount, totalVoteCount) {
-    const percentage = voteCount * 100 / totalVoteCount
-    if(percentage > 0) {
-      return percentage
-    } else {
-      return 0
-    }
   }
 
   deleteHujah() {
@@ -299,14 +282,16 @@ class Hujah extends React.Component {
   }
 
   render() {
-    if($.isEmptyObject(this.state.hujah)){
+    if($.isEmptyObject(this.state.hujah)) {
       return (
         <LoadingAnimation />
       )
     }
    
-    const { hujah, hujahChildrenAvailable, hujahParentAvailable, hujahResponseFilter } = this.state
+    const { hujah, hujahParentAvailable, hujahResponseFilter } = this.state
     const { children, current_user_vote, agree_count, neutral_count, disagree_count, body, children_count, user } = hujah.attributes
+
+    const hujahChildrenAvailable = !!this.state.hujah.attributes && Array.isArray(hujah.attributes.children)
 
     var displayChildren = null
     if(hujahChildrenAvailable) {
@@ -336,6 +321,9 @@ class Hujah extends React.Component {
 
     return (
       <div className="container">
+        <pre>
+    <code>{JSON.stringify(this.state, null, 2)}</code>
+        </pre>
         <div className="row justify-content-center">
           <Navbar {...this.props} handleLogout={this.props.handleLogout} />
           <nav className="navbar bg-transparent pt-0">
@@ -359,23 +347,16 @@ class Hujah extends React.Component {
                 <h3 className="card-title text-black text-regular">{body}</h3>
               </div>
               <div className="card-body py-0">
-                <div className="d-flex flex-column justify-content-around">
-                  <div className="vote-show mb-3 d-flex align-items-center">
-                    <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${current_user_vote === "agree" ? "voted" : null}`} onClick={() => this.handleVoteAgree()}><AgreeIcon /></button>
-                    <div className="vote bg-agree mr-2" style={{ width: `${this.calculatePercentage(agree_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-agree ml-auto">{Math.round(this.calculatePercentage(agree_count, totalVoteCount))}%</small>
-                  </div>
-                  <div className="vote-show mb-3 d-flex align-items-center">
-                    <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${current_user_vote === "neutral" ? "voted" : null}`} onClick={() => this.handleVoteNeutral()}><NeutralIcon /></button>
-                    <div className="vote bg-neutral mr-2" style={{ width: `${this.calculatePercentage(neutral_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-neutral ml-auto">{Math.round(this.calculatePercentage(neutral_count, totalVoteCount))}%</small>
-                  </div>
-                  <div className="vote-show mb-3 d-flex align-items-center">
-                    <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${current_user_vote === "disagree" ? "voted" : null}`} onClick={() => this.handleVoteDisagree()}><DisagreeIcon /></button>
-                    <div className="vote bg-disagree mr-2" style={{ width: `${this.calculatePercentage(disagree_count, totalVoteCount)}%` }}></div>
-                    <small className="vote-text text-disagree ml-auto">{Math.round(this.calculatePercentage(disagree_count, totalVoteCount))}%</small>
-                  </div>
-                </div>
+                <VotingSummary
+                  currentUserVote={current_user_vote}
+                  agreeCount={agree_count}
+                  neutralCount={neutral_count}
+                  disagreeCount={disagree_count}
+                  totalVoteCount={totalVoteCount}
+                  handleVoteAgree={() => this.handleVoteAgree()}
+                  handleVoteDisagree={() => this.handleVoteDisagree()}
+                  handleVoteNeutral={() => this.handleVoteNeutral()}
+                />
               </div>
               <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
                 <VotesIcon />
@@ -406,6 +387,77 @@ class Hujah extends React.Component {
       </div>
     )
   }
+}
+
+const Button = ({ type = 'button', className, variant, ...props }) => {
+  return <button type={type} className={`btn ${className}`} {...props} />
+}
+
+function updateVoteApi({
+  vote,
+  hujahId,
+  userId
+}) {
+  const url = "/api/v1/votes/create"
+
+  const body = {
+    vote: vote,
+    hujah_id: hujahId,
+    user_id: userId
+  }
+
+  const token = document.querySelector('meta[name="csrf-token"]').content
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "X-CSRF-Token": token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      }
+      throw new Error("Network response was not ok.")
+    })
+    .catch(error => console.log(error.message))
+}
+
+function calculatePercentage(voteCount, totalVoteCount) {
+  const percentage = voteCount * 100 / totalVoteCount
+  if(percentage > 0) {
+    return percentage
+  } else {
+    return 0
+  }
+}
+
+const VotingSummary = ({ currentUserVote, agreeCount, neutralCount, disagreeCount, totalVoteCount, handleVoteAgree, handleVoteDisagree, handleVoteNeutral }) => {
+  const themeValue = React.useContext(ThemeContext);
+
+  console.log({ themeValue })
+
+  return (
+    <div className="d-flex flex-column justify-content-around">
+      <button onClick={themeValue[1]}>toggle</button>
+    <div className="vote-show mb-3 d-flex align-items-center">
+      <button className={`shadow btn btn-outline-agree btn-lg btn-circle btn-icon-16 fill-agree ${currentUserVote === "agree" ? "voted" : null}`} onClick={handleVoteAgree}><AgreeIcon /></button>
+      <div className="vote bg-agree mr-2" style={{ width: `${calculatePercentage(agreeCount, totalVoteCount)}%` }}></div>
+      <small className="vote-text text-agree ml-auto">{Math.round(calculatePercentage(agreeCount, totalVoteCount))}%</small>
+    </div>
+    <div className="vote-show mb-3 d-flex align-items-center">
+      <button className={`shadow btn btn-outline-neutral btn-lg btn-circle btn-icon-16 fill-neutral neutral ${currentUserVote === "neutral" ? "voted" : null}`} onClick={handleVoteNeutral}><NeutralIcon /></button>
+      <div className="vote bg-neutral mr-2" style={{ width: `${calculatePercentage(neutralCount, totalVoteCount)}%` }}></div>
+      <small className="vote-text text-neutral ml-auto">{Math.round(calculatePercentage(neutralCount, totalVoteCount))}%</small>
+    </div>
+    <div className="vote-show mb-3 d-flex align-items-center">
+      <button className={`shadow btn btn-outline-disagree btn-lg btn-circle btn-icon-16 fill-disagree ${currentUserVote === "disagree" ? "voted" : null}`} onClick={handleVoteDisagree}><DisagreeIcon /></button>
+      <div className="vote bg-disagree mr-2" style={{ width: `${calculatePercentage(disagreeCount, totalVoteCount)}%` }}></div>
+      <small className="vote-text text-disagree ml-auto">{Math.round(calculatePercentage(disagreeCount, totalVoteCount))}%</small>
+    </div>
+  </div>
+  )
 }
 
 export default Hujah

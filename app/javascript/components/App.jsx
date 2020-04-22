@@ -8,6 +8,7 @@ import HujahForm from './Hujah/form'
 import ScrollToTop from './Utilities/scroll_to_top'
 import Login from './Registrations/Login'
 import Signup from './Registrations/Signup'
+import { ThemeProvider } from './theme';
 
 class App extends React.Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class App extends React.Component {
   
   render() {
     return (
+      <ThemeProvider>
       <Router>
         <ScrollToTop />
         <Switch>
@@ -98,6 +100,7 @@ class App extends React.Component {
           />
         </Switch>
       </Router>
+      </ThemeProvider>
     )
   }
 }
