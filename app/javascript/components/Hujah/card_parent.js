@@ -9,7 +9,7 @@ class HujahParentCard extends React.Component {
 
     return(
       <Link to={`/hoojah/${hujah.id}`} className="no-underscore">
-        <div className="shadow card-body border-bottom border-light-grey px-3 py-1 d-flex align-items-center mb-0">
+        <div id="parent-card-container" className="shadow card-body border-bottom border-light-grey px-3 py-1 d-flex align-items-center mb-0">
           <div className="media pt-1">
             <img src={photo} className="rounded-circle mr-2 avatar-small" />
             <div className="media-body">
@@ -17,7 +17,9 @@ class HujahParentCard extends React.Component {
                 <small className="text-grey">
                   Response to <span className="text-primary">{full_name}</span>'s hoojah
                 </small>
-                <div className="mb-0 text-grey text-14 text-truncate d-inline-block" style={{ width: "70vw" }}>{body}</div>
+                <div className="mb-0 text-grey text-14 text-truncate d-block d-sm-none" style={{ maxWidth: '270px' }}>{body}</div>
+                <div className="mb-0 text-grey text-14 text-truncate d-none d-sm-block d-md-none" style={{ maxWidth: '310px' }}>{body}</div>
+                <div className="mb-0 text-grey text-14 text-truncate d-none d-md-block" style={{ maxWidth: '350px' }}>{body}</div>
               </div>
             </div>
           </div>

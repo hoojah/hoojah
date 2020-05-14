@@ -30,7 +30,10 @@ class Signup extends Component {
   }
 
   handleChange = (event) => {
-    const {name, value} = event.target
+    var {name, value} = event.target
+    if(/\s/.test(value)) {
+      value = value.slice(0, -1)
+    }
     this.setState({
       [name]: value
     })
