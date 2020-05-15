@@ -191,8 +191,7 @@ class HujahCard extends React.Component {
     )
 
     return(
-      <div className="col-12 col-lg-6 col-md-8 sm-fluid mb-3">
-        <div className="shadow card border-0 rounded-0">
+        <div className="shadow card border-0 rounded-0 mb-2">
           <HujahCardHeader hujah={hujah} hujahParentAvailable={hujahParentAvailable} />
           <div className="card-body pb-0">
             <Link to={`/hoojah/${hujah.id}`}>
@@ -218,7 +217,6 @@ class HujahCard extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     )
   }
 }

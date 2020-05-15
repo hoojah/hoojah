@@ -5,7 +5,7 @@ import ButtonBack from '../Layouts/button_back'
 class NavbarHujah extends React.Component {
   render() {
     return(
-      <nav className="navbar bg-transparent pt-0">
+      <nav className="navbar bg-transparent pt-0 border-0">
         <div className="container px-0 d-flex justify-content-between">
           <ButtonBack />
 
