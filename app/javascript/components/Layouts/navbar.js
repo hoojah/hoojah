@@ -55,6 +55,7 @@ class Navbar extends React.Component {
                 }
               }} className="btn btn-icon-24 fill-primary p-0">
               <HujahIcon />
+              <span className="d-none d-lg-inline text-primary"> New Claim</span>
             </Link>
           </div>
         </div>

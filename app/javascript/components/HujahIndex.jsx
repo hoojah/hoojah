@@ -40,7 +40,9 @@ class HujahIndex extends React.Component {
         <div id="navbar-bg"></div>
         <main className="container">
           <div className="row justify-content-sm-center">
-            {allHujah.length > 0 ? displayAllHujah : <LoadingAnimation />}
+            <div className="col-12 col-lg-6 col-md-8 sm-fluid mb-3">
+              {allHujah.length > 0 ? displayAllHujah : <LoadingAnimation />}
+            </div>
           </div>
         </main>
       </div>
