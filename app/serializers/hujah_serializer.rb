@@ -64,8 +64,4 @@ class HujahSerializer
 
     newChildren
   end
-
-  attribute :current_user_vote do |hujah, params|
-    hujah.current_user_vote(logged_in: params[:logged_in], current_user_id: params[:current_user_id])
-  end
 end
