@@ -2,13 +2,20 @@ class Api::V1::HujahsController < ApplicationController
   def index
     
     hujahs = Hujah.all.order(updated_at: :desc)
-    serialized_hujahs = HujahSerializer.new(hujahs, params: {logged_in: logged_in?, current_user_id: current_user&.id }).serializable_hash
+
+    serialized_hujahs = Hash["data", []]
+    hujahs.each do |hujah_to_process|
+      serialized_hujah = JSON.parse(HujahSerializer.new(hujah_to_process).serialized_json)
+      serialized_hujah["data"]["attributes"].merge!({"current_user_vote" => current_user_vote(hujah_to_process)})
+      serialized_hujahs["data"] << serialized_hujah["data"]
+    end
+
     render json: serialized_hujahs
 
   end
 
   def create
-    hujah = current_user.hujahs.create(hujah_params)
+    hujah = current_user.hujahs.create!(hujah_params)
     if hujah
       render json: hujah
     else
@@ -43,4 +50,22 @@ class Api::V1::HujahsController < ApplicationController
     @hujah ||= Hujah.find(params[:id])
   end
 
+  def current_user_vote(hujah)
+    if logged_in?
+      if hujah.votes.joins(:user).find_by(user_id: current_user.id).nil?
+        nil
+      else
+        vote = hujah.votes.joins(:user).find_by(user_id: current_user.id).vote.last
+        if vote == 1
+          "agree"
+        elsif vote == 2
+          "neutral"
+        elsif vote == 3
+          "disagree"
+        end
+      end
+    else
+      nil
+    end
+  end
 end
