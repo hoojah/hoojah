@@ -19,7 +19,7 @@ class Api::V1::HujahsController < ApplicationController
   def show
     if hujah
 
-      serialized_hujah = HujahSerializer.new(hujah, params: {logged_in: logged_in?, current_user_id: current_user.id }).serializable_hash
+      serialized_hujah = HujahSerializer.new(hujah, params: {logged_in: logged_in?, current_user_id: current_user&.id }).serializable_hash
 
       render json: serialized_hujah
     end

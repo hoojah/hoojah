@@ -23,7 +23,8 @@ rudzainy = User.create!(
   email: "hello@rudzainy.com",
   username: "rudzainy",
   password: PASSWORD,
-  password_confirmation: PASSWORD
+  password_confirmation: PASSWORD,
+  photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/fkmfd5lfkqdpdfvvh0x3.png"
 )
 
 #2
@@ -32,7 +33,8 @@ hoojah = User.create!(
   email: "hello@hoojah.my",
   username: "hoojah",
   password: PASSWORD,
-  password_confirmation: PASSWORD
+  password_confirmation: PASSWORD,
+  photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/xecjnelhwisrdo4k8bcl.png"
 )
 
 #3

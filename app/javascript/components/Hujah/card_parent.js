@@ -17,9 +17,9 @@ class HujahParentCard extends React.Component {
                 <small className="text-grey">
                   Response to <span className="text-primary">{full_name}</span>'s hoojah
                 </small>
-                <div className="mb-0 text-grey text-14 text-truncate d-block d-sm-none" style={{ maxWidth: '270px' }}>{body}</div>
-                <div className="mb-0 text-grey text-14 text-truncate d-none d-sm-block d-md-none" style={{ maxWidth: '310px' }}>{body}</div>
-                <div className="mb-0 text-grey text-14 text-truncate d-none d-md-block" style={{ maxWidth: '350px' }}>{body}</div>
+                <div className="mb-0 text-grey text-14 text-truncate d-block d-sm-none" style={{ maxWidth: '270px' }} dangerouslySetInnerHTML={{ __html: body }}></div>
+                <div className="mb-0 text-grey text-14 text-truncate d-none d-sm-block d-md-none" style={{ maxWidth: '310px' }} dangerouslySetInnerHTML={{ __html: body }}></div>
+                <div className="mb-0 text-grey text-14 text-truncate d-none d-md-block" style={{ maxWidth: '350px' }} dangerouslySetInnerHTML={{ __html: body }}></div>
               </div>
             </div>
           </div>
