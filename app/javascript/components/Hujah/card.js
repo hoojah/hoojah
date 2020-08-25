@@ -195,7 +195,7 @@ class HujahCard extends React.Component {
           <HujahCardHeader hujah={hujah} hujahParentAvailable={hujahParentAvailable} />
           <div className="card-body pb-0">
             <Link to={`/hoojah/${hujah.id}`}>
-              <h5 className="card-title text-black text-regular">{body}</h5>
+              <h5 className="card-title text-black text-regular" dangerouslySetInnerHTML={{ __html: body }}></h5>
             </Link>
           </div>
           <div className={`card-body pt-0 ${showAddHujahButton ? "d-flex justify-content-between" : null}`}>

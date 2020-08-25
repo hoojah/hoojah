@@ -338,7 +338,7 @@ class Hujah extends React.Component {
       <div className="container">
         <div className="row justify-content-center">
           <Navbar {...this.props} handleLogout={this.props.handleLogout} />
-          <nav className="navbar bg-transparent pt-0">
+          <nav className="subnav bg-transparent pt-0">
             <div className="container px-0 d-flex justify-content-between">
               <ButtonBack />
               <div className="dropdown">
@@ -356,7 +356,7 @@ class Hujah extends React.Component {
             <div className="card border-0 rounded-0">
               <HujahCardHeader hujah={hujah} hujahParentAvailable={hujahParentAvailable} />
               <div className="card-body pb-1 hujah-body fill-agree btn-icon-14">
-                <h3 className="card-title text-black text-regular">{body}</h3>
+                <h3 className="card-title text-black text-regular" dangerouslySetInnerHTML={{ __html: body }}></h3>
               </div>
               <div className="card-body py-0">
                 <div className="d-flex flex-column justify-content-around">

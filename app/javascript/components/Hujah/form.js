@@ -163,7 +163,7 @@ class HujahForm extends React.Component {
       </div>
       <div className="row justify-content-center">
         <div className={`col-12 col-lg-6 col-md-8 bg-white pl-2 border-left-8 border-${current_user_vote}`}>
-          <h6 className="text-regular pt-1">{body}</h6>
+          <h6 className="text-regular pt-1" dangerouslySetInnerHTML={{ __html: body }}></h6>
         </div>
       </div>
       <div className="row justify-content-center">
