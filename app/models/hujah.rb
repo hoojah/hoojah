@@ -14,4 +14,23 @@ class Hujah < ApplicationRecord
   def has_children?
     self.children != 0
   end
+
+  def current_user_vote(logged_in: nil, current_user_id: nil)
+    if logged_in
+      if votes.joins(:user).find_by(user_id: current_user_id).nil?
+        nil
+      else
+        vote = votes.joins(:user).find_by(user_id: current_user_id).vote.last
+        if vote == 1
+          "agree"
+        elsif vote == 2
+          "neutral"
+        elsif vote == 3
+          "disagree"
+        end
+      end
+    else
+      nil
+    end
+  end
 end
