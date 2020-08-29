@@ -37,7 +37,6 @@ class HujahIndex extends React.Component {
     return (
       <div className="">
         <Navbar {...this.props} handleLogout={this.props.handleLogout} />
-        <div id="navbar-bg"></div>
         <main className="container">
           <div className="row justify-content-sm-center">
             <div className="col-12 col-lg-6 col-md-8 sm-fluid mb-3">

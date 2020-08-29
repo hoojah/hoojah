@@ -37,6 +37,7 @@ class Navbar extends React.Component {
 
     return(
       <nav className="navbar fixed-top navbar-light">
+        <div className="nav-blur" />
         <div className="container px-0 d-flex justify-content-between">
           <Link to="/" className="navbar-brand">
             <img src={Logo} />
@@ -46,18 +47,16 @@ class Navbar extends React.Component {
             userMenu : 
             <Link to="/login" className="btn btn-link">Log in</Link>
           }
-          <div className="">
-            <Link to={{
-                pathname: '/hoojah/new',
-                state: {
-                  hujahParent: { id: null },
-                  user: { id: null }
-                }
-              }} className="btn btn-icon-24 fill-primary p-0">
-              <HujahIcon />
-              <span className="d-none d-lg-inline text-primary"> New Claim</span>
-            </Link>
-          </div>
+          <Link to={{
+              pathname: '/hoojah/new',
+              state: {
+                hujahParent: { id: null },
+                user: { id: null }
+              }
+            }} className="btn btn-icon-24 fill-primary p-0" id="nav-right">
+            <HujahIcon />
+            <span className="d-none d-lg-inline text-primary"> New Claim</span>
+          </Link>
         </div>
       </nav>
     )
