@@ -45,7 +45,7 @@ class Navbar extends React.Component {
           { 
             this.props.loggedInStatus ? 
             userMenu : 
-            <Link to="/login" className="btn btn-link">Log in</Link>
+            <Link to="/login" className="btn btn-link nav-top-menu">Log in</Link>
           }
           <Link to={{
               pathname: '/hoojah/new',
@@ -53,7 +53,7 @@ class Navbar extends React.Component {
                 hujahParent: { id: null },
                 user: { id: null }
               }
-            }} className="btn btn-icon-24 fill-primary p-0" id="nav-right">
+            }} className="btn btn-icon-24 fill-primary p-0 nav-top-menu">
             <HujahIcon />
             <span className="d-none d-lg-inline text-primary"> New Claim</span>
           </Link>
