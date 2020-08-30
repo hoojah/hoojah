@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :hujahs, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :flags, dependent: :destroy
 
   has_secure_password
