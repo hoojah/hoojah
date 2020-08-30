@@ -317,6 +317,15 @@ nav {
     }
   }
 
+  &.subnav {
+    & > .container {
+      @media (min-width: 576px) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
   .nav-top-menu {
     z-index: 1;
   }
