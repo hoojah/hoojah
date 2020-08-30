@@ -294,7 +294,6 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 56px;
   z-index: 1000;
 
   .nav-blur {
@@ -308,12 +307,22 @@ nav {
   
   &.navbar {
     border-bottom: 1px solid white;
+    height: 56px;
 
     .navbar-brand {
       position: absolute;
       left: 50%;
       margin-left: -36px;
       width: 72px;
+    }
+  }
+
+  &.subnav {
+    & > .container {
+      @media (min-width: 576px) {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   }
 

@@ -208,12 +208,14 @@ class HujahCard extends React.Component {
           </div>
           {totalVoteCount > 0 ? showVoteBar : null}
           <div className="card-footer d-flex justify-content-between text-grey">
-            <div className="d-flex align-items-center text-14 btn-icon-14 fill-grey">
-              <VotesIcon />
-              <span className="ml-1">{totalVoteCount}</span>
-              <span className="mx-2">·</span>
-              <HujahIcon />
-              <span className="ml-1">{children_count}</span>
+            <div className="d-flex align-items-center">
+              <Link to={`/hoojah/${hujah.id}`} className="text-14 btn-icon-14 fill-grey no-underscore text-grey">
+                <VotesIcon />
+                <span className="ml-1">{totalVoteCount}</span>
+                <span className="mx-2">·</span>
+                <HujahIcon />
+                <span className="ml-1">{children_count}</span>
+              </Link>
             </div>
           </div>
         </div>

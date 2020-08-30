@@ -338,8 +338,8 @@ class Hujah extends React.Component {
       <div className="container">
         <div className="row justify-content-center">
           <Navbar {...this.props} handleLogout={this.props.handleLogout} />
-          <nav className="subnav bg-transparent pt-0">
-            <div className="container px-0 d-flex justify-content-between">
+          <nav className="subnav bg-transparent pt-0 pb-2">
+            <div className="container d-flex justify-content-between">
               <ButtonBack />
               <div className="dropdown">
                 <button className="btn btn-icon-24 fill-primary" type="button" id="moreAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

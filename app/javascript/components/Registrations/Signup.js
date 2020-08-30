@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Logo from 'logo.svg'
-import HomeIcon from '../Icons/home'
+import NavbarRegistration from '../Layouts/navbar_registration'
 
 class Signup extends Component {
   constructor(props) {
@@ -84,18 +83,7 @@ class Signup extends Component {
     return (
       <div className="container">
         <div className="row justify-content-center">
-          <nav className="navbar fixed-top navbar-light">
-            <div className="container px-0 d-flex justify-content-between">
-              <Link to="/" className="navbar-brand">
-                <img src={Logo} />
-              </Link>
-              <div className="">
-                <Link to={"/"} className="btn btn-icon-24 fill-primary">
-                  <HomeIcon />
-                </Link>
-              </div>
-            </div>
-          </nav>
+          <NavbarRegistration />
           <div className="col-12 col-lg-6 col-md-8 sm-fluid mb-2">
             <div className="card border-0 rounded-0">
               <div className="card-header text-center">
