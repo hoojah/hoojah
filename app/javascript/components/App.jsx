@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HujahIndex from './HujahIndex'
+import NotificationsIndex from './NotificationsIndex'
 import Hujah from './Hujah'
 import UserProfile from './UserProfile'
 import HujahForm from './Hujah/form'
@@ -76,6 +77,12 @@ class App extends React.Component {
             exact path='/users/:id' 
             render={props => (
               <UserProfile {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+            )}
+          />
+          <Route 
+            exact path='/users/:id/notifications' 
+            render={props => (
+              <NotificationsIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
             )}
           />
           <Route 
