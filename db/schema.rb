@@ -50,18 +50,6 @@ ActiveRecord::Schema.define(version: 2020_09_30_141357) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "body"
-    t.integer "model_type", null: false
-    t.boolean "read", default: false
-    t.integer "hoojah_id"
-    t.integer "subject_user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_notifications_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
