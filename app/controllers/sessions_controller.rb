@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
       login!
       render json: {
         logged_in: true,
-        user: @user
+        user: @user,
+        unread_notifications_count: @user.unread_notifications_count
       }
     else
       render json: { 
@@ -20,7 +21,8 @@ class SessionsController < ApplicationController
     if logged_in? && current_user
       render json: {
         logged_in: true,
-        user: current_user
+        user: current_user,
+        unread_notifications_count: current_user.unread_notifications_count
       }
     else
       render json: {

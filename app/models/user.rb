@@ -21,4 +21,8 @@ class User < ApplicationRecord
       "https://res.cloudinary.com/hoojah/image/upload/v1586909320/user_photo_7.gif"
     ].sample
   end
+
+  def unread_notifications_count
+    self.notifications.where(read: false).count
+  end
 end

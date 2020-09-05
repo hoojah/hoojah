@@ -15,7 +15,8 @@ class App extends React.Component {
     super(props)
     this.state = { 
       isLoggedIn: false,
-      currentUser: {}
+      currentUser: {},
+      unreadNotificationsCount: 0
      }
   }
 
@@ -39,12 +40,14 @@ class App extends React.Component {
     if(data.hasOwnProperty("user")){
       this.setState({
         isLoggedIn: true,
-        currentUser: data.user
+        currentUser: data.user,
+        unreadNotificationsCount: data.unread_notifications_count
       })
     } else if(data.data.hasOwnProperty("user")) {
       this.setState({
         isLoggedIn: true,
-        currentUser: data.data.user
+        currentUser: data.data.user,
+        unreadNotificationsCount: data.data.unread_notifications_count
       })
     }
   }
@@ -70,25 +73,25 @@ class App extends React.Component {
           <Route 
             exact path='/hoojah/:id' 
             render={props => (
-              <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+              <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
           />
           <Route 
             exact path='/users/:id' 
             render={props => (
-              <UserProfile {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+              <UserProfile {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
           />
           <Route 
             exact path='/users/:id/notifications' 
             render={props => (
-              <NotificationsIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+              <NotificationsIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
           />
           <Route 
             exact path='/' 
             render={props => (
-              <HujahIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} />
+              <HujahIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
           />
           <Route 

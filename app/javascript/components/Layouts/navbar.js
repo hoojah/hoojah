@@ -23,13 +23,20 @@ class Navbar extends React.Component {
   render() {
     const {username, photo, id } = this.props.currentUser
 
+    let notificationMessage = ""
+    if(this.props.unreadNotificationsCount > 0) {
+      notificationMessage = `Your notifications (${this.props.unreadNotificationsCount})`
+    } else {
+      notificationMessage = "Your notifications"
+    }
+
     const userMenu = (
       <div className="dropdown">
         <img src={photo} className="dropdown-toggle rounded-circle mx-2 avatar-small" id="userMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
         <div className="dropdown-menu" aria-labelledby="userMenuButton">
           <h6 className="dropdown-header">@{username}</h6>
           <Link to={`/users/${id}`} className="dropdown-item" >Your profile</Link>
-          <Link to={`/users/${id}/notifications`} className="dropdown-item" >Your notifications</Link>
+          <Link to={`/users/${id}/notifications`} className="dropdown-item">{notificationMessage}</Link>
           <div className="dropdown-divider"></div>
           <Link to='/logout' className="dropdown-item" onClick={this.handleLogout}>Log Out</Link>
         </div>

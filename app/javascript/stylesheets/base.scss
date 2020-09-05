@@ -49,6 +49,10 @@ body {
   border-left: solid 8px $color-disagree;
 }
 
+.border-unread {
+  border-left: solid 8px $color-primary;
+}
+
 .btn-agree {
   color: white;
   background-color: $color-agree;
