@@ -9,6 +9,7 @@ import HujahForm from './Hujah/form'
 import ScrollToTop from './Utilities/scroll_to_top'
 import Login from './Registrations/Login'
 import Signup from './Registrations/Signup'
+import { ReactQueryDevtools } from 'react-query-devtools'
 
 class App extends React.Component {
   constructor(props) {
@@ -107,6 +108,7 @@ class App extends React.Component {
             )}
           />
         </Switch>
+        <ReactQueryDevtools initialIsOpen />
       </Router>
     )
   }
