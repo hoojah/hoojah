@@ -68,7 +68,7 @@ class UserProfile extends React.Component {
       ))
     } else {
       displayChildren = (
-        <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
+        <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey">
           <HujahIcon />
           <span className="ml-1">No response yet</span>
         </div>

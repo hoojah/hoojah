@@ -10,7 +10,8 @@ class NotificationsIndex extends React.Component {
     super(props)
     this.state = {
       notifications: {},
-      userHasNotifications: false
+      userHasNotifications: false,
+      doneFetch: false
     }
   }
 
@@ -32,22 +33,31 @@ class NotificationsIndex extends React.Component {
       })
       .then(response => {
         const notifications = response.data
-        this.setState({ 
-          notifications: notifications,
-          userHasNotifications: notifications.length > 0,
-        })
+        if(notifications != []) {
+          this.setState({ 
+            notifications: notifications,
+            userHasNotifications: notifications.length > 0,
+            doneFetch: true
+          })
+        } else {
+          this.setState({ 
+            doneFetch: true
+          })
+        }
       })
       .catch(() => this.props.history.push("/"))
   }
 
   render() {
-    if($.isEmptyObject(this.state.notifications)){
+    const { notifications, doneFetch } = this.state
+
+    if($.isEmptyObject(notifications) && !doneFetch) {
       return (
         <LoadingAnimation />
       )
     }
 
-    const { notifications, userHasNotifications } = this.state
+    const { userHasNotifications } = this.state
 
     var displayNotifications = null
     if(userHasNotifications) {
@@ -56,7 +66,7 @@ class NotificationsIndex extends React.Component {
       ))
     } else {
       displayNotifications = (
-        <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey pt-0">
+        <div className="d-flex align-items-center text-14 card-body btn-icon-14 text-light-grey fill-light-grey">
           <NotificationIcon />
           <span className="ml-1">You have no notifications</span>
         </div>
