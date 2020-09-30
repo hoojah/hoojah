@@ -9,7 +9,7 @@ import LoadingAnimation from './Layouts/loading_animation'
 import AgreeIcon from './Icons/agree'
 import NeutralIcon from './Icons/neutral'
 import DisagreeIcon from './Icons/disagree'
-import ViewsIcon from './Icons/views'
+import FlagIcon from './Icons/flag'
 import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
 import HujahCardHeader from './Hujah/card_header'
@@ -347,7 +347,7 @@ class Hujah extends React.Component {
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
                   {this.userIsLoggedIn() && user.id === this.props.currentUser.id ? displayDeleteHujahButton : null}
-                  <button className="dropdown-item disabled" type="button">Flag hoojah</button>
+                  <button className="dropdown-item btn-icon-14 fill-grey" type="button" datatoggle="modal" datatarget="#flagModal"><FlagIcon /> Flag this hoojah</button>
                 </div>
               </div>
             </div>
