@@ -3,10 +3,12 @@
 $color-agree: #FCAF45;
 $color-neutral: #E1306C;
 $color-disagree: #833AB4;
+
 $color-primary: #415DE6;
 $color-black: #343A40;
 $color-grey: #8E8E8E;
 $color-light-grey: #BAC2CA;
+$color-danger: $color-neutral;
 
 
 $color-agree-light: lighten($color-agree, 15%);

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_12_153534) do
+ActiveRecord::Schema.define(version: 2020_09_30_141357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "flags", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "hujah_id", null: false
+    t.integer "subject"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hujah_id"], name: "index_flags_on_hujah_id"
+    t.index ["user_id"], name: "index_flags_on_user_id"
+  end
 
   create_table "hujahs", force: :cascade do |t|
     t.text "body", null: false
@@ -26,6 +36,18 @@ ActiveRecord::Schema.define(version: 2020_04_12_153534) do
     t.bigint "user_id", null: false
     t.integer "vote"
     t.index ["user_id"], name: "index_hujahs_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "body"
+    t.integer "category", null: false
+    t.boolean "read", default: false
+    t.integer "hujah_id"
+    t.integer "subject_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -50,6 +72,9 @@ ActiveRecord::Schema.define(version: 2020_04_12_153534) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "flags", "hujahs"
+  add_foreign_key "flags", "users"
   add_foreign_key "hujahs", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "votes", "users"
 end

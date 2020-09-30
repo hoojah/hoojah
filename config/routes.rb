@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       
       get '/users/:id', to: 'users#show'
       post 'users/:id/update', to: 'users#update'
+
+      post 'flags/create', to: 'flags#create'
     end
   end
   
