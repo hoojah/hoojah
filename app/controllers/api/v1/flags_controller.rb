@@ -1,4 +1,4 @@
-class Api::V1::FlagsController < ApplicationController\
+class Api::V1::FlagsController < ApplicationController
   def create
     flag = current_user.flags.create(flag_params)
     if flag
@@ -11,6 +11,6 @@ class Api::V1::FlagsController < ApplicationController\
   private
 
   def flag_params
-    params.permit(:hujah_id, :subject)
+    params[:flag].permit(:hujah_id, :subject, :user_id)
   end
 end

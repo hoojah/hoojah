@@ -314,12 +314,50 @@ class Hujah extends React.Component {
     })
   }
 
+
+
+
+
+
+
   handleSubmitFlag() {
     console.log(this.state.flagOptionValue)
+
+    const url = "/api/v1/flags/create"
+
+    const body = {
+      subject: this.state.flagOptionValue,
+      hujah_id: this.state.hujah.id,
+      user_id: this.props.currentUser.id
+    }
+
+    const token = document.querySelector('meta[name="csrf-token"]').content
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error("Network response was not ok.")
+      })
+      .catch(error => console.log(error.message))
+
     this.setState({ 
       showFlagModal: !this.state.showFlagModal
     })
   }
+
+
+
+
+
+
 
   render() {
     if($.isEmptyObject(this.state.hujah)){

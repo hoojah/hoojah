@@ -1,6 +1,6 @@
 class Flag < ApplicationRecord
   belongs_to :user
-  belongs_to :hoojah
+  belongs_to :hujah
 
   enum subject: {
     spam: 0,
