@@ -11,8 +11,8 @@ function ButtonBack() {
   }
 
   return (
-    <button type="button" onClick={handleNavigateBack} className="btn btn-icon-24 fill-primary">
-      <BackIcon />
+    <button type="button" onClick={handleNavigateBack} className="d-flex btn btn-icon-24 fill-primary">
+      <BackIcon /><span className="d-none d-md-inline-block ml-2 text-primary">Back</span>
     </button>
   )
 }
