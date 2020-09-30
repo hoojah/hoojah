@@ -1,6 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
-import Linkify from 'react-linkify'
+import { Link } from 'react-router-dom'
 import Navbar from './Layouts/navbar'
 import MoreActionsIcon from './Icons/more_actions'
 import ButtonBack from './Layouts/button_back'
@@ -314,14 +314,7 @@ class Hujah extends React.Component {
     })
   }
 
-
-
-
-
-
-
   handleSubmitFlag() {
-    console.log(this.state.flagOptionValue)
 
     const url = "/api/v1/flags/create"
 
@@ -352,12 +345,6 @@ class Hujah extends React.Component {
       showFlagModal: !this.state.showFlagModal
     })
   }
-
-
-
-
-
-
 
   render() {
     if($.isEmptyObject(this.state.hujah)){
@@ -393,6 +380,14 @@ class Hujah extends React.Component {
       <button className="dropdown-item" type="button" onClick={this.deleteHujah}>Delete hoojah</button>
     )
 
+    const displayFlagHujahButton = (
+      <button className="dropdown-item btn-icon-14 fill-alert" type="button" onClick={this.toggleShowFlagModal}><FlagIcon /> Flag this hoojah</button>
+    )
+
+    const displayLoginFlagButton = (
+      <Link to="/login" className="btn btn-link btn-icon-14 fill-alert"><FlagIcon /> Login to flag this hoojah</Link>
+    )
+
     const totalVoteCount = agree_count + neutral_count + disagree_count
 
     return (
@@ -408,7 +403,7 @@ class Hujah extends React.Component {
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
                   {this.userIsLoggedIn() && user.id === this.props.currentUser.id ? displayDeleteHujahButton : null}
-                  <button className="dropdown-item btn-icon-14 fill-alert" type="button" onClick={this.toggleShowFlagModal}><FlagIcon /> Flag this hoojah</button>
+                  {this.userIsLoggedIn() ? displayFlagHujahButton : displayLoginFlagButton}
                 </div>
               </div>
             </div>
