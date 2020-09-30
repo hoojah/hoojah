@@ -29,6 +29,9 @@ body {
 .bg-neutral {
   background-color: $color-neutral;
 }
+.bg-white {
+  background-color: white;
+}
 
 .border-left-8 {
   border-left: solid 8px;
@@ -247,6 +250,10 @@ body {
 .card-body,
 .card-header {
   background-color: white;
+}
+
+.fill-alert {
+  fill: $color-danger;
 }
 
 .fill-black {

@@ -14,6 +14,7 @@ import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
 import HujahCardHeader from './Hujah/card_header'
 import HujahCardSmall from './Hujah/card_small'
+import {Modal, Button, ListGroup} from 'react-bootstrap'
 
 class Hujah extends React.Component {
   constructor(props) {
@@ -24,10 +25,15 @@ class Hujah extends React.Component {
       totalVoteCount: 0,
       hujahResponseFilter: "all",
       hujahParentAvailable: false,
-      hujahChildrenAvailable: false
+      hujahChildrenAvailable: false,
+      showFlagModal: false,
+      flagOptionValue: ""
     }
     this.deleteHujah = this.deleteHujah.bind(this)
     this.handleFilterClick = this.handleFilterClick.bind(this)
+    this.toggleShowFlagModal = this.toggleShowFlagModal.bind(this)
+    this.handleFlagOptionClick = this.handleFlagOptionClick.bind(this)
+    this.handleSubmitFlag = this.handleSubmitFlag.bind(this)
   }
 
   componentDidMount() {
@@ -298,6 +304,23 @@ class Hujah extends React.Component {
     return`btn btn-${selectedResponse} btn-icon-16 fill-white`
   }
 
+  toggleShowFlagModal() {
+    this.setState({ showFlagModal: !this.state.showFlagModal })
+  }
+
+  handleFlagOptionClick(value) {
+    this.setState({ 
+      flagOptionValue: value
+    })
+  }
+
+  handleSubmitFlag() {
+    console.log(this.state.flagOptionValue)
+    this.setState({ 
+      showFlagModal: !this.state.showFlagModal
+    })
+  }
+
   render() {
     if($.isEmptyObject(this.state.hujah)){
       return (
@@ -305,7 +328,7 @@ class Hujah extends React.Component {
       )
     }
    
-    const { hujah, hujahChildrenAvailable, hujahParentAvailable, hujahResponseFilter } = this.state
+    const { hujah, hujahChildrenAvailable, hujahParentAvailable, hujahResponseFilter, showFlagModal } = this.state
     const { children, current_user_vote, agree_count, neutral_count, disagree_count, body, children_count, user } = hujah.attributes
 
     var displayChildren = null
@@ -347,7 +370,7 @@ class Hujah extends React.Component {
                 </button>
                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="moreAction">
                   {this.userIsLoggedIn() && user.id === this.props.currentUser.id ? displayDeleteHujahButton : null}
-                  <button className="dropdown-item btn-icon-14 fill-grey" type="button" datatoggle="modal" datatarget="#flagModal"><FlagIcon /> Flag this hoojah</button>
+                  <button className="dropdown-item btn-icon-14 fill-alert" type="button" onClick={this.toggleShowFlagModal}><FlagIcon /> Flag this hoojah</button>
                 </div>
               </div>
             </div>
@@ -403,6 +426,28 @@ class Hujah extends React.Component {
             </div>
           </div>
         </div>
+        
+        <Modal show={showFlagModal} onHide={this.toggleShowFlagModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Flag this hoojah</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="mb-2">Help us understand the problem. What is going on with this hoojah?</div>
+            <ListGroup>
+              <ListGroup.Item action onClick={() => this.handleFlagOptionClick("spam")}>It's suspicious or spam</ListGroup.Item>
+              <ListGroup.Item action onClick={() => this.handleFlagOptionClick("abusive")}>It's abusive or harmful</ListGroup.Item>
+              <ListGroup.Item action onClick={() => this.handleFlagOptionClick("irrelevant")}>It's irrelevant to the parent hoojah</ListGroup.Item>
+            </ListGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="link" onClick={this.toggleShowFlagModal}>
+              Cancel
+            </Button>
+            <Button variant="danger" onClick={this.handleSubmitFlag}>
+              Confirm flagging
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }
