@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       post 'flags/create', to: 'flags#create'
 
       resources :users, except: [:new, :index] do
-        resources :notifications, only: [:index, :destroy]
+        resources :notifications, only: [:index, :destroy, :update]
       end
     end
   end

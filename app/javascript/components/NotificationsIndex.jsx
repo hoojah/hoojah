@@ -62,7 +62,7 @@ class NotificationsIndex extends React.Component {
     var displayNotifications = null
     if(userHasNotifications) {
       displayNotifications = notifications.map((notification, index) => (
-        <NotificationCard key={index} notification={notification} />
+        <NotificationCard {...this.props} key={index} notification={notification} />
       ))
     } else {
       displayNotifications = (

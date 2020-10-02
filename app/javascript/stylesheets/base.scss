@@ -49,6 +49,10 @@ body {
   border-left: solid 8px $color-disagree;
 }
 
+.border-read {
+  border-left: solid 8px $color-light-grey;
+}
+
 .border-unread {
   border-left: solid 8px $color-primary;
 }
@@ -342,11 +346,12 @@ nav {
 
     span {
       background-color: $color-danger;
-      font-size: 1rem;
+      font-size: 0.75rem;
       color: white;
       font-weight: bold;
       border-radius: 1rem;
-      padding: 0.25rem;
+      padding: 0.15rem 0.5rem;
+      vertical-align: text-bottom;
     }
   }
 

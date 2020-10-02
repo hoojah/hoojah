@@ -9,7 +9,25 @@ class Api::V1::NotificationsController < ApplicationController
     render json: serialized_notifications
   end
 
+  def update
+    if notification.update!(read: notification_params[:read])
+      render json: {
+        status: 200
+      }
+    else
+      render json: notification.errors
+    end
+  end
+
   private
+
+  def notification_params
+    params[:notification].permit(:read)
+  end
+
+  def notification
+    @notification ||= Notification.find(params[:id])
+  end
 
   def find_user
     @user ||= User.find(params[:user_id])
