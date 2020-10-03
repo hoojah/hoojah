@@ -9,10 +9,10 @@ class Api::V1::VotesController < ApplicationController
       update_vote
       render json: vote
     else
-      new_vote = user.votes.create!(vote: [vote_params[:vote]], hujah_id: vote_params[:hujah_id])
+      new_vote = user.votes.create!(vote: [vote_params[:vote]], hujah_id: hujah.id)
       if new_vote
         update_hujah_counters(vote_params[:vote], nil)
-        Notification.create!(user_id: user.id, category: 4, hujah_id: vote_params[:hujah_id])
+        Notification.create!(user_id: hujah.user.id, category: 4, hujah_id: hujah.id)
         render json: vote
       else
         render json: vote.errors
