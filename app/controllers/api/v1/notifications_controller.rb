@@ -19,6 +19,14 @@ class Api::V1::NotificationsController < ApplicationController
     end
   end
 
+  def destroy
+    notification&.destroy
+    render json: { 
+      message: 'Notification deleted!',
+      status: 200
+    }
+  end
+
   private
 
   def notification_params

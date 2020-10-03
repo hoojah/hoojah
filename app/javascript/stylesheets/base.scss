@@ -255,6 +255,11 @@ body {
   }
 }
 
+.btn-notification-trash:hover {
+  fill: $color-danger;
+  cursor: pointer;
+}
+
 .card-body,
 .card-header {
   background-color: white;
