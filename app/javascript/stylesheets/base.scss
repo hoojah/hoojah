@@ -49,6 +49,14 @@ body {
   border-left: solid 8px $color-disagree;
 }
 
+.border-read {
+  border-left: solid 8px $color-light-grey;
+}
+
+.border-unread {
+  border-left: solid 8px $color-primary;
+}
+
 .btn-agree {
   color: white;
   background-color: $color-agree;
@@ -247,6 +255,11 @@ body {
   }
 }
 
+.btn-notification-trash:hover {
+  fill: $color-danger;
+  cursor: pointer;
+}
+
 .card-body,
 .card-header {
   background-color: white;
@@ -333,6 +346,20 @@ nav {
     }
   }
 
+  .nav-notification {
+    display: inline-block;
+
+    span {
+      background-color: $color-danger;
+      font-size: 0.75rem;
+      color: white;
+      font-weight: bold;
+      border-radius: 1rem;
+      padding: 0.15rem 0.5rem;
+      vertical-align: text-bottom;
+    }
+  }
+
   .nav-top-menu {
     z-index: 1;
   }
@@ -345,6 +372,18 @@ nav {
   box-shadow: none;
 
   resize: none;
+}
+
+.notification-indicator {
+  min-height: 0.5rem;
+    min-width: 0.5rem;
+    background-color: #E1306C;
+    border-radius: 0.25rem;
+    max-width: 0.5rem;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .no-underscore,

@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       post 'users/:id/update', to: 'users#update'
 
       post 'flags/create', to: 'flags#create'
+
+      resources :users, except: [:new, :index] do
+        resources :notifications, only: [:index, :destroy, :update]
+      end
     end
   end
   

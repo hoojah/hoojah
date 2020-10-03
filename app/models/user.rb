@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :hujahs, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :flags, dependent: :destroy
 
   has_secure_password
@@ -19,5 +20,9 @@ class User < ApplicationRecord
       "https://res.cloudinary.com/hoojah/image/upload/v1586909321/user_photo_6.gif",
       "https://res.cloudinary.com/hoojah/image/upload/v1586909320/user_photo_7.gif"
     ].sample
+  end
+
+  def unread_notifications_count
+    self.notifications.where(read: false).count
   end
 end

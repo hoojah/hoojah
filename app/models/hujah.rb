@@ -12,6 +12,10 @@ class Hujah < ApplicationRecord
     self.parent == nil
   end
 
+  def has_parent?
+    self.parent != nil
+  end
+
   def has_children?
     self.children != 0
   end
