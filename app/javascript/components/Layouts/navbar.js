@@ -23,25 +23,26 @@ class Navbar extends React.Component {
   render() {
     const {username, photo, id } = this.props.currentUser
 
+    const notificationIndicator = (
+      <span className="notification-indicator"></span>
+    )
+
     let notificationMessage = ""
     if(this.props.unreadNotificationsCount > 0) {
       notificationMessage = (
         <div className="nav-notification">
-          Your notifications <span>{this.props.unreadNotificationsCount}</span>
+          {/* Your notifications <span>{this.props.unreadNotificationsCount}</span> //TODO: show this when react-query is implemented */}
+          Your notifications {this.props.unreadNotificationsCount > 0 ? notificationIndicator : null}
         </div>
       )
     } else {
       notificationMessage = "Your notifications"
     }
 
-    const notificationIndicator = (
-      <span className="notification-indicator"></span>
-    )
-
     const userMenu = (
       <div className="dropdown">
         <img src={photo} className={`dropdown-toggle rounded-circle mx-2 avatar-small `} id="userMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
-        {this.props.unreadNotificationsCount > 0 ? notificationIndicator: null}
+        {this.props.unreadNotificationsCount > 0 ? notificationIndicator : null}
         <div className="dropdown-menu" aria-labelledby="userMenuButton">
           <h6 className="dropdown-header">@{username}</h6>
           <Link to={`/users/${id}`} className="dropdown-item" >Your profile</Link>

@@ -347,16 +347,18 @@ nav {
   }
 
   .nav-notification {
-    display: inline-block;
+    position: relative;
+    // display: inline-block;
 
     span {
-      background-color: $color-danger;
-      font-size: 0.75rem;
-      color: white;
-      font-weight: bold;
-      border-radius: 1rem;
-      padding: 0.15rem 0.5rem;
-      vertical-align: text-bottom;
+      margin-right: -0.5rem;
+    //   background-color: $color-danger;
+    //   font-size: 0.75rem;
+    //   color: white;
+    //   font-weight: bold;
+    //   border-radius: 1rem;
+    //   padding: 0.15rem 0.5rem;
+    //   vertical-align: text-bottom;
     }
   }
 
@@ -376,14 +378,14 @@ nav {
 
 .notification-indicator {
   min-height: 0.5rem;
-    min-width: 0.5rem;
-    background-color: #E1306C;
-    border-radius: 0.25rem;
-    max-width: 0.5rem;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
+  min-width: 0.5rem;
+  background-color: #E1306C;
+  border-radius: 0.25rem;
+  max-width: 0.5rem;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .no-underscore,
