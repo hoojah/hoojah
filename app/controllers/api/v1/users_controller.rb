@@ -20,6 +20,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user
-    @user ||= User.find(params[:id])
+    @user ||= User.find_by_username(params[:username])
   end
 end

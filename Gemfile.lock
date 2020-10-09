@@ -173,6 +173,10 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    slug (4.1.1)
+      activerecord (> 3.0.0)
+      activesupport (> 3.0.0)
+      rake
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -221,6 +225,7 @@ DEPENDENCIES
   rails (~> 6.0.2, >= 6.0.2.2)
   rspec-rails (~> 4.0.0)
   sass-rails (>= 6)
+  slug
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

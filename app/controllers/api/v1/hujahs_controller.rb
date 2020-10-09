@@ -43,7 +43,7 @@ class Api::V1::HujahsController < ApplicationController
   end
 
   def hujah
-    @hujah ||= Hujah.find(params[:id])
+    @hujah ||= Hujah.find_by_slug(params[:slug])
   end
 
 end
