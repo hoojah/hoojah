@@ -14,7 +14,7 @@ import VotesIcon from './Icons/votes'
 import HujahIcon from './Icons/hujah'
 import HujahCardHeader from './Hujah/card_header'
 import HujahCardSmall from './Hujah/card_small'
-import {Modal, Button, ListGroup} from 'react-bootstrap'
+import { Modal, Button, ListGroup } from 'react-bootstrap'
 
 class Hujah extends React.Component {
   constructor(props) {
@@ -262,29 +262,33 @@ class Hujah extends React.Component {
   }
 
   deleteHujah() {
-    const {
-      match: {
-        params: { id }
-      }
-    } = this.props;
-    const url = `/api/v1/hoojah/destroy/${id}`
-    const token = document.querySelector('meta[name="csrf-token"]').content
+    console.log(this)
+    if(window.confirm("⚠️ Are you sure you want to DELETE YOUR HOOJAH? (This can not be undone! 😰)")) {
 
-    fetch(url, {
-      method: "DELETE",
-      headers: {
-        "X-CSRF-Token": token,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json()
+      const {
+        match: {
+          params: { slug }
         }
-        throw new Error("Network response was not ok.")
+      } = this.props;
+      const url = `/api/v1/hoojah/destroy/${slug}`
+      const token = document.querySelector('meta[name="csrf-token"]').content
+
+      fetch(url, {
+        method: "DELETE",
+        headers: {
+          "X-CSRF-Token": token,
+          "Content-Type": "application/json"
+        }
       })
-      .then(() => this.props.history.push("/"))
-      .catch(error => console.log(error.message))
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          }
+          throw new Error("Network response was not ok.")
+        })
+        .then(() => this.props.history.push("/"))
+        .catch(error => console.log(error.message))
+    }
   }
 
   filterChildren(hujah, index) {
