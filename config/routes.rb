@@ -4,20 +4,20 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'hoojah/index', to: 'hujahs#index'
       post 'hoojah/create', to: 'hujahs#create'
-      get '/hoojah/:id', to: 'hujahs#show'
-      delete '/hoojah/destroy/:id', to: 'hujahs#destroy'
+      get '/hoojah/:slug', to: 'hujahs#show'
+      delete '/hoojah/destroy/:slug', to: 'hujahs#destroy'
       get '/hoojah/new', to: 'hujahs#new'
 
       post 'votes/create', to: 'votes#create'
       
-      get '/users/:id', to: 'users#show'
-      post 'users/:id/update', to: 'users#update'
+      get '/:username', to: 'users#show'
+      post ':username/update', to: 'users#update'
 
       post 'flags/create', to: 'flags#create'
 
-      resources :users, except: [:new, :index] do
-        resources :notifications, only: [:index, :destroy, :update]
-      end
+      get '/:username/notifications', to: 'notifications#index'
+      put '/:username/notifications/:id', to: 'notifications#update'
+      delete '/:username/notifications/:id', to: 'notifications#destroy'
     end
   end
   

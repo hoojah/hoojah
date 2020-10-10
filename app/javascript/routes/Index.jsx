@@ -51,7 +51,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HujahIndex} />
           <Route exact path='/hoojah/new' component={HujahForm} />
-          <Route exact path='/hoojah/:id' component={Hujah} />
+          <Route exact path='/hoojah/:slug' component={Hujah} />
         </Switch>
       </Router>
     )

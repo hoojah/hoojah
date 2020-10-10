@@ -24,6 +24,7 @@ class UserSerializer
           "agree_count": child_hujah.agree_count,
           "neutral_count": child_hujah.neutral_count,
           "disagree_count": child_hujah.disagree_count,
+          "slug": child_hujah.slug,
           "user": {
             "attributes": {
               "username": child_hujah.user.username,

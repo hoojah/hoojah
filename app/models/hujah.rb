@@ -8,6 +8,8 @@ class Hujah < ApplicationRecord
   
   validates :body, presence: true
 
+  slug :body
+
   def is_parent?
     self.parent == nil
   end

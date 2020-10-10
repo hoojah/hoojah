@@ -7,8 +7,8 @@ import Hujah from './Hujah'
 import UserProfile from './UserProfile'
 import HujahForm from './Hujah/form'
 import ScrollToTop from './Utilities/scroll_to_top'
-import Login from './Registrations/Login'
-import Signup from './Registrations/Signup'
+import Login from './Start/Login'
+import Signup from './Start/Signup'
 import { ReactQueryDevtools } from 'react-query-devtools'
 
 class App extends React.Component {
@@ -72,19 +72,19 @@ class App extends React.Component {
             )}
           />
           <Route 
-            exact path='/hoojah/:id' 
+            exact path='/hoojah/:slug' 
             render={props => (
               <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
           />
           <Route 
-            exact path='/users/:id' 
+            exact path='/:username' 
             render={props => (
               <UserProfile {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
           />
           <Route 
-            exact path='/users/:id/notifications' 
+            exact path='/:username/notifications' 
             render={props => (
               <NotificationsIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
@@ -96,13 +96,13 @@ class App extends React.Component {
             )}
           />
           <Route 
-            exact path='/login' 
+            exact path='/start/login' 
             render={props => (
               <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
             )}
           />
           <Route 
-            exact path='/signup' 
+            exact path='/start/signup' 
             render={props => (
               <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
             )}

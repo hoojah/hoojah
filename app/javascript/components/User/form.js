@@ -78,8 +78,8 @@ class UserForm extends React.Component {
   handleSubmit(event) {
 
     event.preventDefault()
-    const url = `/api/v1/users/${this.props.user.id}/update`
     const { photo, full_name, username, location, link, headline } = this.state
+    const url = `/api/v1/${username}/update`
 
     const body = {
       photo: photo,

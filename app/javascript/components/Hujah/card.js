@@ -168,7 +168,7 @@ class HujahCard extends React.Component {
   }
   
   redirectToLogin() {
-    this.props.history.push('/login')
+    this.props.history.push('/start/login')
   }
 
   render() {
@@ -178,7 +178,7 @@ class HujahCard extends React.Component {
     }
 
     const { hujah, hujahParentAvailable, showAddHujahButton, totalVoteCount } = this.state
-    const { agree_count, neutral_count, disagree_count, body, current_user_vote, children_count, user } = hujah.attributes
+    const { agree_count, neutral_count, disagree_count, body, current_user_vote, children_count, user, slug } = hujah.attributes
 
     const showVoteBar = (
       <div className="card-body p-0">
@@ -194,7 +194,7 @@ class HujahCard extends React.Component {
         <div className="shadow card border-0 rounded-0 mb-2">
           <HujahCardHeader hujah={hujah} hujahParentAvailable={hujahParentAvailable} />
           <div className="card-body pb-0">
-            <Link to={`/hoojah/${hujah.id}`}>
+            <Link to={`/hoojah/${slug}`}>
               <h5 className="card-title text-black text-regular" dangerouslySetInnerHTML={{ __html: body }}></h5>
             </Link>
           </div>
@@ -209,7 +209,7 @@ class HujahCard extends React.Component {
           {totalVoteCount > 0 ? showVoteBar : null}
           <div className="card-footer d-flex justify-content-between text-grey">
             <div className="d-flex align-items-center">
-              <Link to={`/hoojah/${hujah.id}`} className="text-14 btn-icon-14 fill-grey no-underscore text-grey">
+              <Link to={`/hoojah/${hujah.slug}`} className="text-14 btn-icon-14 fill-grey no-underscore text-grey">
                 <VotesIcon />
                 <span className="ml-1">{totalVoteCount}</span>
                 <span className="mx-2">·</span>
