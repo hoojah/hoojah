@@ -24,7 +24,8 @@ class HujahCardHeader extends React.Component {
     const { full_name, username, photo } = user.attributes
 
     const messageForSocialMedia = `"${body} (by @${username})" Do you AGREE? NEUTRAL? DISAGREE?`
-    const socialMediaButtonUrl = window.location.href
+    
+    const socialMediaButtonUrl = `${window.location.origin}/hoojah/${hujah.attributes.slug}`
     const socialMediaButtonClass = "px-3 py-1"
 
     return(
