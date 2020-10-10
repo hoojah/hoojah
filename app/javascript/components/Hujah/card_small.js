@@ -20,7 +20,7 @@ class HujahCardSmall extends React.Component {
 
   render() {
     const hujah = this.props.hujah
-    console.log(hujah)
+
     const { body, vote, agree_count, neutral_count, disagree_count, user, slug } = hujah.attributes
     const { full_name, username, photo } = user.attributes
 
