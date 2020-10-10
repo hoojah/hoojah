@@ -262,7 +262,6 @@ class Hujah extends React.Component {
   }
 
   deleteHujah() {
-    console.log(this)
     if(window.confirm("⚠️ Are you sure you want to DELETE YOUR HOOJAH? (This can not be undone! 😰)")) {
 
       const {
