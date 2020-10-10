@@ -84,10 +84,8 @@ class HujahForm extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-          console.log(response)
           return response.json()
         }
-        console.log(response)
         throw new Error("Network response was not ok.")
       })
       .then(response => this.props.history.push(`/hoojah/${response.slug}`))
