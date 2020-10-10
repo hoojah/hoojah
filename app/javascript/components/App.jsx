@@ -10,6 +10,7 @@ import ScrollToTop from './Utilities/scroll_to_top'
 import Login from './Start/Login'
 import Signup from './Start/Signup'
 import { ReactQueryDevtools } from 'react-query-devtools'
+import packageJson from '../../../package.json';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +23,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log(`-------------------\n\n${packageJson.name} v.${packageJson.version}\nmade in Malaysia 🇲🇾\nby ${packageJson.author}\nand fellow friends!\n\n-------------------\n\nDoing good is contagious!\n\nI am building Hoojah and\ncollecting data so that we\ncan one day write a super\naccurate algorithm to help\nMalaysians figure out where\ndo they REALLY want to eat.\n\nIf you believe that you\ncan do some good for Hoojah,\nyou are welcome to reach\nus at hello@hoojah.my\n\n💪🐤💪\n\n`)
+    
     this.loginStatus()
   }
 
