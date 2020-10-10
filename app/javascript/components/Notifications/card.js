@@ -41,7 +41,7 @@ class NotificationCard extends React.Component {
         .then(response => this.props.history.push(`/hoojah/${hujah.slug}`))
         .catch(error => console.log(error.message))
     } else {
-      this.props.history.push(`/hoojah/${hujah.id}`)
+      this.props.history.push(`/hoojah/${hujah.slug}`)
     }
   }
 
