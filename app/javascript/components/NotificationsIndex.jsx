@@ -18,11 +18,11 @@ class NotificationsIndex extends React.Component {
   componentDidMount() {
     const {
       match: {
-        params: { id }
+        params: { username }
       }
     } = this.props
 
-    const url = `/api/v1/users/${id}/notifications`
+    const url = `/api/v1/${username}/notifications`
 
     fetch(url)
       .then(response => {

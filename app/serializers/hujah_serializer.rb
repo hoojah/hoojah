@@ -25,6 +25,7 @@ class HujahSerializer
       "type": "hujah",
       "attributes": {
         "body": hujah.parent.body,
+        "slug": hujah.parent.slug,
         "user": {
           "attributes": {
             "username": hujah.parent.user.username,
@@ -50,6 +51,7 @@ class HujahSerializer
           "agree_count": child.agree_count,
           "neutral_count": child.neutral_count,
           "disagree_count": child.disagree_count,
+          "slug": child.slug,
           "user": {
             "attributes": {
               "username": child.user.username,

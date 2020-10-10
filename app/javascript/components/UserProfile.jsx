@@ -22,11 +22,11 @@ class UserProfile extends React.Component {
   componentDidMount() {
     const {
       match: {
-        params: { id }
+        params: { username }
       }
     } = this.props
 
-    const url = `/api/v1/users/${id}`
+    const url = `/api/v1/${username}`
 
     fetch(url)
       .then(response => {

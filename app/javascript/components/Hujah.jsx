@@ -39,11 +39,11 @@ class Hujah extends React.Component {
   componentDidMount() {
     const {
       match: {
-        params: { id }
+        params: { slug }
       }
     } = this.props
 
-    const url = `/api/v1/hoojah/${id}`
+    const url = `/api/v1/hoojah/${slug}`
 
     fetch(url)
       .then(response => {
@@ -71,11 +71,11 @@ class Hujah extends React.Component {
 
       const {
         match: {
-          params: { id }
+          params: { slug }
         }
       } = this.props
   
-      const url = `/api/v1/hoojah/${id}`
+      const url = `/api/v1/hoojah/${slug}`
   
       fetch(url)
         .then(response => {

@@ -33,10 +33,10 @@ class HujahCardHeader extends React.Component {
 
         <div className="card-header border-bottom-0 pb-0 d-flex justify-content-between align-items-center">
           <div className="media">
-            <Link to={`/users/${user.id}`}><img src={photo} className="rounded-circle mr-3 avatar" /></Link>
+            <Link to={`/${username}`}><img src={photo} className="rounded-circle mr-3 avatar" /></Link>
             <div className="media-body">
               <div className="d-flex flex-column">
-                <Link to={`/users/${user.id}`} className="mt-0 mb-0 text-primary">{full_name}</Link>
+                <Link to={`/${username}`} className="mt-0 mb-0 text-primary">{full_name}</Link>
                 <a className="no-underscore handle">
                   <small className="text-muted">{`@${username}`}</small>
                 </a>

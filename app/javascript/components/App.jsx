@@ -72,19 +72,19 @@ class App extends React.Component {
             )}
           />
           <Route 
-            exact path='/hoojah/:id' 
+            exact path='/hoojah/:slug' 
             render={props => (
               <Hujah {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
           />
           <Route 
-            exact path='/users/:id' 
+            exact path='/:username' 
             render={props => (
               <UserProfile {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}
           />
           <Route 
-            exact path='/users/:id/notifications' 
+            exact path='/:username/notifications' 
             render={props => (
               <NotificationsIndex {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} currentUser={this.state.currentUser} unreadNotificationsCount={this.state.unreadNotificationsCount} />
             )}

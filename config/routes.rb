@@ -10,14 +10,14 @@ Rails.application.routes.draw do
 
       post 'votes/create', to: 'votes#create'
       
-      get '/users/:username', to: 'users#show'
-      post 'users/:username/update', to: 'users#update'
+      get '/:username', to: 'users#show'
+      post ':username/update', to: 'users#update'
 
       post 'flags/create', to: 'flags#create'
 
-      resources :users, except: [:new, :index] do
-        resources :notifications, only: [:index, :destroy, :update]
-      end
+      get '/:username/notifications', to: 'notifications#index'
+      put '/:username/notifications/:id', to: 'notifications#update'
+      delete '/:username/notifications/:id', to: 'notifications#destroy'
     end
   end
   

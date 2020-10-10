@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 class HujahParentCard extends React.Component {
   render() {
     const hujah = this.props.hujah
-    const { user, body } = hujah.attributes
+    const { user, body, slug } = hujah.attributes
     const { full_name, photo } = user.attributes
 
     return(
-      <Link to={`/hoojah/${hujah.id}`} className="no-underscore">
+      <Link to={`/hoojah/${slug}`} className="no-underscore">
         <div id="parent-card-container" className="shadow card-body border-bottom border-light-grey px-3 py-1 d-flex align-items-center mb-0">
           <div className="media pt-1">
             <img src={photo} className="rounded-circle mr-2 avatar-small" />

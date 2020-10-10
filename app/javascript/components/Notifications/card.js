@@ -20,7 +20,7 @@ class NotificationCard extends React.Component {
     const { read, hujah } = notification.attributes
 
     if(read == false){
-      const url = `/api/v1/users/${currentUser.id}/notifications/${notification.id}`
+      const url = `/api/v1/${currentUser.username}/notifications/${notification.id}`
       const body = { read: !read }
 
       const token = document.querySelector('meta[name="csrf-token"]').content
@@ -38,7 +38,7 @@ class NotificationCard extends React.Component {
           }
           throw new Error("Network response was not ok.")
         })
-        .then(response => this.props.history.push(`/hoojah/${hujah.id}`))
+        .then(response => this.props.history.push(`/hoojah/${hujah.slug}`))
         .catch(error => console.log(error.message))
     } else {
       this.props.history.push(`/hoojah/${hujah.id}`)
@@ -50,7 +50,7 @@ class NotificationCard extends React.Component {
 
     const { currentUser, notification } = this.props
 
-    const url = `/api/v1/users/${currentUser.id}/notifications/${notification.id}`
+    const url = `/api/v1/${currentUser.username}/notifications/${notification.id}`
 
     const token = document.querySelector('meta[name="csrf-token"]').content
     fetch(url, {
@@ -66,7 +66,7 @@ class NotificationCard extends React.Component {
         }
         throw new Error("Network response was not ok.")
       })
-      .then(response => this.props.history.push(`/users/${currentUser.id}/notifications`))
+      .then(response => this.props.history.push(`/${currentUser.username}/notifications`))
       .catch(error => console.log(error.message))
   }
 
@@ -108,9 +108,9 @@ class NotificationCard extends React.Component {
                 </div>
                 <div className="d-flex flex-column text-14 text-grey py-0 pr-1 ml-3">
                   <span>@{subject_user.username} posted a new argument on your hoojah</span>
-                  <Link to={`/hoojah/${hujah.id}`} className="no-underscore py-0 text-truncate d-block d-sm-none" style={{ maxWidth: '270px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
-                  <Link to={`/hoojah/${hujah.id}`} className="no-underscore py-0 text-truncate d-none d-sm-block d-md-none" style={{ maxWidth: '310px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
-                  <Link to={`/hoojah/${hujah.id}`} className="no-underscore py-0 text-truncate d-none d-md-block" style={{ maxWidth: '350px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
+                  <Link to={`/hoojah/${hujah.slug}`} className="no-underscore py-0 text-truncate d-block d-sm-none" style={{ maxWidth: '270px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
+                  <Link to={`/hoojah/${hujah.slug}`} className="no-underscore py-0 text-truncate d-none d-sm-block d-md-none" style={{ maxWidth: '310px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
+                  <Link to={`/hoojah/${hujah.slug}`} className="no-underscore py-0 text-truncate d-none d-md-block" style={{ maxWidth: '350px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
                 </div>
                 <div className="d-flex btn-icon-14 ml-auto btn-notification-trash align-items-center mr-2 fill-grey" onClick={this.handleDelete}>
                   <TrashIcon />
@@ -131,9 +131,9 @@ class NotificationCard extends React.Component {
                 </div>
                 <div className="d-flex flex-column text-14 text-grey py-0 pr-1 ml-3">
                   <span>You have a new vote on your hoojah</span>
-                  <Link to={`/hoojah/${hujah.id}`}className="no-underscore py-0 text-truncate d-block d-sm-none" style={{ maxWidth: '270px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
-                  <Link to={`/hoojah/${hujah.id}`}className="no-underscore py-0 text-truncate d-none d-sm-block d-md-none" style={{ maxWidth: '310px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
-                  <Link to={`/hoojah/${hujah.id}`}className="no-underscore py-0 text-truncate d-none d-md-block" style={{ maxWidth: '350px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
+                  <Link to={`/hoojah/${hujah.slug}`}className="no-underscore py-0 text-truncate d-block d-sm-none" style={{ maxWidth: '270px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
+                  <Link to={`/hoojah/${hujah.slug}`}className="no-underscore py-0 text-truncate d-none d-sm-block d-md-none" style={{ maxWidth: '310px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
+                  <Link to={`/hoojah/${hujah.slug}`}className="no-underscore py-0 text-truncate d-none d-md-block" style={{ maxWidth: '350px' }} dangerouslySetInnerHTML={{ __html: hujah.body }} onClick={this.handleRead}></Link>
                 </div>
                 <div className="d-flex btn-icon-14 ml-auto btn-notification-trash align-items-center mr-2 fill-grey" onClick={this.handleDelete}>
                   <TrashIcon />
