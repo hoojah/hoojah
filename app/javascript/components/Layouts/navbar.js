@@ -63,7 +63,7 @@ class Navbar extends React.Component {
           { 
             this.props.loggedInStatus ? 
             userMenu : 
-            <Link to="/login" className="btn btn-link nav-top-menu">Log in</Link>
+            <Link to="/start/login" className="btn btn-link nav-top-menu">Log in</Link>
           }
           <Link to={{
               pathname: '/hoojah/new',

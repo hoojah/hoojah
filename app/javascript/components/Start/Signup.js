@@ -142,7 +142,7 @@ class Signup extends Component {
                         placeholder="Your phone number"
                         type="text"
                       />
-                      <small className="form-text text-muted">For testing purpose, you won't need to provide your phone number.</small>
+                      <small className="form-text text-muted">For testing purpose, you won't need to provide your phone number. We will explain in the future why we need to verify your identity.</small>
                     </div>
                   </fieldset>
                   <div className="form-group">
@@ -170,9 +170,9 @@ class Signup extends Component {
                   <button type="submit" className="btn btn-block btn-primary">Create your account</button>
                 </form>
               </div>
-              <div className="card-body text-center bg-primary text-white">
+              <div className="card-body text-center bg-info text-white">
                 <h5 className="card-title">Already have an account?</h5>
-                <Link to={"/login"} className="btn btn-warning">Click here to log in!</Link>
+                <Link to={"/start/login"} className="btn btn-warning">Click here to log in!</Link>
               </div>
               <div className="card-footer text-muted">
                 <small>Disclaimer: Hoojah is still in development. All activities are for testing purpose. Hoojah will not be liable for any damage done during this testing period.</small>

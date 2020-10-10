@@ -199,6 +199,25 @@ body {
   }
 }
 
+.btn-outline-primary:not(:disabled):not(.disabled):active, 
+.btn-outline-primary:not(:disabled):not(.disabled).active, 
+.show > .btn-outline-primary.dropdown-toggle,
+.btn-outline-primary:hover,
+.btn-outline-primary.voted {
+  color: white;
+  
+  &.btn-outline-primary {
+    background-color: $color-primary;
+    -webkit-box-shadow: 3px 3px 12px 0px $color-primary !important;
+    -moz-box-shadow: 3px 3px 12px 0px $color-primary !important;
+    box-shadow: 3px 3px 12px 0px $color-primary !important;
+  }
+
+  svg {
+    fill: white;
+  }
+}
+
 .btn-rounded {
   &.btn {
     border-radius: 16px;

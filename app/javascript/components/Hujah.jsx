@@ -213,7 +213,7 @@ class Hujah extends React.Component {
   }
   
   redirectToLogin() {
-    this.props.history.push('/login')
+    this.props.history.push('/start/login')
   }
 
   userIsLoggedIn() {
@@ -389,7 +389,7 @@ class Hujah extends React.Component {
     )
 
     const displayLoginFlagButton = (
-      <Link to="/login" className="btn btn-link btn-icon-14 fill-alert"><FlagIcon /> Login to flag this hoojah</Link>
+      <Link to="/start/login" className="btn btn-link btn-icon-14 fill-alert"><FlagIcon /> Login to flag this hoojah</Link>
     )
 
     const totalVoteCount = agree_count + neutral_count + disagree_count

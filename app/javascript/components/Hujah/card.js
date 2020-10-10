@@ -168,7 +168,7 @@ class HujahCard extends React.Component {
   }
   
   redirectToLogin() {
-    this.props.history.push('/login')
+    this.props.history.push('/start/login')
   }
 
   render() {

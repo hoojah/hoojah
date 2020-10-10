@@ -83,9 +83,9 @@ class Login extends Component {
               <div className="card-header text-center">
                 Hello from Hoojah! 🎉
               </div>
-              <div className="card-body text-center bg-primary text-white">
+              <div className="card-body text-center bg-info text-white">
                 <h5 className="card-title">Don't have an account yet?</h5>
-                <Link to={"/signup"} className="btn btn-warning">Get started here!</Link>
+                <Link to={"/start/signup"} className="btn btn-warning">Get started here!</Link>
               </div>
               <div className="card-body mb-5">
                 <h5 className="card-title mt-4">Log in</h5>

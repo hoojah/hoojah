@@ -51,7 +51,7 @@ class HujahForm extends React.Component {
   }
   
   redirectToLogin = () => {
-    this.props.history.push('/login')
+    this.props.history.push('/start/login')
   }
 
   handleBodyChange(event) {
@@ -88,7 +88,7 @@ class HujahForm extends React.Component {
         }
         throw new Error("Network response was not ok.")
       })
-      .then(response => this.props.history.push(`/hoojah/${response.id}`))
+      .then(response => this.props.history.push(`/hoojah/${response.slug}`))
       .catch(error => console.log(error.message))
   }
 
