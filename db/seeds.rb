@@ -1,7 +1,7 @@
 
 
 # SEED_DATA = JSON.load File.read('config/seed_data.json')
-PASSWORD = "1234567890"
+# PASSWORD = "1234567890"
 
 
 puts "\n============================================="
@@ -13,71 +13,71 @@ puts "============================================="
 #  Users
 # -------
 
-print "\nSeeding users..."
+# print "\nSeeding users..."
 
-# users = SEED_DATA["users"]
+# # users = SEED_DATA["users"]
 
-#1
-rudzainy = User.create!(
-  full_name: "Rudzainy Rahman",
-  email: "hello@rudzainy.com",
-  username: "rudzainy",
-  password: PASSWORD,
-  password_confirmation: PASSWORD,
-  photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/fkmfd5lfkqdpdfvvh0x3.png"
-)
+# #1
+# rudzainy = User.create!(
+#   full_name: "Rudzainy Rahman",
+#   email: "hello@rudzainy.com",
+#   username: "rudzainy",
+#   password: PASSWORD,
+#   password_confirmation: PASSWORD,
+#   photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/fkmfd5lfkqdpdfvvh0x3.png"
+# )
 
-#2
-hoojah = User.create!(
-  full_name: "Hoojah",
-  email: "hello@hoojah.my",
-  username: "hoojah",
-  password: PASSWORD,
-  password_confirmation: PASSWORD,
-  photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/xecjnelhwisrdo4k8bcl.png"
-)
+# #2
+# hoojah = User.create!(
+#   full_name: "Hoojah",
+#   email: "hello@hoojah.my",
+#   username: "hoojah",
+#   password: PASSWORD,
+#   password_confirmation: PASSWORD,
+#   photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/xecjnelhwisrdo4k8bcl.png"
+# )
 
-#3
-kurus = User.create!(
-  full_name: "Tom Kurus",
-  email: "tom@kurus.com",
-  username: "TomKurus",
-  password: PASSWORD,
-  password_confirmation: PASSWORD,
-  photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/tom_kurus_zpqm7u.png"
-)
+# #3
+# kurus = User.create!(
+#   full_name: "Tom Kurus",
+#   email: "tom@kurus.com",
+#   username: "TomKurus",
+#   password: PASSWORD,
+#   password_confirmation: PASSWORD,
+#   photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/tom_kurus_zpqm7u.png"
+# )
 
-#4
-hacks = User.create!(
-  full_name: "Tom Hacks",
-  email: "tom@hacks.com",
-  username: "tomhacks",
-  password: PASSWORD,
-  password_confirmation: PASSWORD,
-  photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/tom_hacks_sqrexr.png"
-)
+# #4
+# hacks = User.create!(
+#   full_name: "Tom Hacks",
+#   email: "tom@hacks.com",
+#   username: "tomhacks",
+#   password: PASSWORD,
+#   password_confirmation: PASSWORD,
+#   photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/tom_hacks_sqrexr.png"
+# )
 
-#5
-party = User.create!(
-  full_name: "Tom Party",
-  email: "tom@party.com",
-  username: "tomparty",
-  password: PASSWORD,
-  password_confirmation: PASSWORD,
-  photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/tom_party_wxfii5.png"
-)
+# #5
+# party = User.create!(
+#   full_name: "Tom Party",
+#   email: "tom@party.com",
+#   username: "tomparty",
+#   password: PASSWORD,
+#   password_confirmation: PASSWORD,
+#   photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/tom_party_wxfii5.png"
+# )
 
-#6
-netherlands = User.create!(
-  full_name: "Tom Netherlands",
-  email: "tom@netherlands.com",
-  username: "TomNetherlands1996",
-  password: PASSWORD,
-  password_confirmation: PASSWORD,
-  photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/tom_netherlands_qbszsg.png"
-)
+# #6
+# netherlands = User.create!(
+#   full_name: "Tom Netherlands",
+#   email: "tom@netherlands.com",
+#   username: "TomNetherlands1996",
+#   password: PASSWORD,
+#   password_confirmation: PASSWORD,
+#   photo: "https://res.cloudinary.com/hoojah/image/upload/v1586917414/tom_netherlands_qbszsg.png"
+# )
 
-print " done! 👍🏻\n"
+# print " done! 👍🏻\n"
 
 
 # ---------
