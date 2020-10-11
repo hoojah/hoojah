@@ -8,7 +8,7 @@ class Hujah < ApplicationRecord
   
   validates :body, presence: true
 
-  slug :body
+  slug :set_slug
 
   def is_parent?
     self.parent == nil
@@ -20,6 +20,11 @@ class Hujah < ApplicationRecord
 
   def has_children?
     self.children != 0
+  end
+
+  def set_slug
+    re = /<("[^"]*"|'[^']*'|[^'">])*>/
+    self.slug = self.body.gsub(re, '').parameterize
   end
 
   def current_user_vote(logged_in: nil, current_user_id: nil)
