@@ -1,3 +1,11 @@
+.app-version-overlay {
+  position: fixed;
+  right: 15px;
+  bottom: 0;
+  font-size: 0.75rem;
+  color: $color-light-gray;
+}
+
 .avatar {
   height: 42px;
   width: 42px;
@@ -50,7 +58,7 @@ body {
 }
 
 .border-read {
-  border-left: solid 8px $color-light-grey;
+  border-left: solid 8px $color-light-gray;
 }
 
 .border-unread {
@@ -309,7 +317,7 @@ body {
 }
 
 .fill-light-grey {
-  fill: $color-light-grey;
+  fill: $color-light-gray;
 }
 
 .fill-grey {
@@ -443,7 +451,7 @@ nav {
 }
 
 .text-light-grey {
-  color: $color-light-grey;
+  color: $color-light-gray;
 }
 
 .text-regular {
