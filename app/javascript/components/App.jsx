@@ -10,7 +10,8 @@ import ScrollToTop from './Utilities/scroll_to_top'
 import Login from './Start/Login'
 import Signup from './Start/Signup'
 import { ReactQueryDevtools } from 'react-query-devtools'
-import packageJson from '../../../package.json';
+import packageJson from '../../../package.json'
+import Drift from "react-driftjs"
 
 class App extends React.Component {
   constructor(props) {
@@ -112,6 +113,7 @@ class App extends React.Component {
           />
         </Switch>
         <ReactQueryDevtools initialIsOpen />
+        <Drift appId="fx42y6ieyaff" />
         <div className="app-version-overlay">alpha v{packageJson.version}</div>
       </Router>
     )
