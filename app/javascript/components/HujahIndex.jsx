@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from './Layouts/navbar'
 import HujahCard from './Hujah/card'
+import HujahPinned from './Hujah/pinned'
 import LoadingAnimation from './Layouts/loading_animation'
 
 class HujahIndex extends React.Component {
@@ -9,6 +10,10 @@ class HujahIndex extends React.Component {
     this.state = {
       allHujah: []
     }
+  }
+
+  userIsLoggedIn() {
+    return this.props.loggedInStatus
   }
 
   componentDidMount() {
@@ -40,6 +45,7 @@ class HujahIndex extends React.Component {
         <main className="container">
           <div className="row justify-content-sm-center">
             <div className="col-12 col-lg-6 col-md-8 sm-fluid mb-3">
+              {this.userIsLoggedIn() ? null : <HujahPinned />}
               {allHujah.length > 0 ? displayAllHujah : <LoadingAnimation />}
             </div>
           </div>
